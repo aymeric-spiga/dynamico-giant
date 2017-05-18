@@ -75,8 +75,6 @@ itau_adv=3
 # 1/10th of a year -- 2443 krons
 run_length=92961036
 
-run_length=380520
-
 ####################################
 
 ##activate IO (default = true)
@@ -119,10 +117,10 @@ etat0_start_file_colocated=false
 start_file_name=start_icosa
 restart_file_name=restart_icosa
 
-##### for one-day run from a profile to create a start
-#etat0=temperature_profile
-#temperature_profile_file=temp_profile.txt
-#run_length=38052
+#### for one-day run from a profile to create a start
+etat0=temperature_profile
+temperature_profile_file=temp_profile.txt
+run_length=38052
 
 # ------------------------------ Dynamics --------------------------------
 

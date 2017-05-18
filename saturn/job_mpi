@@ -22,11 +22,12 @@
 ###SBATCH -p all
 ###SBATCH -p highmem
 
-export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
+#export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
+export EXEC_NAME=./icosa_lmdz.exe
 
 set -vx
 
-source ../ARCH/arch-X64_OCCIGEN.env
+source ../code/ARCH/arch-X64_OCCIGEN.env
 
 
 #printenv | sort
@@ -34,9 +35,9 @@ export OMP_NUM_THREADS=1
 export OMP_STACKSIZE=256M
 export KMP_AFFINITY=granularity=fine,compact,1,0,verbose
 
-### just one
-#srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS $EXEC_NAME > icosa_lmdz.out 2>&1
-#exit
+## just one
+srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS $EXEC_NAME > icosa_lmdz.out 2>&1
+exit
 
 count=1
 limcount=$((count+11))
