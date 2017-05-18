@@ -1,0 +1,218 @@
+#INCLUDEDEF=saturn_const.def
+
+##mpi_threading_mode=serialized
+#mpi_threading_mode=funneled
+
+#halo_i=0
+#halo_j=1
+# ------------------------------- Mesh ---------------------------------
+
+# Number of subdivision on a main triangle (nbp) : integer (default=40)
+nbp=160
+nbp=40
+
+# nbp                 20  40  80 160
+# T-edge length (km) 500 250 120  60
+
+## sub splitting of main rhombus : integer (default=1)
+#nsplit_i=1
+#nsplit_j=1
+#omp_level_size=1
+## There must be less MPIxOpenMP processes than the 10 x nsplit_i x nsplit_j tiles
+# 40 procs
+nsplit_i=2
+nsplit_j=2
+## 50 noeuds (factor 2 marge)
+#nsplit_i=20
+#nsplit_j=24
+### 100 noeuds
+#nsplit_i=10
+#nsplit_j=12
+### minimum bien: 1 proc par nbp
+
+# Number of vertical layer (llm) : integer (default=19)
+llm=64
+llm=32
+
+# disvert : vertical discretisation : string (default='std') : std, ncar, ncar30l
+disvert=read_apbp
+
+# optim_it : mesh optimisation : number of iteration : integer (default=0)
+#optim_it=1000
+optim_it=0
+
+# ---------------------------------- Time---------------------------------
+
+## scheme type : string ( default='runge_kutta') euler, leapfrog_matsuno, runge_kutta )
+#scheme = runge_kutta   leapfrog_matsuno 
+
+## matsuno period : integer ( default=5)
+#matsuno_period = 5
+
+# timestep : real (default=480s)
+dt = 118.9125
+
+# advection called every itau_adv time steps : integer (default 2)
+# standard : umax=100m/s vs c=340m/s (ratio 1:3)
+# in JW06 umax=35m/s vs c=340m/s (ratio 1:10)
+itau_adv=3
+
+# number of timestep (default 100) (ignored if run_length is set)
+ itaumax = 10
+
+# run length : real (default=dt*itaumax)
+
+
+####################################
+
+## 1000 saturn day
+#run_length=38052000
+
+## special 
+## -- to cross the 2y limit precisely
+#run_length=32686668
+
+# 1/10th of a year -- 2443 krons
+run_length=92961036
+
+run_length=380520
+
+####################################
+
+##activate IO (default = true)
+#enable_io = false
+
+## output with XIOS (only if compiled with XIOS): true/false (default true)
+#xios_output=false
+
+# output field period (only when not using XIOS) : integer (default none)
+#write_period=7200
+# write_period=14400
+write_period=86400
+
+
+#itau_write_etat0=380520
+
+# ---------------------------------- Misc --------------------------------
+
+# number of tracer (nqtot) : integer (default 1)
+nqtot=1
+
+# pression value where output is interpolated : real (default=0, no output)
+out_pression_level=85000
+
+# etat0 : initial state : string (default=jablonowsky06) : 
+# jablonowsky06, academic, ncar
+
+etat0=start_file
+etat0_start_file_colocated=false
+
+## -- to cross the 2y limit
+#etat0_start_iteration=0
+#run_length=38052
+
+#etat0=isothermal
+#etat0_isothermal_temp=175
+
+# start file name (default is start.nc)
+# restart file name (default is restart.nc)
+start_file_name=start_icosa
+restart_file_name=restart_icosa
+
+##### for one-day run from a profile to create a start
+#etat0=temperature_profile
+#temperature_profile_file=temp_profile.txt
+#run_length=38052
+
+# ------------------------------ Dynamics --------------------------------
+
+# caldyn : computation type for gcm equation : string (default=gcm) : gcm, adv
+caldyn=gcm
+
+# caldyn_conserv : string (default=energy) : energy,enstrophy
+caldyn_conserv=energy
+
+# caldyn_exner : scheme for computing Exner function : string (default=direct) : direct,lmdz
+caldyn_exner=direct
+
+# caldyn_hydrostat : scheme for computing geopotential : string (default=direct) : direct,lmdz
+caldyn_hydrostat=direct
+
+# guided_type : string (default=none) : none, ncar
+guided_type=none
+
+#Sponge layer
+### iflag_sponge=0 for no sponge
+### iflag_sponge=1 for sponge over 4 topmost layers
+### iflag_sponge=2 for sponge from top to ~1% of top layer pressure
+### tau_sponge --> damping frequency at last layer
+### e-5 medium / e-4 strong yet reasonable / e-3 very strong
+### mode_sponge=1 for u,v --> 0
+### mode_sponge=2 for u,v --> zonal mean (NOT IMPLEMENTED)
+### mode_sponge=3 for u,v,h --> zonal mean (NOT IMPLEMENTED)
+#iflag_sponge = 1
+iflag_sponge = 0
+#tau_sponge = 1.e-4
+#mode_sponge = 1
+
+
+# ---------------------------------- Dissipation ---------------------------------
+
+# dissipation time graddiv : real (default=5000)
+tau_graddiv = 10000
+
+# number of iteration for graddiv : integer (default=1)
+nitergdiv = 2
+
+# dissipation time nxgradrot (default=5000)
+tau_gradrot = 10000
+
+# number of iteration for nxgradrot : integer (default=1)
+nitergrot=2
+
+# dissipation time divgrad (theta) (default=5000)
+tau_divgrad= 10000
+
+# number of iteration for divgrad : integer (default=1)
+niterdivgrad=2
+
+# Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear
+rayleigh_friction_type=none
+
+# -------------------------------- Physics -------------------------------------
+
+# (itau_physics=160)*(dt=118.9125) --> half a saturn day as physical timestep
+# ---- change also in run.def
+itau_physics=160
+
+# kind of physics : string : none, dcmip (default=none)
+physics=phys_external
+
+## testcase physics for dcmip : INTEGER : 1, 2 (default=1)
+#dcmip_physics=1
+
+# -------------------- parameters for NCAR test cases ------------------------
+
+# NCAR advection test, initial tracer : string ( default='cos_bell')
+# const, slotted_cyl, cos_bell, dbl_cos_bell_q1, dbl_cos_bell_q2, complement, hadley
+ncar_adv_shape=cos_bell
+
+# NCAR advection test, wind field : string (default='deform') : solid, deform, hadley
+ncar_adv_wind=solid
+
+# ncar_T0 : reference temperature for NCAR test cases : real (default=300) 
+# also used by disvert if disvert=ncar
+ncar_T0=300
+
+# ncar_p0 : reference pressure for NCAR test cases : real (default=1e5) 
+# also used by disvert if disvert=ncar
+ncar_p0=1e5
+
+# ncar_disvert_c : exponent for B(eta) : integer (default=1)
+# used by disvert if disvert=ncar
+
+ncar_disvert_c=1
+
+# dcmip 4 testcase : integer (default=1) : 1, 2
+dcmip4_testcase=1
+#-----------------------------------------------------------------------
