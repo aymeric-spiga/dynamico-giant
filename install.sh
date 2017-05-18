@@ -20,3 +20,6 @@ echo "get I/O libraries..."
 svn co -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
 svn co -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
 
+echo "fix"
+cd ..
+cp fix/arch-X64_OCCIGEN.fcm code/IOIPSL/arch/
