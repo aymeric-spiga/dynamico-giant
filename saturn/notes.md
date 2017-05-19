@@ -3,7 +3,7 @@
 
 dans le .bash_profile
 
-~~~
+```bash
 export PATH=$PATH:.:~millourheat/FCM_V1.2/bin
 ulimit -s unlimited
 # modules
@@ -17,7 +17,7 @@ module load nco
 module load qt
 module load python
 module load mkl
-~~~
+```
 
 ### fix problem with regridding when nb proc > nb targetted latitude points
 
