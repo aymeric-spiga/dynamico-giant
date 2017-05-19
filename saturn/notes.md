@@ -19,7 +19,7 @@ module load python
 module load mkl
 ```
 
-### fix problem with regridding when nb proc > nb targetted latitude points
+### fix problem with regridding when nb proc > nb targetted latitude points [Ehouarn]
 
 La solution pour avoir des sorties lon-lat avec Dynamico et beaucoup de coeurs: tourner en mode client-serveur.
 Il faut donc:
@@ -30,11 +30,10 @@ Pour ce dernier point, il faut savoir que xios_server n'a pas besoin que de quel
 Partie pénible, il faut écrire un fichier dans lequel on référence les procs assignés à l'un ou l'autre (et ça va changer si on change le nombre ou le type de noeuds sur lesquels on tourne...)
 
 Par exemple, sur 4 noeuds HSW24, soit 96 procs, si on veut donner les 95 premiers à icosa_lmdz.e, dans le script de soumission:
+~~~
 # srun configuration file
 echo "# srun configuration file" > srun.conf
 echo "0-94 icosa_lmdz.exe" >> srun.conf
 echo "95 xios_server.exe" >> srun.conf
-
 srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
-
-Et c'est tout. 
+~~~
