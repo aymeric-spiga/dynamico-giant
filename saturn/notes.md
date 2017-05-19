@@ -21,8 +21,6 @@ module load mkl
 
 ### fix problem with regridding when nb proc > nb targetted latitude points
 
-$$ \frac{rho}{p} $$
-
 La solution pour avoir des sorties lon-lat avec Dynamico et beaucoup de coeurs: tourner en mode client-serveur.
 Il faut donc:
 1) copier l'exécutable "xios_server.exe" (de XIOS/bin) dans le répertoire courant.
