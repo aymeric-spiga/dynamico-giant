@@ -51,9 +51,9 @@ do
   ln -sf startfi_$count.nc     startfi.nc
   ##
   srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS $EXEC_NAME > icosa_lmdz.out.$count 2>&1
+  mv Xhistins.nc      Xhistins_$count".nc"
   ##
   count=$((count+1))
-  mv Xhistins.nc      Xhistins_$count".nc"
   mv restart_icosa.nc start_icosa_$count".nc"
   mv restartfi.nc     startfi_$count".nc"
 done
