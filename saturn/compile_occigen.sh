@@ -7,3 +7,5 @@ cd ../code/ICOSA_LMDZ/
 ls -l bin/icosa_lmdz.exe
 cp -rf bin/icosa_lmdz.exe $here
 cd $here
+
+cp ../code/XIOS/bin/xios_server.exe ./

@@ -8,7 +8,7 @@
           <domain id="dom_glo" />
         </domain_group>
         
-        <domain id="dom_regular" ni_glo="512" nj_glo="512" type="rectilinear">
+        <domain id="dom_regular" ni_glo="128" nj_glo="128" type="rectilinear">
               <generate_rectilinear_domain/>
               <interpolate_domain order="1"/>
         </domain>
@@ -103,7 +103,7 @@
         -->
         <file id="histins"
               name="Xhistins"
-              output_freq="1ts"
+              output_freq="40ts"
               type="one_file"
               enabled=".true.">
 
@@ -114,8 +114,8 @@
                 <field field_ref="ls" />
             </field_group>
 
-            <!--<field_group domain_ref="dom_regular"> -->
-            <field_group domain_ref="dom_glo">
+            <!--<field_group domain_ref="dom_glo"> -->
+            <field_group domain_ref="dom_regular">
             <!-- toggle domain_ref to output on native or lon-lat domain -->
             
               <!-- VARS 2D -->
