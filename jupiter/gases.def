@@ -1,0 +1,16 @@
+# gases
+5
+H2_
+He_
+CH4
+C2H2
+C2H6
+0.897
+0.100
+0.003
+1.e-7
+1.e-5
+# First line is number of gases
+# Followed by gas names (always 3 characters)
+# and then molar mixing ratios.
+# mixing ratio -1 means the gas is variable.
