@@ -50,7 +50,7 @@ optim_it=0
 #matsuno_period = 5
 
 # timestep : real (default=480s)
-dt = 118.9125
+dt = 111.665625
 
 # advection called every itau_adv time steps : integer (default 2)
 # standard : umax=100m/s vs c=340m/s (ratio 1:3)
@@ -178,7 +178,7 @@ rayleigh_friction_type=none
 
 # -------------------------------- Physics -------------------------------------
 
-# (itau_physics=160)*(dt=118.9125) --> half a saturn day as physical timestep
+# (itau_physics=160)*(dt=111.665625) --> half a jovian day as physical timestep
 # ---- change also in run.def
 itau_physics=160
 
