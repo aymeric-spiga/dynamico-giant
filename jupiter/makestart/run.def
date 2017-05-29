@@ -1,0 +1,39 @@
+###########################################################################
+### INCLUDE OTHER DEF FILES (physics, specific settings, etc...)
+###########################################################################
+INCLUDEDEF=run_icosa.def
+
+INCLUDEDEF=saturn_const.def
+
+INCLUDEDEF=callphys.def
+
+
+prt_level=0
+
+## iphysiq must be same as itau_physics
+iphysiq=160
+
+
+#######################################
+### to run a one-day simulation
+### using a ASCII profile
+### to create start files
+#######################################
+
+### --------------------
+### CALLPHYS.DEF add-ons
+### --------------------
+# use (read/write) a startfi.nc file? (default=.true.)
+startphy_file = .false.
+# constant value for surface albedo (if startphy_file = .false.)
+surfalbedo = 0.0
+# constant value for surface emissivity (if startphy_file = .false.)
+surfemis = 1.0
+
+### ---------------------
+### RUN_ICOSA.DEF add-ons
+### ---------------------
+etat0=temperature_profile
+temperature_profile_file=temp_profile.txt
+run_length=35733
+
