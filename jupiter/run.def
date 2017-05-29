@@ -1,1 +1,14 @@
-../saturn/run.def
+###########################################################################
+### INCLUDE OTHER DEF FILES (physics, specific settings, etc...)
+###########################################################################
+INCLUDEDEF=run_icosa.def
+
+INCLUDEDEF=jupiter_const.def
+
+INCLUDEDEF=callphys.def
+
+
+prt_level=0
+
+## iphysiq must be same as itau_physics
+iphysiq=160
