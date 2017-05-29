@@ -31,12 +31,12 @@ enertest  = .false.
 # Check to see if cpp, mugaz values used match gas mixture defined in gases.def (recommended) ?
 check_cpp_match=.false. 
 
-## use (read/write) a startfi.nc file? (default=.true.)
-startphy_file = .false.
-## constant value for surface albedo (if startphy_file = .false.)
-surfalbedo = 0.0
-## constant value for surface emissivity (if startphy_file = .false.)
-surfemis = 1.0
+### use (read/write) a startfi.nc file? (default=.true.)
+#startphy_file = .false.
+### constant value for surface albedo (if startphy_file = .false.)
+#surfalbedo = 0.0
+### constant value for surface emissivity (if startphy_file = .false.)
+#surfemis = 1.0
 
 ## Directory where external input files are
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

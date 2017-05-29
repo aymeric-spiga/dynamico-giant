@@ -9,7 +9,7 @@
 
 # Number of subdivision on a main triangle (nbp) : integer (default=40)
 nbp=160
-nbp=40
+#nbp=40
 
 # nbp                 20  40  80 160
 # T-edge length (km) 500 250 120  60
@@ -19,15 +19,15 @@ nbp=40
 #nsplit_j=1
 #omp_level_size=1
 ## There must be less MPIxOpenMP processes than the 10 x nsplit_i x nsplit_j tiles
-# 40 procs
-nsplit_i=2
-nsplit_j=2
+## 40 procs
+#nsplit_i=2
+#nsplit_j=2
 ## 50 noeuds (factor 2 marge)
 #nsplit_i=20
 #nsplit_j=24
 ### 100 noeuds
-#nsplit_i=10
-#nsplit_j=12
+nsplit_i=10
+nsplit_j=12
 ### minimum bien: 1 proc par nbp
 
 # Number of vertical layer (llm) : integer (default=19)
@@ -117,10 +117,10 @@ etat0_start_file_colocated=false
 start_file_name=start_icosa
 restart_file_name=restart_icosa
 
-#### for one-day run from a profile to create a start
-etat0=temperature_profile
-temperature_profile_file=temp_profile.txt
-run_length=38052
+##### for one-day run from a profile to create a start
+#etat0=temperature_profile
+#temperature_profile_file=temp_profile.txt
+#run_length=38052
 
 # ------------------------------ Dynamics --------------------------------
 
