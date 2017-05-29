@@ -13,7 +13,7 @@
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J JUPITER
-#SBATCH --time=00:05:00
+#SBATCH --time=00:03:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
