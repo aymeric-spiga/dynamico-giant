@@ -1,4 +1,9 @@
 code
 *.nc
-*.out
+*.out*
 *.exe
+checkconsicosa.txt
+srun.conf
+job*
+log_compile
+
