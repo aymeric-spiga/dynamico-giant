@@ -11,4 +11,4 @@ INCLUDEDEF=callphys.def
 prt_level=0
 
 ## iphysiq must be same as itau_physics
-iphysiq=160
+iphysiq=57

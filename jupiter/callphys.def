@@ -44,7 +44,7 @@ phi0 = 33.
 # call radiative transfer?
 callrad    = .true.
 # the rad. transfer is computed every "iradia" physical timestep
-iradia     = 40
+iradia     = 60
 # call multilayer correlated-k radiative transfer ?
 corrk      = .true.
 # Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
