@@ -1,0 +1,3 @@
+# srun configuration file
+00-37 icosa_lmdz.exe
+38-39 xios_server.exe
