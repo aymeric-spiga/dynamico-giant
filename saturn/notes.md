@@ -1,4 +1,15 @@
 
+### important
+
+* synchronize call to physics with XIOS outputs
+* synchronize also for physics
+* do not use a timestep with more than 3 digits after .
+* enough procs for xios_server (1 per 25)
+* set nprocs_for_run = 10 * nsplit_i * nsplit_j
+* do not call physics and radtrans too often
+* increase buffer (factor 4 --> 12)
+* do not open output file before the end
+
 ### fix compilation problems 
 
 dans le .bash_profile
