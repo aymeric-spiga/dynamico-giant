@@ -14,20 +14,20 @@ nbp=160
 # nbp                 20  40  80 160
 # T-edge length (km) 500 250 120  60
 
-## sub splitting of main rhombus : integer (default=1)
+### sub splitting of main rhombus : integer (default=1)
 #nsplit_i=1
 #nsplit_j=1
 #omp_level_size=1
 ## There must be less MPIxOpenMP processes than the 10 x nsplit_i x nsplit_j tiles
 ## 40 procs
-#nsplit_i=2
-#nsplit_j=2
+nsplit_i=2
+nsplit_j=2
 ## 50 noeuds (factor 2 marge)
 #nsplit_i=20
 #nsplit_j=24
-### 100 noeuds
-nsplit_i=10
-nsplit_j=12
+#### 100 noeuds
+#nsplit_i=10
+#nsplit_j=12
 ### minimum bien: 1 proc par nbp
 
 # Number of vertical layer (llm) : integer (default=19)
@@ -72,12 +72,12 @@ itau_adv=3
 ## -- to cross the 2y limit precisely
 #run_length=32686668
 
-# 1/10th of a year -- 2443 krons
-run_length=92961036
+## 1/10th of a year -- 2443 krons
+#run_length=92961036
 
-### 1000 jovian days
-### -- 10475 days per year
-run_length=35733000
+#### 1000 jovian days
+#### -- 10475 days per year
+#run_length=35733000
 
 ####################################
 

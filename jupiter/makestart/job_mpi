@@ -3,17 +3,17 @@
 ##SBATCH --nodes=1
 ##SBATCH --ntasks-per-node=10
 ######
-##SBATCH --nodes=2
-##SBATCH --ntasks-per-node=20
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=20
 ###### TEST MPI 
-#SBATCH --nodes=50
-#SBATCH --ntasks-per-node=24
-##SBATCH --cpus-per-task=1
+##SBATCH --nodes=50
+##SBATCH --ntasks-per-node=24
+###SBATCH --cpus-per-task=1
 #####
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J JUPITER
-#SBATCH --time=00:03:00
+#SBATCH --time=00:05:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
