@@ -20,3 +20,7 @@ echo "get I/O libraries..."
 svn co -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
 svn co -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
 
+cd -
+
+echo "get remap..."
+svn co -q http://forge.ipsl.jussieu.fr/heat/svn/codes/remap
