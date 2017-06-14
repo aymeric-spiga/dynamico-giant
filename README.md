@@ -9,6 +9,21 @@
 * do not call physics and radtrans too often
 * increase buffer (factor 4 --> 12)
 * do not open output file before the end
+* augmenter info_level ralentit
+* faire tail -f icosa_lmdz.out | grep "0000:" ralentit
+* gros effet de la fréquence de sortie (y compris en grille native)
+
+semble-t-il le remapping explose la mémoire utilisée par XIOS
+--> utiliser plus que 1 serveur par 25 coeurs de run ?
+
+il faut 100 serveurs pour 1200 sinon ça freeze
+testé en sortie grille native
+environ même temps de calcul que version non serveur
+voire un peu plus rapide
+(sauf fin XIOS beaucoup plus longue 
+le temps de fermer tous les serveurs)
+-- autre probleme: il n ecrit pas bien le startfi.nc
+-- et en fait il ne clot jamais...
 
 ### fix compilation problems 
 
