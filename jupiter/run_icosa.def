@@ -25,7 +25,7 @@ nbp=160
 ## 50 noeuds (factor 2 marge)
 #nsplit_i=20
 #nsplit_j=24
-### 100 noeuds
+#### 100 noeuds
 nsplit_i=10
 nsplit_j=12
 ### minimum bien: 1 proc par nbp
@@ -50,7 +50,7 @@ optim_it=0
 #matsuno_period = 5
 
 # timestep : real (default=480s)
-dt = 209.0
+dt = 111.6875
 ### attention 3 chiffres significatifs dans XIOS
 
 # advection called every itau_adv time steps : integer (default 2)
@@ -73,14 +73,12 @@ itau_adv=3
 ## -- to cross the 2y limit precisely
 #run_length=32686668
 
-## 1/10th of a year -- 2443 krons
-#run_length=92961036
+# 1000 jovian days
+run_length=35740000
 
-#### 1000 jovian days
-#### -- 10475 days per year
-#run_length=35733000
-
-run_length=3573900
+## A jovian year (less than 6h)
+## ... 10474 * 35740 = 374340760
+#run_length=374340760
 
 ####################################
 
@@ -181,14 +179,10 @@ rayleigh_friction_type=none
 
 # -------------------------------- Physics -------------------------------------
 
-# 35733 = 3 x 19 x 6269
-# 35739 = 3 x 3 x 11 x 19 x 19 (le meilleur proche de 35733)
-# dt = 11 x 19 = 209s
-# itau_physics = 57 --> a 1/3th jovian day as physical timestep
-# (itau_physics=57)*(dt=209) 
-# ---- change also in run.def
+# (itau_physics=160)*(dt=111.6875) --> half a jupiter day as physical timestep
 # ---- for some reason (day consistency, physical timestep must be less a day)
-itau_physics=57
+# ---- change also in run.def
+itau_physics=160
 
 # kind of physics : string : none, dcmip (default=none)
 physics=phys_external

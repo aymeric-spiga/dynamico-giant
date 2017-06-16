@@ -157,6 +157,7 @@ obs_tau_col_strato= 0.1D0
 ## Auroral aerosols (Saturn/Jupiter)?
 #aeroaurora    = .true.
 ##obs_tau_col_aurora=2.0
+#### METTRE s=3
 
 # Fixed CO2 aerosol distribution?
 aerofixco2    = .false.

@@ -14,7 +14,7 @@ nbp=160
 # nbp                 20  40  80 160
 # T-edge length (km) 500 250 120  60
 
-### sub splitting of main rhombus : integer (default=1)
+## sub splitting of main rhombus : integer (default=1)
 #nsplit_i=1
 #nsplit_j=1
 #omp_level_size=1
@@ -50,7 +50,8 @@ optim_it=0
 #matsuno_period = 5
 
 # timestep : real (default=480s)
-dt = 111.665625
+dt = 111.6875
+### attention 3 chiffres significatifs dans XIOS
 
 # advection called every itau_adv time steps : integer (default 2)
 # standard : umax=100m/s vs c=340m/s (ratio 1:3)
@@ -72,12 +73,12 @@ itau_adv=3
 ## -- to cross the 2y limit precisely
 #run_length=32686668
 
-## 1/10th of a year -- 2443 krons
-#run_length=92961036
+# 1000 jovian days
+run_length=35740000
 
-#### 1000 jovian days
-#### -- 10475 days per year
-#run_length=35733000
+## A jovian year (less than 6h)
+## ... 10474 * 35740 = 374340760
+#run_length=374340760
 
 ####################################
 
@@ -128,7 +129,7 @@ restart_file_name=restart_icosa
 #######################################
 etat0=temperature_profile
 temperature_profile_file=temp_profile.txt
-run_length=35733
+run_length=35740
 
 # ------------------------------ Dynamics --------------------------------
 
@@ -187,7 +188,8 @@ rayleigh_friction_type=none
 
 # -------------------------------- Physics -------------------------------------
 
-# (itau_physics=160)*(dt=111.665625) --> half a jovian day as physical timestep
+# (itau_physics=160)*(dt=111.6875) --> half a jupiter day as physical timestep
+# ---- for some reason (day consistency, physical timestep must be less a day)
 # ---- change also in run.def
 itau_physics=160
 

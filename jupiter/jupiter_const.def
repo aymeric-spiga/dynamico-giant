@@ -25,11 +25,9 @@ year_length = 374321041.5
 
 # truc pour decomposition
 # 1/3 jour manquant
-# ... 10474 * 35739 = 374330286
-day_length = 35739
-year_length = 374330286
-
-
+# ... 10474 * 35740 = 374340760
+day_length = 35740
+year_length = 374340760
 
 #starting day
 start_day = 0
@@ -45,7 +43,7 @@ netcdf_prec = double
 
 
 daysec=35733
-daysec=35739
+daysec=35740
 
 ## additional stuff for LMDZ physics:
 #################################################

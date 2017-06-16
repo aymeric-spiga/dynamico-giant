@@ -2,18 +2,18 @@
 ##### TEST EHOUARN
 ##SBATCH --nodes=1
 ##SBATCH --ntasks-per-node=10
-#######
+######
 ##SBATCH --nodes=2
 ##SBATCH --ntasks-per-node=20
-####### TEST MPI 
-#SBATCH --nodes=52
+###### TEST MPI 
+#SBATCH --nodes=50
 #SBATCH --ntasks-per-node=24
 ##SBATCH --cpus-per-task=1
 #####
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J JUPITER
-#SBATCH --time=00:10:00
+#SBATCH --time=24:00:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
@@ -35,19 +35,19 @@ export OMP_NUM_THREADS=1
 export OMP_STACKSIZE=256M
 export KMP_AFFINITY=granularity=fine,compact,1,0,verbose
 
-#nproc=$((SLURM_NTASKS-2))
-#nlast=$((SLURM_NTASKS-1))
-#echo "# srun configuration file" > srun.conf
-#echo "0-$nproc icosa_lmdz.exe" >> srun.conf
-#echo "$nlast xios_server.exe" >> srun.conf
-ln -sf srun.conf.$SLURM_NTASKS srun.conf
+nproc=$((SLURM_NTASKS-2))
+nlast=$((SLURM_NTASKS-1))
+echo "# srun configuration file" > srun.conf
+echo "0-$nproc icosa_lmdz.exe" >> srun.conf
+echo "$nlast xios_server.exe" >> srun.conf
+#ln -sf srun.conf.$SLURM_NTASKS srun.conf
 
-## just one
-srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
-exit
+### just one
+#srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
+#exit
 
 count=1
-limcount=$((count+1))
+limcount=$((count+15))
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
