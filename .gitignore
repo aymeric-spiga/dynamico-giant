@@ -2,6 +2,7 @@ code
 *.nc
 *.out*
 *.exe
+*.e
 checkconsicosa.txt
 srun.conf
 job*
