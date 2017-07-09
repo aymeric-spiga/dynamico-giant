@@ -8,3 +8,4 @@ srun.conf
 job*
 log_compile
 used_*
+*.log
