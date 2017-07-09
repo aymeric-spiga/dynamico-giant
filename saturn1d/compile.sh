@@ -1,6 +1,7 @@
 #! /bin/bash
 
 vert=64
+vert=32
 
 cd ../code/LMDZ.COMMON
 ./makelmdz_fcm -full \
