@@ -48,6 +48,10 @@ ecritphy=5000
 iradia = 25
 # no tracers
 tracer=.false.
+####
+phi0 = 180.
+randompert = 0.0
+
 
 ## Vertical levels
 ## ~~~~~~~~~~~~~~~
