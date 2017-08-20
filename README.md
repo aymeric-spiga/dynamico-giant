@@ -1,4 +1,6 @@
 
+tested with rev 1711 of LMD models
+
 ### important
 
 * synchronize call to physics with XIOS outputs
