@@ -1,24 +1,32 @@
 #! /bin/bash
 
+##############
+### CONFIG ###
+ver_dyn=532
+ver_phys=1711
+ver_xios=1137
+ver_ioipsl=195
+##############
+
 rm -rf code
 svn co -q -N http://svn.lmd.jussieu.fr/Planeto/trunk code
 
 cd code
 
 echo "get DYNAMICO..."
-svn co -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
+svn co -v $ver_dyn -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
 
 echo "get PHYSICS..."
-svn update -q LMDZ.COMMON
-svn update -q LMDZ.GENERIC
+svn update -v $ver_phys -q LMDZ.COMMON
+svn update -v $ver_phys -q LMDZ.GENERIC
 
 echo "get interface..."
-svn update -q ICOSA_LMDZ
-svn update -q ARCH
+svn update -v $ver_phys -q ICOSA_LMDZ
+svn update -v $ver_phys -q ARCH
 
 echo "get I/O libraries..."
-svn co -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
-svn co -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
+svn co -v $ver_xios -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
+svn co -v $ver_ioipsl -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
 
 cd -
 
