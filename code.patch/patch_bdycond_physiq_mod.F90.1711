@@ -1,0 +1,72 @@
+Index: LMDZ.GENERIC/libf/phystd/physiq_mod.F90
+===================================================================
+--- LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(révision 1711)
++++ LMDZ.GENERIC/libf/phystd/physiq_mod.F90	(copie de travail)
+@@ -54,6 +54,7 @@
+                                  send_xios_field
+       use wxios, only: wxios_context_init, xios_context_finalize
+ #endif
++      use ioipsl_getin_p_mod, only: getin_p
+       implicit none
+ 
+ 
+@@ -443,7 +444,13 @@
+       real :: flux_sens_lat(ngrid)
+       real :: qsurfint(ngrid,nq)
+ 
++      real, save :: facwind,phi0
++      real, dimension(:),allocatable,save :: drag
++      real :: randx
++      real :: randompert
++!$OMP THREADPRIVATE(drag)
+ 
++
+ !==================================================================================================
+ 
+ ! -----------------
+@@ -1053,6 +1060,45 @@
+ !  III. Vertical diffusion (turbulent mixing) :
+ !  --------------------------------------------
+ 
++      if (firstcall) then
++        facwind = 1e5
++        CALL getin_p('facwind',facwind)
++        phi0 = 33.
++        CALL getin_p('phi0',phi0)
++        ALLOCATE(drag(ngrid))
++        phi0 = phi0*pi/180.
++        WHERE (ABS(latitude) < phi0)
++           drag = 0.
++        ELSEWHERE
++           drag = -1./facwind
++        ENDWHERE 
++      endif
++
++      pdu(1:ngrid,1)=drag*pu(1:ngrid,1)
++      pdv(1:ngrid,1)=drag*pv(1:ngrid,1)
++
++      randompert = 0.
++      CALL getin_p('randompert',randompert)
++      if (randompert .gt. 0.) then
++      !   call random_seed()
++       do l=1,nlayer
++         call random_seed()
++         do ig=1,ngrid
++            IF (pplev(ig,l) .ge. pres_nh3_cloud ) THEN
++              !call random_number (randx)
++              !randx = (randx - 0.5) * randompert
++              !pdu(ig,l) = pdu(ig,l) + (randx / ptimestep)
++              !call random_number (randx)
++              !randx = (randx - 0.5) * randompert / 10.
++              !pdv(ig,l) = pdv(ig,l) + (randx / ptimestep)
++              call random_number (randx)
++              randx = (randx - 0.5) * randompert
++              pdt(ig,l) = pdt(ig,l) + (randx / ptimestep)
++            ENDIF
++         enddo
++       enddo
++      endif
++
+       if (calldifv) then
+       
+          zflubid(1:ngrid)=fluxrad(1:ngrid)+fluxgrd(1:ngrid)
