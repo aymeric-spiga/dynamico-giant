@@ -1,3 +1,19 @@
+# install
+```bash
+./install.sh
+cd saturn
+./compile_occigen.sh
+cd makestart
+sbatch job_mpi
+cd ..
+sbatch job_mpi
+```
+
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+# sandbox
 
 tested with rev 1711 of LMD models
 
