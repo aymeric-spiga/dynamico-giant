@@ -27,6 +27,12 @@ le temps de fermer tous les serveurs)
 -- autre probleme: il n ecrit pas bien le startfi.nc
 -- et en fait il ne clot jamais...
 
+
+### note
+
+server-client is necessary for online remapping
+attached works only if interpolated nlat < nproc used (a strong requirement actually)
+
 ### fix compilation problems 
 
 dans le .bash_profile
