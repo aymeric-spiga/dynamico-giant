@@ -1,5 +1,7 @@
 # install
 ```bash
+git clone https://github.com/aymeric-spiga/dynamico-giant.git
+cd dynamico-giant
 ./install.sh
 cd saturn
 ./compile_occigen.sh
