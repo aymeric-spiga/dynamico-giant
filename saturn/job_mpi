@@ -13,7 +13,8 @@
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN
-#SBATCH --time=12:00:00
+#SBATCH --time=01:00:00
+##SBATCH --time=12:00:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
