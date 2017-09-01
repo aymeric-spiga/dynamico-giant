@@ -24,8 +24,13 @@ sbatch job_mpi
 cd ..
 ```
 
-once previous job is done, 
-run dynamico
+check job
+```bash 
+squeue
+```
+symbolic links startfi.nc and start_icosa.nc
+should link to something. if this is OK, then
+run DYNAMICO
 ```bash
 sbatch job_mpi
 ```
