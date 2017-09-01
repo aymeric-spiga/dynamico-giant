@@ -1,16 +1,34 @@
 # install
-```bash
+
+download structure
+```bash 
 git clone https://github.com/aymeric-spiga/dynamico-giant.git
+```
+
+install code
+```bash 
 cd dynamico-giant
 ./install.sh
+```
+
+compile code
+```bash
 cd saturn
 ./compile_occigen.sh
+```
+
+prepare starts (brief run)
+```bash
 cd makestart
 sbatch job_mpi
 cd ..
-sbatch job_mpi
 ```
 
+once previous job is done, 
+run dynamico
+```bash
+sbatch job_mpi
+```
 
 
 ----------------------------------------------------------
