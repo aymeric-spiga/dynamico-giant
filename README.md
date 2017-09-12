@@ -1,5 +1,11 @@
 # install
 
+add local in PATH
+```
+echo 'export PATH=$PATH:.' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
 download structure
 ```bash 
 git clone https://github.com/aymeric-spiga/dynamico-giant.git
