@@ -20,6 +20,9 @@ echo "get PHYSICS..."
 svn update -r $ver_phys -q LMDZ.COMMON
 svn update -r $ver_phys -q LMDZ.GENERIC
 
+echo "...(apply patch)"
+patch -p0 < ../code.patch/patch_bdycond_physiq_mod.F90.1711
+
 echo "get interface..."
 svn update -r $ver_phys -q ICOSA_LMDZ
 svn update -r $ver_phys -q ARCH
