@@ -7,13 +7,15 @@
 ##SBATCH --ntasks-per-node=20
 ###### TEST MPI 
 #SBATCH --nodes=50
+##SBATCH --nodes=51
 #SBATCH --ntasks-per-node=24
 ##SBATCH --cpus-per-task=1
 #####
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
+##SBATCH --time=02:00:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
@@ -21,6 +23,7 @@
 ##SBATCH --mem=120G
 ###SBATCH -p all
 ###SBATCH -p highmem
+#SBATCH --qos=bonus
 
 #export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
 export EXEC_NAME=./icosa_lmdz.exe
@@ -41,12 +44,40 @@ echo "# srun configuration file" > srun.conf
 echo "0-$nproc icosa_lmdz.exe" >> srun.conf
 echo "$nlast xios_server.exe" >> srun.conf
 
+### 1200: see run_icosa.def 10*nsplit_i*nsplit_j
+### 24(SLURM_JOB_NUM_NODES - 50) gives number of XIOS servers
+#build_srun_conf.bash -nodes $SLURM_JOB_NUM_NODES -cores 1200
+
 ### just one
 #srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
 #exit
 
 count=1
-limcount=$((count+15))
+count=22
+count=43
+count=64
+count=85
+count=106
+count=107 # passe a 720x360
+count=128
+#count=11
+#count=21
+count=1 # avec zero perturb
+count=22
+count=43
+count=45
+count=66
+count=85
+count=106
+count=112
+count=132
+count=153
+count=163
+count=184
+count=205
+##############
+#limcount=$((count+15)) #12h
+limcount=$((count+30)) #24h
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
