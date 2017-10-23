@@ -14,19 +14,22 @@ svn co -q -N http://svn.lmd.jussieu.fr/Planeto/trunk code
 cd code
 
 echo "get DYNAMICO..."
-svn co -v $ver_dyn -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
+svn co -r $ver_dyn -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
 
 echo "get PHYSICS..."
-svn update -v $ver_phys -q LMDZ.COMMON
-svn update -v $ver_phys -q LMDZ.GENERIC
+svn update -r $ver_phys -q LMDZ.COMMON
+svn update -r $ver_phys -q LMDZ.GENERIC
+
+echo "...(apply patch)"
+patch -p0 < ../code.patch/patch_bdycond_physiq_mod.F90.1711
 
 echo "get interface..."
-svn update -v $ver_phys -q ICOSA_LMDZ
-svn update -v $ver_phys -q ARCH
+svn update -r $ver_phys -q ICOSA_LMDZ
+svn update -r $ver_phys -q ARCH
 
 echo "get I/O libraries..."
-svn co -v $ver_xios -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
-svn co -v $ver_ioipsl -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
+svn co -r $ver_xios -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
+svn co -r $ver_ioipsl -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
 
 cd -
 
