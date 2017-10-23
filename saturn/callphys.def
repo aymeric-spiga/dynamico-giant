@@ -40,7 +40,9 @@ facwind = 9e8
 #facwind = 9e9
 phi0 = 33.
 
-randompert = 0.001
+#randompert = 0.001
+#randompert = 1.e-5
+randompert = 0
 pres_nh3_cloud = 80000
 
 ## Radiative transfer options
