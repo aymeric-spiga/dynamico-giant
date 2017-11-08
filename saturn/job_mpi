@@ -23,7 +23,7 @@
 ##SBATCH --mem=120G
 ###SBATCH -p all
 ###SBATCH -p highmem
-#SBATCH --qos=bonus
+##SBATCH --qos=bonus
 
 #export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
 export EXEC_NAME=./icosa_lmdz.exe
