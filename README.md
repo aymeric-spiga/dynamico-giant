@@ -9,7 +9,7 @@ source ~/.bash_profile
 download structure
 ```bash 
 cd $SCRATCHDIR
-git clone https://github.com/aymeric-spiga/dynamico-giant.git
+git clone https://github.com/aymeric-spiga/dynamico-giant.git [optional different name]
 ```
 
 install code
