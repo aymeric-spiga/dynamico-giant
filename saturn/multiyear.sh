@@ -26,9 +26,14 @@ ncrcat -O -d time_counter,,,25 Xhistins_16[1-9].nc Xhistins_170.nc Xhistins_tmp.
 ncrcat -O -d time_counter,,,25 Xhistins_17[1-9].nc Xhistins_180.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_18.nc 
 ncrcat -O -d time_counter,,,25 Xhistins_18[1-9].nc Xhistins_190.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_19.nc 
 ncrcat -O -d time_counter,,,25 Xhistins_19[1-9].nc Xhistins_200.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_20.nc 
+ncrcat -O -d time_counter,,,25 Xhistins_20[1-9].nc Xhistins_210.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_21.nc
+ncrcat -O -d time_counter,,,25 Xhistins_21[1-9].nc Xhistins_220.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_22.nc
+ncrcat -O -d time_counter,,,25 Xhistins_22[1-9].nc Xhistins_230.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_23.nc
+ncrcat -O -d time_counter,,,25 Xhistins_23[1-9].nc Xhistins_240.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_24.nc
 
 # ajouter un record dimension
+rm -rf tprecast*
 find precast_??.nc -exec ncks --mk_rec_dmn time_counter {} t{} \;
 
 # tout concaténer dans un fichier tprecast_99.nc
-ncrcat tprecast_??.nc tprecast_99.nc
+ncrcat -O tprecast_??.nc tprecast_99.nc
