@@ -14,5 +14,10 @@
       <interpolate_domain order="1"/>
     </domain>
 
-    <domain id="dom_out" domain_ref="dom_144_142"/>
+    <domain id="dom_720_360" ni_glo="720" nj_glo="360" type="rectilinear">
+      <generate_rectilinear_domain/>
+      <interpolate_domain order="1"/>
+    </domain>
+
+    <domain id="dom_out" domain_ref="dom_720_360"/>
 </domain_definition>
