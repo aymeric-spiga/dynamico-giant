@@ -14,8 +14,9 @@
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN
-#SBATCH --time=24:00:00
-##SBATCH --time=02:00:00
+##SBATCH --time=24:00:00
+#SBATCH --time=01:00:00
+##SBATCH --time=00:30:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
@@ -75,9 +76,14 @@ count=153
 count=163
 count=184
 count=205
+count=226
+count=247
+count=266
+count=1
 ##############
 #limcount=$((count+15)) #12h
-limcount=$((count+30)) #24h
+#limcount=$((count+30)) #24h
+limcount=$((count+1)) #24h
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
