@@ -1,14 +1,16 @@
 <context id="icosagcm" >
   <calendar type="d360" start_date="2000-01-01 00:00:00" time_origin="2000-01-01 00:00:00"/>
   
-  <field_definition src="./field_def_icosa.xml" />
+<!-- LINK TO DYNAMICAL DIAGNOSTICS -->
+<!--  <field_definition src="./field_def_icosa.xml" /> -->
   
   <field_definition src="./field_def.xml" />
 
 <!--  <file_definition src="./filedef_debug.xml" /> -->     
 <!--  <file_definition src="./filedef_dcmip2016.xml" /> -->
   
-  <file_definition src="./file_def_histmth_icosa.xml"/>
+<!-- LINK TO DYNAMICAL DIAGNOSTICS -->
+<!--  <file_definition src="./file_def_histmth_icosa.xml"/> -->
 
   <field_definition>
 
