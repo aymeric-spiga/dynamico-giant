@@ -219,3 +219,7 @@ ncar_disvert_c=1
 # dcmip 4 testcase : integer (default=1) : 1, 2
 dcmip4_testcase=1
 #-----------------------------------------------------------------------
+
+
+check_conservation = detailed
+itau_check_conserv = 160
