@@ -47,6 +47,10 @@ sbatch job_mpi
 ----------------------------------------------------------
 # sandbox
 
+check_conserv = detailed dans run_icosa.def
+(vori fichiers log)
+
+
 tested with rev 1711 of LMD models
 
 ### important

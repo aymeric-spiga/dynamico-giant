@@ -1,10 +1,14 @@
 <context id="icosagcm" >
   <calendar type="d360" start_date="2000-01-01 00:00:00" time_origin="2000-01-01 00:00:00"/>
   
+  <field_definition src="./field_def_icosa.xml" />
+  
   <field_definition src="./field_def.xml" />
 
 <!--  <file_definition src="./filedef_debug.xml" /> -->     
 <!--  <file_definition src="./filedef_dcmip2016.xml" /> -->
+  
+  <file_definition src="./file_def_histmth_icosa.xml"/>
 
   <field_definition>
 
@@ -120,6 +124,7 @@
      <domain id="v" />
      <domain id="u" />
      
+     <!--
      <domain id="regular_half_degree" type="rectilinear" ni_glo="720" nj_glo="360" >
        <generate_rectilinear_domain />
        <interpolate_domain order="1"/>
@@ -134,6 +139,7 @@
        <generate_rectilinear_domain />
        <interpolate_domain order="1"/>
      </domain> 
+     -->
 
      <domain id="domain_relief" type="rectilinear" >
         <generate_rectilinear_domain />
@@ -144,6 +150,8 @@
      </domain>
      
   </domain_definition>    
+  
+  <domain_definition src="./domain_def.xml"/>
   
   <grid_definition>    
     <grid id="scalar">
