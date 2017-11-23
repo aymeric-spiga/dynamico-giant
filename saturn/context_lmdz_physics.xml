@@ -66,6 +66,12 @@
             <field id="area"
                    long_name="Mesh area"
                    unit="m2" />
+            <field id="OLR"
+                   long_name="outgoing longwave radiation (W/m2)" 
+                   unit="Pa" />
+            <field id="ISR"
+                   long_name="incoming solar radiation (W/m2)"  
+                   unit="Pa" />
         </field_group>
 
         <!-- 3D variables -->
@@ -80,6 +86,9 @@
             <field id="v" 
                    long_name="Northward Meridional Wind" 
                    unit="m/s" />
+            <field id="omega" 
+                   long_name="Downward omega velocity" 
+                   unit="Pa/s" />
         </field_group>
 
     </field_definition>
@@ -123,6 +132,8 @@
                            freq_op="1ts">
                   <field field_ref="area" operation="once" />
                   <field field_ref="ps" />
+                  <field field_ref="ISR" />
+                  <field field_ref="OLR" />
               </field_group>
 
               <!-- VARS 3D -->
@@ -131,6 +142,7 @@
                   <field field_ref="temperature" />
                   <field field_ref="u" />
                   <field field_ref="v" />
+                  <field field_ref="omega" />
               </field_group>
               
             </field_group>
