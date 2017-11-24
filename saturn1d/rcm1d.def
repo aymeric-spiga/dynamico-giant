@@ -41,7 +41,7 @@ day_step       = 1
 # Number of sols to run 
 ndt            = 244300
 # Number of steps between each writing in diagfi
-ecritphy=5000
+ecritphy=24430
 
 # OVERRIDE callphys.def settings
 # ... this to ensure compliancy with the low day_step value above
@@ -57,6 +57,7 @@ randompert = 0.0
 ## ~~~~~~~~~~~~~~~
 # hybrid vertical coordinate ? (.true. for hybrid and .false. for sigma levels)
 hybrid         = .false.
+#hybrid         = .true.
 # autocompute vertical discretisation? (useful for exoplanet runs)
 autozlevs      = .false.
 # Ceiling pressure (Pa) ? (only used if autozlevs = .true.)
