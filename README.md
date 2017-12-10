@@ -45,6 +45,11 @@ sbatch job_mpi
 
 ----------------------------------------------------------
 ----------------------------------------------------------
+# problems
+- kappa
+- drag value
+- correct in gfluxi
+
 # sandbox
 
 check_conserv = detailed dans run_icosa.def
