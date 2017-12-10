@@ -48,7 +48,10 @@ sbatch job_mpi
 # problems
 - kappa
 - drag value
+- preff
 - correct in gfluxi
+- saturn1d psurf
+- saturn1d ichoice
 
 # sandbox
 
