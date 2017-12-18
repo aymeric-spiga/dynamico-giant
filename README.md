@@ -52,6 +52,7 @@ sbatch job_mpi
 - correct in gfluxi
 - saturn1d psurf
 - saturn1d ichoice
+- bad Ls for ending the 1D
 
 # sandbox
 
