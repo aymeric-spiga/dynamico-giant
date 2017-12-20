@@ -45,6 +45,15 @@ sbatch job_mpi
 
 ----------------------------------------------------------
 ----------------------------------------------------------
+# problems
+- kappa
+- drag value
+- preff
+- correct in gfluxi
+- saturn1d psurf
+- saturn1d ichoice
+- bad Ls for ending the 1D
+
 # sandbox
 
 check_conserv = detailed dans run_icosa.def
