@@ -161,7 +161,7 @@ iflag_sponge = 0
 # ---------------------------------- Dissipation ---------------------------------
 
 # dissipation time graddiv : real (default=5000)
-tau_graddiv = 10000
+tau_graddiv = 10000 
 
 # number of iteration for graddiv : integer (default=1)
 nitergdiv = 2
@@ -174,12 +174,14 @@ nitergrot=2
 
 # dissipation time divgrad (theta) (default=5000)
 tau_divgrad= 10000
-
 # number of iteration for divgrad : integer (default=1)
 niterdivgrad=2
 
 # Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear
-rayleigh_friction_type=none
+#rayleigh_friction_type=none
+rayleigh_friction_type=giant_liu_schneider
+rayleigh_limlat = 33.
+rayleigh_friction_tau = 8640000.
 
 # -------------------------------- Physics -------------------------------------
 
