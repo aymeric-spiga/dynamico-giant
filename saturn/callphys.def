@@ -40,6 +40,8 @@ facwind = 9e8
 #facwind = 9e9
 phi0 = 33.
 
+facwind = 9e6
+
 #randompert = 0.001
 #randompert = 1.e-5
 randompert = 0
