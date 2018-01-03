@@ -39,7 +39,7 @@ time           = 12
 # Number of time steps per sol
 day_step       = 1
 # Number of sols to run 
-ndt            = 244300
+ndt            = 488600
 # Number of steps between each writing in diagfi
 ecritphy=24430
 
