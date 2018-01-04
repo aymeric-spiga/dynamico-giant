@@ -2,10 +2,10 @@
 
 ##############
 ### CONFIG ###
-ver_dyn=532
-ver_phys=1711
-ver_xios=1137
-ver_ioipsl=195
+ver_dyn=HEAD
+ver_phys=HEAD
+ver_xios=HEAD
+ver_ioipsl=HEAD
 ##############
 
 rm -rf code
@@ -28,7 +28,3 @@ echo "get I/O libraries..."
 svn co -r $ver_xios -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
 svn co -r $ver_ioipsl -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
 
-cd -
-
-echo "get remap..."
-svn co -q http://forge.ipsl.jussieu.fr/heat/svn/codes/remap

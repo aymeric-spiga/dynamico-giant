@@ -18,14 +18,13 @@ nbp=301
 #nsplit_i=1
 #nsplit_j=1
 #omp_level_size=1
-############################################
-## There must be less MPIxOpenMP processes 
-## than the 10 x nsplit_i x nsplit_j tiles
-## --
-## minimum bien: 1 proc par nbp
-############################################ nbp=301
+###########################################
+## There must be less MPIxOpenMP processes than the 10 x nsplit_i x nsplit_j tiles
+## typically for pure MPI runs, let nproc = 10 x nsplit_i x nsplit_j
+## it is better to have nbp/split >~ 10
+###########################################
 ## 375 nodes x 24 tasks = 9000 processes
-## nsplit_i = nsplit_j = 30 
+## nsplit_i = nsplit_j = 30
 ## --
 #nsplit_i=30
 #nsplit_j=30
@@ -34,7 +33,6 @@ nbp=301
 ## settings for nbp=160 multiplied by 4
 nsplit_i=20
 nsplit_j=24
-
 
 # Number of vertical layer (llm) : integer (default=19)
 llm=64
@@ -163,7 +161,7 @@ iflag_sponge = 0
 # ---------------------------------- Dissipation ---------------------------------
 
 # dissipation time graddiv : real (default=5000)
-tau_graddiv = 10000
+tau_graddiv = 10000 
 
 # number of iteration for graddiv : integer (default=1)
 nitergdiv = 2
@@ -176,12 +174,14 @@ nitergrot=2
 
 # dissipation time divgrad (theta) (default=5000)
 tau_divgrad= 10000
-
 # number of iteration for divgrad : integer (default=1)
 niterdivgrad=2
 
 # Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear
-rayleigh_friction_type=none
+#rayleigh_friction_type=none
+rayleigh_friction_type=giant_liu_schneider
+rayleigh_limlat = 33.
+rayleigh_friction_tau = 8640000.
 
 # -------------------------------- Physics -------------------------------------
 
@@ -221,3 +221,7 @@ ncar_disvert_c=1
 # dcmip 4 testcase : integer (default=1) : 1, 2
 dcmip4_testcase=1
 #-----------------------------------------------------------------------
+
+
+check_conservation = detailed
+itau_check_conserv = 320

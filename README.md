@@ -1,3 +1,64 @@
+# install
+
+set environment (do it once)
+```
+cp ~aspigaheat/.bash_profile ~/.bash_profile
+source ~/.bash_profile
+```
+
+download structure
+```bash 
+cd $SCRATCHDIR
+git clone https://github.com/aymeric-spiga/dynamico-giant.git [optional different name]
+```
+
+install code
+```bash 
+cd dynamico-giant
+./install.sh
+```
+
+compile code
+```bash
+cd saturn
+./compile_occigen.sh
+```
+
+prepare starts (brief run)
+```bash
+cd makestart
+sbatch job_mpi
+cd ..
+```
+
+check job
+```bash 
+squeue
+```
+symbolic links startfi.nc and start_icosa.nc
+should link to something. if this is OK, then
+run DYNAMICO
+```bash
+sbatch job_mpi
+```
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+# problems
+- kappa
+- drag value
+- preff
+- correct in gfluxi
+- saturn1d psurf
+- saturn1d ichoice
+- bad Ls for ending the 1D
+
+# sandbox
+
+check_conserv = detailed dans run_icosa.def
+(vori fichiers log)
+
 
 tested with rev 1711 of LMD models
 
@@ -26,6 +87,12 @@ voire un peu plus rapide
 le temps de fermer tous les serveurs)
 -- autre probleme: il n ecrit pas bien le startfi.nc
 -- et en fait il ne clot jamais...
+
+
+### note
+
+server-client is necessary for online remapping
+attached works only if interpolated nlat < nproc used (a strong requirement actually)
 
 ### fix compilation problems 
 

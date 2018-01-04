@@ -21,6 +21,7 @@
 ##SBATCH --mem=120G
 ###SBATCH -p all
 ###SBATCH -p highmem
+##SBATCH --qos=bonus
 
 
 #export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
@@ -53,8 +54,45 @@ echo "$nlast xios_server.exe" >> srun.conf
 srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
 exit
 
+### 1200: see run_icosa.def 10*nsplit_i*nsplit_j
+### 24(SLURM_JOB_NUM_NODES - 50) gives number of XIOS servers
+#build_srun_conf.bash -nodes $SLURM_JOB_NUM_NODES -cores 1200
+
+### just one
+#srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
+#exit
+
 count=1
-limcount=$((count+15))
+count=22
+count=43
+count=64
+count=85
+count=106
+count=107 # passe a 720x360
+count=128
+#count=11
+#count=21
+count=1 # avec zero perturb
+count=22
+count=43
+count=45
+count=66
+count=85
+count=106
+count=112
+count=132
+count=153
+count=163
+count=184
+count=205
+count=226
+count=247
+count=266
+count=1
+##############
+#limcount=$((count+15)) #12h
+#limcount=$((count+30)) #24h
+limcount=$((count+1)) #24h
 while [ $count -lt $limcount ]
 do
   echo "**************************************"

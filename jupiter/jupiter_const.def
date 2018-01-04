@@ -5,10 +5,12 @@ radius=7.1492000E7
 g=24.79
 
 #planetary rotation rate (default=7.292E-5)
-omega=0.000175837
+omega=0.000175803
 
+# WARNING MUST BE COMPLIANT WITH PHYSIQ
 # kappa=Rd/cpp (default=0.2857143)
-kappa=0.325672
+# kappa = 8314.45986145 / (cpp*mugaz) 
+kappa=0.308972867
 
 # Heat capacity at constant pressure real (default=1004.70885)
 cpp =  11500.
