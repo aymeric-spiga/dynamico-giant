@@ -8,7 +8,7 @@
 # ------------------------------- Mesh ---------------------------------
 
 # Number of subdivision on a main triangle (nbp) : integer (default=40)
-nbp=160
+nbp=301
 #nbp=40
 
 # nbp                 20  40  80 160
@@ -20,8 +20,8 @@ nbp=160
 #omp_level_size=1
 ## There must be less MPIxOpenMP processes than the 10 x nsplit_i x nsplit_j tiles
 ## 40 procs
-nsplit_i=2
-nsplit_j=2
+nsplit_i=8
+nsplit_j=8
 ## 50 noeuds (factor 2 marge)
 #nsplit_i=20
 #nsplit_j=24
@@ -50,7 +50,7 @@ optim_it=0
 #matsuno_period = 5
 
 # timestep : real (default=480s)
-dt = 118.9125
+dt = 59.45625
 ### attention 3 chiffres significatifs dans XIOS
 
 # advection called every itau_adv time steps : integer (default 2)
@@ -190,7 +190,7 @@ rayleigh_friction_type=none
 # (itau_physics=160)*(dt=118.9125) --> half a saturn day as physical timestep
 # ---- for some reason (day consistency, physical timestep must be less a day)
 # ---- change also in run.def
-itau_physics=160
+itau_physics=320
 
 # kind of physics : string : none, dcmip (default=none)
 physics=phys_external

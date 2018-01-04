@@ -3,7 +3,7 @@
 ##SBATCH --nodes=1
 ##SBATCH --ntasks-per-node=10
 ######
-#SBATCH --nodes=2
+#SBATCH --nodes=32
 #SBATCH --ntasks-per-node=20
 ###### TEST MPI 
 ##SBATCH --nodes=50
@@ -13,7 +13,7 @@
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN
-#SBATCH --time=00:05:00
+#SBATCH --time=00:10:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
@@ -32,7 +32,7 @@ source ../code/ARCH/arch-X64_OCCIGEN.env
 
 #printenv | sort
 export OMP_NUM_THREADS=1
-export OMP_STACKSIZE=256M
+export OMP_STACKSIZE=512M
 export KMP_AFFINITY=granularity=fine,compact,1,0,verbose
 
 nproc=$((SLURM_NTASKS-2))
