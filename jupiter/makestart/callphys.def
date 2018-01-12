@@ -42,57 +42,60 @@ surfemis = 1.0
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 datadir = datadir
 
-facwind = 9e8
+# Friction
 #facwind = 9e9
-phi0 = 33.
+facwind  = 9e8
+
+# Friction min latitude
+phi0     = 33.
 
 ## Radiative transfer options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # call radiative transfer?
-callrad    = .true.
+callrad          = .true.
 # the rad. transfer is computed every "iradia" physical timestep
-iradia     = 40
+iradia           = 40
 # call multilayer correlated-k radiative transfer ?
-corrk      = .true.
+corrk            = .true.
 # Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
-continuum  = .true.
+continuum        = .true.
 # folder in which correlated-k data is stored ?
-#corrkdir   = CH4_C2H6_C2H2_Profils
-#corrkdir   = CH4_C2H6_C2H2_T_70-400K
-#corrkdir   = CH4_C2H6_C2H2_HITRAN2012
-#corrkdir   = CH4_C2H6_C2H2_HITRAN2012_Karko
-corrkdir   = Jupiter_NewMOSES_NH3_HITRAN2012_REY_ISO_ge-12_NoKarko
+#corrkdir         = CH4_C2H6_C2H2_Profils
+#corrkdir         = CH4_C2H6_C2H2_T_70-400K
+#corrkdir         = CH4_C2H6_C2H2_HITRAN2012
+#corrkdir         = CH4_C2H6_C2H2_HITRAN2012_Karko
+corrkdir         = Jupiter_NewMOSES_NH3_HITRAN2012_REY_ISO_ge-12_NoKarko
 # call visible gaseous absorption in radiative transfer ?
-callgasvis = .true.
+callgasvis       = .true.
 # Include Rayleigh scattering in the visible ?
-rayleigh   = .true.
+rayleigh         = .true.
 # Uniform absorption coefficient in radiative transfer?
-graybody     = .false.
+graybody         = .false.
 # Characteristic planetary equilibrium (black body) temperature
 # This is used only in the aerosol radiative transfer setup. (see aerave.F)
-tplanet    = 100.
+tplanet          = 100.
 # Output spectral OLR in 1D/3D?
-specOLR    = .false.
+specOLR          = .false.
 # Output global radiative balance in file 'rad_bal.out' - slow for 1D!!
-meanOLR    = .false.
+meanOLR          = .false.
 # Variable gas species: Radiatively active ?
-varactive  = .false.
+varactive        = .false.
 # Variable gas species: Fixed vertical distribution ?
 #   (not to be used in time integration mode)
-varfixed   = .false.
+varfixed         = .false.
 # Variable gas species: Saturation percentage value at ground ?
-satval     = 0.0
+satval           = 0.0
 # Force specific heat capacity and molecular mass values
-force_cpp      = .true.
+force_cpp        = .true.
 # Specific heat capacity in J K-1 kg-1 [only used if force_cpp = T]
-cpp            = 11500.
+cpp              = 11500.
 # Molecular mass in g mol-1 [only used if force_cpp = T]
-mugaz          = 2.34
+mugaz            = 2.34
 ### DEBUG
 # To not call abort when temperature is outside boundaries:
 strictboundcorrk = .false.
 # Add temperature sponge effect after radiative transfer?
-callradsponge = .false.
+callradsponge    = .false.
 
 ## Star type
 ## ~~~~~~~~~
@@ -120,17 +123,17 @@ sedimentation = .false.
 ## Other physics options
 ## ~~~~~~~~~~~~~~~~~~~~~
 # call turbulent vertical diffusion ?
-calldifv = .true. 
+calldifv    = .true. 
 # use turbdiff instead of vdifc ?
 UseTurbDiff = .true.
 # call convective adjustment ?
-calladj  = .true.
+calladj     = .true.
 # call thermal conduction in the soil ?
-callsoil = .false.
+callsoil    = .false.
 # Internal heat flux (matters only if callsoil=F)
-intheat = 6.0
+intheat     = 6.0
 # Remove lower boundary (e.g. for gas giant sims)
-nosurf = .true.
+nosurf      = .true.
 
 #########################################################################
 ## extra non-standard definitions for Earth
@@ -139,20 +142,20 @@ nosurf = .true.
 ## Tracer and aerosol options 
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Radiatively active CO2 aerosol?
-aeroco2       = .false.
+aeroco2            = .false.
 
 # Ammonia cloud (Saturn/Jupiter)?
-aeronh3      = .true.
-size_nh3_cloud = 10.e-6  
-pres_nh3_cloud = 80000
-tau_nh3_cloud = 7.0 
+aeronh3            = .true.
+size_nh3_cloud     = 10.e-6  
+pres_nh3_cloud     = 80000
+tau_nh3_cloud      = 7.0 
 # Radiatively active aerosol (Saturn/Jupiter)?
-aeroback2lay   = .true.
-obs_tau_col_tropo= 2.0 
-size_tropo= 5.e-7 #2e-6 
-pres_bottom_tropo=80000.
-pres_top_tropo=18000.
-obs_tau_col_strato= 0.1D0 
+aeroback2lay       = .true.
+obs_tau_col_tropo  = 2.0 
+size_tropo         = 5.e-7 #2e-6 
+pres_bottom_tropo  = 80000.
+pres_top_tropo     = 18000.
+obs_tau_col_strato = 0.1D0 
 
 ## Auroral aerosols (Saturn/Jupiter)?
 #aeroaurora    = .true.
@@ -160,29 +163,29 @@ obs_tau_col_strato= 0.1D0
 #### METTRE s=3
 
 # Fixed CO2 aerosol distribution?
-aerofixco2    = .false.
+aerofixco2     = .false.
 # Radiatively active water aerosol?
-aeroh2o       = .false.
+aeroh2o        = .false.
 # Fixed water aerosol distribution?
-aerofixh2o    = .false.
+aerofixh2o     = .false.
 # basic dust opacity
-dusttau       = 0.0
+dusttau        = 0.0
 # Varying H2O cloud fraction?
-CLFvarying    = .false.
+CLFvarying     = .false.
 # H2O cloud fraction if fixed?
-CLFfixval     = 0.0
+CLFfixval      = 0.0
 # fixed radii for cloud particles?
-radfixed=.false.
+radfixed       = .false.
 # number mixing ratio of CO2 ice particles
-Nmix_co2      = 100000.
+Nmix_co2       = 100000.
 # number mixing ratio of water particles (for rafixed=.false.)
-Nmix_h2o      = 1.e7
+Nmix_h2o       = 1.e7
 # number mixing ratio of water ice particles (for rafixed=.false.)
-Nmix_h2o_ice  = 5.e5
+Nmix_h2o_ice   = 5.e5
 # radius of H2O water particles (for rafixed=.true.):
-rad_h2o=10.e-6
+rad_h2o        = 10.e-6
 # radius of H2O ice particles (for rafixed=.true.):
-rad_h2o_ice=35.e-6
+rad_h2o_ice    = 35.e-6
 # atm mass update due to tracer evaporation/condensation?
 mass_redistrib = .false.
 
@@ -196,9 +199,9 @@ watercond     = .false.
 # Model water precipitation (including coagulation etc.)
 waterrain     = .false.
 # Use simple precipitation scheme?
-precip_scheme=4
+precip_scheme = 4
 # multiplicative constant in Boucher 95 precip scheme
-Cboucher=1.
+Cboucher      = 1.
 # Include hydrology ?
 hydrology     = .false.
 # H2O snow (and ice) albedo ?
