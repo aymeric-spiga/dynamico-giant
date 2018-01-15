@@ -1,53 +1,46 @@
 ## Orbit / general options
 ## ~~~~~~~~~~~~~~~~~~~~~~~
 # Run with or without tracer transport ?
-tracer    = .true.
+tracer       = .true.
 # Diurnal cycle ?  if diurnal=false, diurnally averaged solar heating
-diurnal   = .false. #.true.
+diurnal      = .false. #.true.
 # Seasonal cycle ? if season=false, Ls stays constant, to value set in "start"
-season    = .true. 
+season       = .true. 
 # Tidally resonant orbit ? must have diurnal=false, correct rotation rate in newstart
-tlocked   = .false.
+tlocked      = .false.
 # Tidal resonance ratio ? ratio T_orbit to T_rotation
-nres      = 1
+nres         = 1
 # Planet with rings?
 rings_shadow = .false.
 # Compute latitude-dependent gravity field??
-oblate = .true.
+oblate       = .true.
 # Include non-zero flattening (a-b)/a?
-flatten = 0.06487
+flatten      = 0.06487
 # Needed if oblate=.true.: J2
-J2 = 0.01470
+J2           = 0.01470
 # Needed if oblate=.true.: Planet mean radius (m)
-Rmean = 69911000.
+Rmean        = 69911000.
 # Needed if oblate=.true.: Mass of the planet (*1e24 kg)
-MassPlanet = 1898.3
+MassPlanet   = 1898.3
 # Write some more output on the screen ?
-lwrite    = .false.
+lwrite       = .false.
 # Save statistics in file "stats.nc" ?
-callstats = .false.
+callstats    = .false.
 # Test energy conservation of model physics ?
-enertest  = .false.
+enertest     = .false.
 # Check to see if cpp, mugaz values used match gas mixture defined in gases.def (recommended) ?
-check_cpp_match=.false. 
+check_cpp_match = .false. 
 
 # use (read/write) a startfi.nc file? (default=.true.)
 startphy_file = .false.
 # constant value for surface albedo (if startphy_file = .false.)
-surfalbedo = 0.0
+surfalbedo   = 0.0
 # constant value for surface emissivity (if startphy_file = .false.)
-surfemis = 1.0
+surfemis     = 1.0
 
 ## Directory where external input files are
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 datadir = datadir
-
-# Friction
-#facwind = 9e9
-facwind  = 9e8
-
-# Friction min latitude
-phi0     = 33.
 
 ## Radiative transfer options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,7 +83,7 @@ force_cpp        = .true.
 # Specific heat capacity in J K-1 kg-1 [only used if force_cpp = T]
 cpp              = 11500.
 # Molecular mass in g mol-1 [only used if force_cpp = T]
-mugaz            = 2.34
+mugaz            = 2.30
 ### DEBUG
 # To not call abort when temperature is outside boundaries:
 strictboundcorrk = .false.

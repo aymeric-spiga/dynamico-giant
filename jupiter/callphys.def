@@ -1,7 +1,7 @@
 ## Orbit / general options
 ## ~~~~~~~~~~~~~~~~~~~~~~~
 # Run with or without tracer transport ?
-tracer       = .true.
+tracer       = true
 # Diurnal cycle ?  if diurnal=false, diurnally averaged solar heating
 diurnal      = .false. #.true.
 # Seasonal cycle ? if season=false, Ls stays constant, to value set in "start"
@@ -34,13 +34,6 @@ check_cpp_match = .false.
 ## Directory where external input files are
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 datadir = datadir
-
-# Friction
-#facwind = 9e9
-facwind  = 9e8
-
-# Friction min latitude
-phi0     = 33.
 
 ## Radiative transfer options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~

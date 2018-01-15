@@ -18,17 +18,17 @@ nbp=160
 #nsplit_i=1
 #nsplit_j=1
 #omp_level_size=1
+###########################################
 ## There must be less MPIxOpenMP processes than the 10 x nsplit_i x nsplit_j tiles
+## typically for pure MPI runs, let nproc = 10 x nsplit_i x nsplit_j
+## it is better to have nbp/split >~ 10
+###########################################
 ## 40 procs
 nsplit_i=2
 nsplit_j=2
-## 50 noeuds (factor 2 marge)
-#nsplit_i=20
-#nsplit_j=24
-#### 100 noeuds
+#### 50 noeuds de 24 processeurs = 1200 procs
 #nsplit_i=10
 #nsplit_j=12
-### minimum bien: 1 proc par nbp
 
 # Number of vertical layer (llm) : integer (default=19)
 llm=64
@@ -183,8 +183,10 @@ tau_divgrad= 10000
 # number of iteration for divgrad : integer (default=1)
 niterdivgrad=2
 
-# Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear
-rayleigh_friction_type=none
+# Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear, giant_liu_schneider
+rayleigh_friction_type = giant_liu_schneider
+rayleigh_limlat = 33.
+rayleigh_friction_tau = 8640000.
 
 # -------------------------------- Physics -------------------------------------
 
