@@ -42,8 +42,6 @@ surfemis = 1.0
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 datadir = datadir
 
-phi0 = 95.
-randompert = 0.0
 
 ## Radiative transfer options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
