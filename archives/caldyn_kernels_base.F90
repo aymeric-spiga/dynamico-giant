@@ -13,7 +13,8 @@ MODULE caldyn_kernels_base_mod
   !$OMP THREADPRIVATE(out_u, p, qu)
 
   ! temporary shared variables for caldyn
-  TYPE(t_field),POINTER,PUBLIC :: f_pk(:),f_wwuu(:),f_planetvel(:)
+  TYPE(t_field),POINTER,PUBLIC :: f_pk(:),f_wwuu(:),f_planetvel(:), &
+                                  f_Fel(:), f_gradPhi2(:), f_wil(:), f_Wetadot(:)
 
   INTEGER, PUBLIC :: caldyn_conserv
   !$OMP THREADPRIVATE(caldyn_conserv) 
@@ -34,19 +35,20 @@ CONTAINS
     REAL(rstd),INTENT(INOUT) :: geopot(iim*jjm,llm+1) ! geopotential
 
     INTEGER :: i,j,ij,l
-    REAL(rstd) :: Rd, p_ik, exner_ik, temp_ik, qv, chi, Rmix
+    REAL(rstd) :: Rd, p_ik, exner_ik, temp_ik, qv, chi, Rmix, gv
     INTEGER    :: ij_omp_begin_ext, ij_omp_end_ext
 
     CALL trace_start("compute_geopot")
 
 !$OMP BARRIER
 
-    CALL distrib_level(ij_end_ext-ij_begin_ext+1,ij_omp_begin_ext,ij_omp_end_ext)
-    ij_omp_begin_ext=ij_omp_begin_ext+ij_begin_ext-1
-    ij_omp_end_ext=ij_omp_end_ext+ij_begin_ext-1
+    CALL distrib_level(ij_begin_ext,ij_end_ext, ij_omp_begin_ext,ij_omp_end_ext)
 
     Rd = kappa*cpp
 
+    IF(dysl_geopot) THEN
+#include "../kernels/compute_geopot.k90"
+    ELSE
     ! Pressure is computed first top-down (temporarily stored in pk)
     ! Then Exner pressure and geopotential are computed bottom-up
     ! Works also when caldyn_eta=eta_mass          
@@ -157,6 +159,8 @@ CONTAINS
        ENDDO
     END IF
 
+    END IF ! dysl
+
     !ym flush geopot
     !$OMP BARRIER
 
@@ -183,9 +187,7 @@ CONTAINS
 
     CALL trace_start("compute_caldyn_vert")
 
-    CALL distrib_level(ij_end-ij_begin+1,ij_omp_begin,ij_omp_end)
-    ij_omp_begin=ij_omp_begin+ij_begin-1
-    ij_omp_end=ij_omp_end+ij_begin-1
+    CALL distrib_level(ij_begin,ij_end, ij_omp_begin,ij_omp_end)
 
     !    REAL(rstd) :: wwuu(iim*3*jjm,llm+1) ! tmp var, don't know why but gain 30% on the whole code in opemp
     ! need to be understood
@@ -314,7 +316,7 @@ CONTAINS
 
   END SUBROUTINE compute_caldyn_vert
 
-  SUBROUTINE compute_caldyn_vert_NH(mass,geopot,W,wflux, du,dPhi,dW)
+  SUBROUTINE compute_caldyn_vert_NH(mass,geopot,W,wflux, W_etadot, du,dPhi,dW)
     REAL(rstd),INTENT(IN) :: mass(iim*jjm,llm)
     REAL(rstd),INTENT(IN) :: geopot(iim*jjm,llm+1)
     REAL(rstd),INTENT(IN) :: W(iim*jjm,llm+1)
@@ -322,15 +324,23 @@ CONTAINS
     REAL(rstd),INTENT(INOUT) :: du(iim*3*jjm,llm)
     REAL(rstd),INTENT(INOUT) :: dPhi(iim*jjm,llm+1)
     REAL(rstd),INTENT(INOUT) :: dW(iim*jjm,llm+1)
-    ! local arrays
-    REAL(rstd) :: eta_dot(iim*jjm) ! eta_dot in full layers
-    REAL(rstd) :: wcov(iim*jjm) ! covariant vertical momentum in full layers
     REAL(rstd) :: W_etadot(iim*jjm,llm) ! vertical flux of vertical momentum
+    ! local arrays
+    REAL(rstd) :: eta_dot(iim*jjm, llm) ! eta_dot in full layers
+    REAL(rstd) :: wcov(iim*jjm,llm) ! covariant vertical momentum in full layers
     ! indices and temporary values
     INTEGER    :: ij, l
     REAL(rstd) :: wflux_ij, w_ij
 
     CALL trace_start("compute_caldyn_vert_nh")
+
+    IF(dysl) THEN
+!$OMP BARRIER
+#include "../kernels/caldyn_vert_NH.k90"
+!$OMP BARRIER
+    ELSE
+#define ETA_DOT(ij) eta_dot(ij,1)
+#define WCOV(ij) wcov(ij,1)
 
     DO l=ll_begin,ll_end
        ! compute the local arrays
@@ -339,21 +349,21 @@ CONTAINS
           wflux_ij = .5*(wflux(ij,l)+wflux(ij,l+1))
           w_ij = .5*(W(ij,l)+W(ij,l+1))/mass(ij,l)
           W_etadot(ij,l) = wflux_ij*w_ij
-          eta_dot(ij) = wflux_ij / mass(ij,l)
-          wcov(ij) = w_ij*(geopot(ij,l+1)-geopot(ij,l))
+          ETA_DOT(ij) = wflux_ij / mass(ij,l)
+          WCOV(ij) = w_ij*(geopot(ij,l+1)-geopot(ij,l))
        ENDDO
        ! add NH term to du
       !DIR$ SIMD
       DO ij=ij_begin,ij_end
           du(ij+u_right,l) = du(ij+u_right,l) &
-               - .5*(wcov(ij+t_right)+wcov(ij)) &
-               *ne_right*(eta_dot(ij+t_right)-eta_dot(ij))
+               - .5*(WCOV(ij+t_right)+WCOV(ij)) &
+               *ne_right*(ETA_DOT(ij+t_right)-ETA_DOT(ij))
           du(ij+u_lup,l) = du(ij+u_lup,l) &
-               - .5*(wcov(ij+t_lup)+wcov(ij)) &
-               *ne_lup*(eta_dot(ij+t_lup)-eta_dot(ij))
+               - .5*(WCOV(ij+t_lup)+WCOV(ij)) &
+               *ne_lup*(ETA_DOT(ij+t_lup)-ETA_DOT(ij))
           du(ij+u_ldown,l) = du(ij+u_ldown,l) &
-               - .5*(wcov(ij+t_ldown)+wcov(ij)) &
-               *ne_ldown*(eta_dot(ij+t_ldown)-eta_dot(ij))
+               - .5*(WCOV(ij+t_ldown)+WCOV(ij)) &
+               *ne_ldown*(ETA_DOT(ij+t_ldown)-ETA_DOT(ij))
        END DO
     ENDDO
     ! add NH terms to dW, dPhi
@@ -372,6 +382,11 @@ CONTAINS
           dW(ij,l)   = dW(ij,l)   - W_etadot(ij,l) ! update bottom+inner interfaces
        END DO
     END DO
+
+#undef ETA_DOT
+#undef WCOV
+
+    END IF ! dysl
     CALL trace_end("compute_caldyn_vert_nh")
 
   END SUBROUTINE compute_caldyn_vert_NH
