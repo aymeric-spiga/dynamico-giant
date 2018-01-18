@@ -56,8 +56,7 @@ randompert = 0.0
 ## Vertical levels
 ## ~~~~~~~~~~~~~~~
 # hybrid vertical coordinate ? (.true. for hybrid and .false. for sigma levels)
-hybrid         = .false.
-#hybrid         = .true.
+hybrid         = .true.
 # autocompute vertical discretisation? (useful for exoplanet runs)
 autozlevs      = .false.
 # Ceiling pressure (Pa) ? (only used if autozlevs = .true.)
