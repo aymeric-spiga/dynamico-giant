@@ -177,7 +177,7 @@ niterdivgrad=2
 # Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear, giant_liu_schneider
 rayleigh_friction_type = giant_liu_schneider
 rayleigh_limlat = 33.
-rayleigh_friction_tau = 8640000.
+rayleigh_friction_tau = 864000.
 
 # ---------------------------------- Physics ----------------------------------
 
