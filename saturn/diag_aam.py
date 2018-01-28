@@ -42,7 +42,7 @@ mpl.close()
 
 mpl.plot(np.abs(eps),'b.',label="|epsilon|")
 mpl.plot(np.abs(dis),'r.',label="|bottom friction|")
-mpl.plot(np.abs(dip),'g.',label="dissip u>0")
+mpl.plot(np.abs(dip),'g.',label="|dissip u>0|")
 mpl.plot(np.abs(dim),'m.',label="|dissip u<0|")
 mpl.semilogy()
 mpl.legend(loc='lower right')
