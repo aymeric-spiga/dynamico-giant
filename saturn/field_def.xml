@@ -29,6 +29,8 @@
         <field id="pk"/>
         <field id="ulon"/>
         <field id="ulat"/>
+        <field id="dulon_phys"/>
+        <field id="dulat_phys"/>
         <field id="uz"/>
         <field id="omega"/>
         <field id="temp"/>
