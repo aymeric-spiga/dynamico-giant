@@ -15,8 +15,8 @@
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN
 ##SBATCH --time=24:00:00
-#SBATCH --time=00:15:00
-##SBATCH --time=01:00:00
+##SBATCH --time=00:15:00
+#SBATCH --time=01:30:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
@@ -57,7 +57,7 @@ count=1
 ##############
 #limcount=$((count+15)) #12h
 #limcount=$((count+30)) #24h
-limcount=$((count+1)) #24h
+limcount=$((count+1)) #1h30
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
