@@ -161,10 +161,10 @@ iflag_sponge = 0
 # ---------------------------------- Dissipation ---------------------------------
 
 # dissipation time graddiv : real (default=5000)
-tau_graddiv = 5000 
+tau_graddiv = 3000 
 
 # number of iteration for graddiv : integer (default=1)
-nitergdiv = 1
+nitergdiv = 2
 
 # dissipation time nxgradrot (default=5000)
 tau_gradrot = 10000
