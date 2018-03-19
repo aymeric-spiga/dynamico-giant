@@ -18,6 +18,9 @@ dip = dip[np.where(dip != 0.)]
 dim = np.loadtxt("aam_dissip_moins.txt")
 dim = dim[np.where(dim != 0.)]
 
+dyn = np.loadtxt("aam_dyn.txt")
+dyn = dyn[np.where(dyn != 0.)]
+
 mas = np.loadtxt("aam_mass.txt")
 win = np.loadtxt("aam_vel.txt")
 
@@ -58,3 +61,15 @@ mpl.legend(loc='lower left')
 mpl.xlabel("simulated days")
 mpl.savefig('diag_aam_4_pert.png', bbox_inches='tight')
 mpl.close()
+
+l = len(eps)
+rat = 100.*eps[0:l]/dyn[0:l]
+rat2 = 100.*eps[0:l]/win[0:l]
+mpl.plot(rat,'b.',label="epsilon/dyn in %")
+mpl.plot(rat2,'r.',label="epsilon/wind in %")
+mpl.legend(loc='lower left')
+mpl.xlabel("simulated days")
+mpl.semilogy()
+mpl.savefig('diag_aam_5_relative.png', bbox_inches='tight')
+mpl.close()
+
