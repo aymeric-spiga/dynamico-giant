@@ -1,6 +1,6 @@
 #! /bin/bash
 
-cat icosa_lmdz_?.out icosa_lmdz_??.out icosa_lmdz_???.out | grep "AAM_dyn" | sed s/'0000: AAM_dyn budget mass + vel:'/' '/g > epsilon.txt
+cat icosa_lmdz_?.out icosa_lmdz_??.out icosa_lmdz_???.out | grep "AAM_dyn" | sed s/'0000: AAM_dyn budget mass + vel:'/' '/g > aam_epsilon.txt
 cat icosa_lmdz_?.out icosa_lmdz_??.out icosa_lmdz_???.out | grep "AAM_mass " | sed s/'0000: AAM_mass : time,old,new,dissip,dyn,phys '/' '/g | awk '{print $3}' > aam_mass.txt
 #cat icosa_lmdz_?.out icosa_lmdz_??.out icosa_lmdz_???.out | grep "AAM_mass " | sed s/'0000: AAM_mass : time,old,new,dissip,dyn,phys '/' '/g | awk '{print $1}' > aam_time.txt
 

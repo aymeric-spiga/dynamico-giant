@@ -5,7 +5,7 @@ import matplotlib.pyplot as mpl
 import ppcompute
 
 ## reading
-eps = np.loadtxt("epsilon.txt")
+eps = np.loadtxt("aam_epsilon.txt")
 dis = np.loadtxt("aam_dissip.txt")
 phy = np.loadtxt("aam_phys.txt")
 dip = np.loadtxt("aam_dissip_plus.txt")

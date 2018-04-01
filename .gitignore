@@ -11,3 +11,5 @@ used_*
 *.log
 jupiter/simu*
 saturn/simu*
+saturn/aam*
+jupiter/aam*
