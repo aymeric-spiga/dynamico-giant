@@ -3,9 +3,9 @@
 # clear log
 rm -rf log
 
-## - selection tous les 500 jours
-## - calcul precast
-## - rename
+### - selection tous les 500 jours
+### - calcul precast
+### - rename
 #ncrcat -O -d time_counter,,,25 Xhistins_[1-9].nc   Xhistins_10.nc  Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_01.nc 
 #ncrcat -O -d time_counter,,,25 Xhistins_1[1-9].nc  Xhistins_20.nc  Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_02.nc 
 #ncrcat -O -d time_counter,,,25 Xhistins_2[1-9].nc  Xhistins_30.nc  Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_03.nc 
@@ -30,9 +30,9 @@ rm -rf log
 #ncrcat -O -d time_counter,,,25 Xhistins_21[1-9].nc Xhistins_220.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_22.nc
 #ncrcat -O -d time_counter,,,25 Xhistins_22[1-9].nc Xhistins_230.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_23.nc
 #ncrcat -O -d time_counter,,,25 Xhistins_23[1-9].nc Xhistins_240.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_24.nc
-ncrcat -O -d time_counter,,,25 Xhistins_24[1-9].nc Xhistins_250.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_25.nc
+#ncrcat -O -d time_counter,,,25 Xhistins_24[1-9].nc Xhistins_250.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_25.nc
 ncrcat -O -d time_counter,,,25 Xhistins_25[1-9].nc Xhistins_260.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_26.nc
-ncrcat -O -d time_counter,,,25 Xhistins_26[1-5].nc                 Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_27.nc
+ncrcat -O -d time_counter,,,25 Xhistins_26[1-9].nc Xhistins_270.nc Xhistins_tmp.nc ; ./precast.py >> log ; mv precast.nc precast_27.nc
 
 # ajouter un record dimension
 rm -rf tprecast*
