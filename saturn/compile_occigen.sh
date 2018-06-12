@@ -2,10 +2,10 @@
 
 here=$PWD
 
-echo "----- update code"
+#echo "----- update code"
 cd ../code
-svn update * | tail -n 7 > log_svn
-cat log_svn
+#svn update * | tail -n 7 > log_svn
+#cat log_svn
 
 echo "----- compile code (please wait)"
 cd ICOSA_LMDZ
