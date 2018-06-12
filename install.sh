@@ -8,6 +8,14 @@ ver_xios=HEAD
 ver_ioipsl=HEAD
 ##############
 
+###############
+#### CONFIG ###
+#ver_dyn=687 # ICOSAGCM
+#ver_phys=1911 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
+#ver_xios=1459 # XIOS
+#ver_ioipsl=302 # IOIPSL
+###############
+
 rm -rf code
 svn co -q -N http://svn.lmd.jussieu.fr/Planeto/trunk code
 
