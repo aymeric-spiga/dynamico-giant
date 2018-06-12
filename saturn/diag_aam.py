@@ -27,18 +27,19 @@ crd = np.arange(eps.shape[0])
 #mpl.savefig('diag_aam_1_tot.png', bbox_inches='tight')
 #mpl.close()
 
-## calculate ratios
-zedyn = np.abs(dyn)
-denom = zedyn + np.abs(eps)
-numer = np.abs(eps)
-rat = 100.*numer/denom
-rat[denom == 0] = 0. # ensure smooth is OK
+### calculate ratios
+#zedyn = np.abs(dyn)
+#denom = zedyn + np.abs(eps)
+#numer = np.abs(eps)
+#rat = 100.*numer/denom
+#rat[denom == 0] = 0. # ensure smooth is OK
 zedyn = np.maximum(np.abs(dyn),np.abs(dyp),np.abs(dym))
 zewin = np.maximum(np.abs(win),np.abs(wip),np.abs(wim))
 chk = 100.*zedyn/zewin
 
 ## smooth for plot clarity
 smth = 200
+#smth = 1000
 eps = ppcompute.smooth1d(eps,window=smth) / 1.e25
 dip = ppcompute.smooth1d(dip,window=smth) / 1.e25
 dim = ppcompute.smooth1d(dim,window=smth) / 1.e25
@@ -49,8 +50,16 @@ wim = ppcompute.smooth1d(dym,window=smth) / 1.e25
 win = ppcompute.smooth1d(win,window=smth) / 1.e25
 mas = ppcompute.smooth1d(mas,window=smth) / 1.e25
 coo = ppcompute.smooth1d(crd,window=smth)
-rat = ppcompute.smooth1d(rat,window=smth) 
+#rat = ppcompute.smooth1d(rat,window=smth) 
 chk = ppcompute.smooth1d(chk,window=smth) 
+
+## calculate ratios
+dyn = ppcompute.smooth1d(dyn,window=smth) / 1.e25
+zedyn = np.abs(dyn)
+denom = zedyn + np.abs(eps)
+numer = np.abs(eps)
+rat = 100.*numer/denom
+
 
 ## calculate xi from Lebonnois et al. 2012
 xi = np.abs(eps) / np.maximum(np.abs(dip),np.abs(dim))
