@@ -41,7 +41,7 @@
     </file>
 
     <file id="restart" name="restart" enabled="true">
-       <field_group id="group_restart" operation="instant"> 
+       <field_group id="group_restart" operation="once"> 
           <field id="it_restart" name="iteration"  grid_ref="scalar" />
           <field id="q_restart" name="q"  grid_ref="grid_q" />
           <field_group domain_ref="i"> 
@@ -58,7 +58,7 @@
     </file>
 
     <file id="start" name="start" enabled="true" mode="write">
-       <field_group id="group_start" operation="instant"> 
+       <field_group id="group_start" operation="once"> 
           <field id="it_start" name="iteration"  grid_ref="scalar" />
           <field id="q_start" name="q"  grid_ref="grid_q" />
           <field_group domain_ref="i"> 
