@@ -36,3 +36,7 @@ echo "get I/O libraries..."
 svn co -r $ver_xios -q http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS
 svn co -r $ver_ioipsl -q http://forge.ipsl.jussieu.fr/heat/svn/codes/dynamico_lmdz/aquaplanet/IOIPSL
 
+echo "get FCM..."
+svn -q co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2
+echo "please add "$PWD"/FCM_V1.2/bin/ to PATH environment variable"
+
