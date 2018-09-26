@@ -36,9 +36,23 @@
 
   <file_definition type="one_file" par_access="collective">
 
-    <file id="output" name="output" enabled=".FALSE."  output_freq="2h" sync_freq="2h" output_level="10" >
-      <field_group group_ref="standard_output"/>
+    <file id="output" name="output" enabled=".TRUE." 
+                      output_freq="40ts" sync_freq="40ts" output_level="10" >
+      <!--<field_group group_ref="standard_output"/>-->
+      <field field_ref="ulon" domain_ref="regular_two_degree" axis_ref="lev" />
+      <field field_ref="ulat" domain_ref="regular_two_degree" axis_ref="lev" />
+      <field field_ref="dulon_phys" domain_ref="regular_two_degree" axis_ref="lev" />
+      <field field_ref="dulat_phys" domain_ref="regular_two_degree" axis_ref="lev" />
     </file>
+
+    <file id="dissip" name="Xdissip" enabled=".TRUE." 
+          output_freq="80ts" sync_freq="80ts" output_level="10" >
+      <field field_ref="dulon_diss1" name="dulon_diss1" domain_ref="dom_out"/>
+      <field field_ref="dulat_diss1" name="dulat_diss1" domain_ref="dom_out"/>
+      <field field_ref="dulon_diss2" name="dulon_diss2" domain_ref="dom_out"/>
+      <field field_ref="dulat_diss2" name="dulat_diss2" domain_ref="dom_out"/>
+    </file>
+
 
     <file id="restart" name="restart" enabled="true">
        <field_group id="group_restart" operation="once"> 
@@ -103,7 +117,8 @@
     <axis id="lev_pressure" positive="down"  n_glo="2" unit="Pa" value="(0,1)[85000 50000]" >
       <interpolate_axis order="1" coordinate="p" />
     </axis>    
-    <axis id="nq" name="nq" n_glo="5" value="(0,4)[1 2 3 4 5]"/>
+    <axis id="nq" name="nq" n_glo="5" value="(0,4)[1 2 3 4 5]"/> 
+    <!-- <axis id="nq" name="nq" n_glo="1" value="(0,0)[1]"/> -->
     <axis id="lev_ecdyn" />
   </axis_definition>    
   
