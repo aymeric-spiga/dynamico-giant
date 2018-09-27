@@ -39,10 +39,10 @@
     <file id="output" name="output" enabled=".TRUE." 
                       output_freq="40ts" sync_freq="40ts" output_level="10" >
       <!--<field_group group_ref="standard_output"/>-->
-      <field field_ref="ulon" domain_ref="regular_two_degree" axis_ref="lev" />
-      <field field_ref="ulat" domain_ref="regular_two_degree" axis_ref="lev" />
-      <field field_ref="dulon_phys" domain_ref="regular_two_degree" axis_ref="lev" />
-      <field field_ref="dulat_phys" domain_ref="regular_two_degree" axis_ref="lev" />
+      <field field_ref="ulon" domain_ref="dom_720_360" axis_ref="lev" />
+      <field field_ref="ulat" domain_ref="dom_720_360" axis_ref="lev" />
+      <field field_ref="dulon_phys" domain_ref="dom_720_360" axis_ref="lev" />
+      <field field_ref="dulat_phys" domain_ref="dom_720_360" axis_ref="lev" />
     </file>
 
     <file id="dissip" name="Xdissip" enabled=".TRUE." 
@@ -142,22 +142,6 @@
      <domain id="u" />
      
     
-     <domain id="regular_half_degree" type="rectilinear" ni_glo="720" nj_glo="360" >
-       <generate_rectilinear_domain />
-       <interpolate_domain order="1"/>
-     </domain> 
-     
-     <domain id="regular_one_degree" type="rectilinear" ni_glo="360" nj_glo="180" >
-       <generate_rectilinear_domain />
-       <interpolate_domain order="1"/>
-     </domain> 
-     
-     <domain id="regular_two_degree" type="rectilinear" ni_glo="180" nj_glo="90" >
-       <generate_rectilinear_domain />
-       <interpolate_domain order="1"/>
-     </domain> 
-    
-
      <domain id="domain_relief" type="rectilinear" >
         <generate_rectilinear_domain />
      </domain>
