@@ -141,7 +141,7 @@
      <domain id="v" />
      <domain id="u" />
      
-     <!--
+    
      <domain id="regular_half_degree" type="rectilinear" ni_glo="720" nj_glo="360" >
        <generate_rectilinear_domain />
        <interpolate_domain order="1"/>
@@ -156,7 +156,7 @@
        <generate_rectilinear_domain />
        <interpolate_domain order="1"/>
      </domain> 
-     -->
+    
 
      <domain id="domain_relief" type="rectilinear" >
         <generate_rectilinear_domain />
