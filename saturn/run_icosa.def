@@ -87,10 +87,10 @@ run_length=38052000
 ## output with XIOS (only if compiled with XIOS): true/false (default true)
 #xios_output=false
 
-# output field period (only when not using XIOS) : integer (default none)
-#write_period=7200
-# write_period=14400
-write_period=86400
+# output field period (valid XIOS or not) : integer (default none)
+# [should be equal to dt if XIOS dynamical outputs are wanted]
+# [because write_period sets synchronization frequency with XIOS]
+write_period = 118.9125
 
 
 #itau_write_etat0=380520
