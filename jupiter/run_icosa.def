@@ -5,7 +5,7 @@
 
 #halo_i=0
 #halo_j=1
-# ------------------------------- Mesh -------------------------------
+# ------------------------------- Mesh ---------------------------------
 
 # Number of subdivision on a main triangle (nbp) : integer (default=40)
 nbp = 160
@@ -24,24 +24,28 @@ nbp = 40
 ## it is better to have nbp/split >~ 10
 ###########################################
 ## 40 procs
-#nsplit_i=2
-#nsplit_j=2
+#nsplit_i = 2
+#nsplit_j = 2
 #### 50 noeuds de 24 processeurs = 1200 procs
-nsplit_i=10
-nsplit_j=12
+nsplit_i = 10
+nsplit_j = 12
+#### 10 noeuds de 24 processeurs = 240 procs
+nsplit_i = 4
+nsplit_j = 6
+
 
 # Number of vertical layer (llm) : integer (default=19)
-llm=64
-llm=32
+llm = 64
+llm = 32
 
 # disvert : vertical discretisation : string (default='std') : std, ncar, ncar30l
 disvert=read_apbp
 
 # optim_it : mesh optimisation : number of iteration : integer (default=0)
-#optim_it=1000
-optim_it=0
+#optim_it = 1000
+optim_it = 0
 
-# ------------------------------- Time -------------------------------
+# ---------------------------------- Time ---------------------------------
 
 ## scheme type : string : euler, leapfrog_matsuno, runge_kutta
 # time_scheme = ARK2.3 // default // RK 2nd order at 3 levels
@@ -98,7 +102,7 @@ write_period = 446.75
 
 #itau_write_etat0=380520
 
-# ------------------------------- Misc -------------------------------
+# ---------------------------------- Misc --------------------------------
 
 # number of tracer (nqtot) : integer (default 1)
 nqtot=1

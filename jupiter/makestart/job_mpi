@@ -47,7 +47,7 @@ srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n
 exit
 
 count=1
-limcount=$((count+4))
+limcount=$((count+1))
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
