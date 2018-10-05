@@ -124,7 +124,7 @@ calladj     = .true.
 # call thermal conduction in the soil ?
 callsoil    = .false.
 # Internal heat flux (matters only if callsoil=F)
-intheat     = 6.0
+intheat     = 7.5
 # Remove lower boundary (e.g. for gas giant sims)
 nosurf      = .true.
 
