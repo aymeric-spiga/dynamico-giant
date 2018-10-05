@@ -8,8 +8,8 @@
 # ------------------------------- Mesh ---------------------------------
 
 # Number of subdivision on a main triangle (nbp) : integer (default=40)
-nbp=160
-#nbp=40
+nbp = 160
+nbp = 40
 
 # nbp                 20  40  80 160
 # T-edge length (km) 500 250 120  60
@@ -24,22 +24,22 @@ nbp=160
 ## it is better to have nbp/split >~ 10
 ###########################################
 ## 40 procs
-nsplit_i=2
-nsplit_j=2
+nsplit_i = 2
+nsplit_j = 2
 #### 50 noeuds de 24 processeurs = 1200 procs
-#nsplit_i=10
-#nsplit_j=12
+#nsplit_i = 10
+#nsplit_j = 12
 
 # Number of vertical layer (llm) : integer (default=19)
-llm=64
-llm=32
+llm = 64
+llm = 32
 
 # disvert : vertical discretisation : string (default='std') : std, ncar, ncar30l
 disvert=read_apbp
 
 # optim_it : mesh optimisation : number of iteration : integer (default=0)
-#optim_it=1000
-optim_it=0
+#optim_it = 1000
+optim_it = 0
 
 # ---------------------------------- Time---------------------------------
 
@@ -51,6 +51,7 @@ optim_it=0
 
 # timestep : real (default=480s)
 dt = 111.6875
+dt = 446.75
 ### attention 3 chiffres significatifs dans XIOS
 
 # advection called every itau_adv time steps : integer (default 2)
@@ -59,7 +60,7 @@ dt = 111.6875
 itau_adv=3
 
 # number of timestep (default 100) (ignored if run_length is set)
- itaumax = 10
+itaumax = 10
 
 # run length : real (default=dt*itaumax)
 
@@ -92,6 +93,7 @@ run_length=35740000
 # [should be equal to dt if XIOS dynamical outputs are wanted]
 # [because write_period sets synchronization frequency with XIOS]
 write_period = 111.6875
+write_period = 446.75
 
 
 #itau_write_etat0=380520
@@ -185,15 +187,16 @@ niterdivgrad=2
 
 # Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear, giant_liu_schneider
 rayleigh_friction_type = giant_liu_schneider
-rayleigh_limlat = 33.
-rayleigh_friction_tau = 864000.
+rayleigh_limlat = 16.
+rayleigh_friction_tau = 8640000.
 
 # -------------------------------- Physics -------------------------------------
 
 # (itau_physics=160)*(dt=111.6875) --> half a jupiter day as physical timestep
 # ---- for some reason (day consistency, physical timestep must be less a day)
 # ---- change also in run.def
-itau_physics=160
+itau_physics = 160
+itau_physics = 40
 
 # kind of physics : string : none, dcmip (default=none)
 physics=phys_external

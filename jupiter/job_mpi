@@ -1,15 +1,15 @@
 #!/bin/bash
-##### TEST EHOUARN
+###### TEST EHOUARN
 ##SBATCH --nodes=1
 ##SBATCH --ntasks-per-node=10
-######
+###### MAKESTART CONFIG
 ##SBATCH --nodes=2
 ##SBATCH --ntasks-per-node=20
-###### TEST MPI 
+###### TEST MPI
 #SBATCH --nodes=50
 #SBATCH --ntasks-per-node=24
 ##SBATCH --cpus-per-task=1
-#####
+######
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J JUPITER
@@ -47,7 +47,7 @@ echo "$nlast xios_server.exe" >> srun.conf
 #exit
 
 count=1
-limcount=$((count+15))
+limcount=$((count+1))
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
