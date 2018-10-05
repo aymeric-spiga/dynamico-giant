@@ -43,6 +43,7 @@ cell_u = 758430
 nvertex_u= 2
 
 newlvl = 64
+#newlvl = 32
 
 output = nc.Dataset('start_icosa_270.nc','w',format='NETCDF4')
 
@@ -140,7 +141,7 @@ bounds_lat_ulvl64[:]        = bounds_lat_u
 iterationlvl64[:]           = 8.608032e+07 #time iteration value of this specific start file
 pslvl64[:]                  = ps
 phislvl64[:]                = phis
-lev[:]                      = range(64)
+lev[:]                      = range(1,65,1)
 
 for i in range(32):
 	ulvl64[i,:]     = u[0,i,:]
@@ -148,6 +149,7 @@ for i in range(32):
 	ulatlvl64[i,:]  = ulat[0,i,:]
 	thetalvl64[i,:] = theta[0,i,:]
 	qlvl64[:,i,:]   = q[0,:,i,:]
+        print i,u[0,i,3456]
 
 for i in range(32):
 	ulvl64[i+32,:]     = u[0,31,:]
@@ -155,6 +157,7 @@ for i in range(32):
 	ulatlvl64[i+32,:]  = ulat[0,31,:]
 	thetalvl64[i+32,:] = theta[0,31,:]
 	qlvl64[:,i+32,:]   = q[0,:,31,:]
+        print i+32,ulvl64[i+32,3456]
 
 # tests
 print("q_lvl32",shape(q))

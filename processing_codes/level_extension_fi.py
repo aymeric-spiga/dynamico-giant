@@ -44,6 +44,7 @@ subsurface_layers = 18
 nlayer_plus_1 = 65
 number_of_advected_fields = 1
 nlayer = 64
+#nlayer = 32
 ocean_layers = 2
 
 output = nc.Dataset('startfi_270.nc','w',format='NETCDF4')
@@ -98,7 +99,7 @@ tsurf_lvl64.title        = 'Surface temperature'
 tsoil_lvl64.title        = 'Soi ltemperature'
 emis_lvl64.title         = 'Surface emissivity'
 q2_lvl64.title           = 'pbl wind variance'
-coudfrac_lvl64.title     = 'Cloud fraction'
+cloudfrac_lvl64.title     = 'Cloud fraction'
 totcloudfrac_lvl64.title = 'Totla fraction'
 hice_lvl64.title         = 'Height og oceanic ice'
 dummy_lvl64.title        = 'tracer on surface'
@@ -127,11 +128,13 @@ dummy_lvl64[:]        = dummy
 
 for i in range(32):
 	cloudfrac_lvl64[i,:] = cloudfrac[i,:]
+for i in range(33):
 	q2_lvl64[i,:]        = q2[i,:]
 
 for i in range(32):
 	cloudfrac_lvl64[i+32,:] = cloudfrac[31,:]
-	q2_lvl64[i+32,:]        = q2[31,:]
+for i in range(32):
+	q2_lvl64[i+33,:]        = q2[32,:]
 
 
 
