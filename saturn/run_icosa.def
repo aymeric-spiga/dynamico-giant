@@ -43,8 +43,8 @@ optim_it=0
 
 # ---------------------------------- Time---------------------------------
 
-## scheme type : string ( default='runge_kutta') euler, leapfrog_matsuno, runge_kutta )
-#scheme = runge_kutta   leapfrog_matsuno 
+## scheme type : string : euler, leapfrog_matsuno, runge_kutta )
+# time_scheme = ARK2.3 // default // RK 2nd order at 3 levels  
 
 ## matsuno period : integer ( default=5)
 #matsuno_period = 5
