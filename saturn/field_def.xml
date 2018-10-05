@@ -31,6 +31,10 @@
         <field id="ulat"/>
         <field id="dulon_phys"/>
         <field id="dulat_phys"/>
+        <field id="dulon_diss1"/>
+        <field id="dulat_diss1"/>
+        <field id="dulon_diss2"/>
+        <field id="dulat_diss2"/>
         <field id="uz"/>
         <field id="omega"/>
         <field id="temp"/>
