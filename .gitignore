@@ -1,6 +1,7 @@
 code
 *.nc
 *.out*
+*.err
 *.exe
 *.e
 checkconsicosa.txt
