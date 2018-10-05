@@ -43,8 +43,8 @@ optim_it=0
 
 # ---------------------------------- Time---------------------------------
 
-## scheme type : string ( default='runge_kutta') euler, leapfrog_matsuno, runge_kutta )
-#scheme = runge_kutta   leapfrog_matsuno 
+## scheme type : string : euler, leapfrog_matsuno, runge_kutta
+# time_scheme = ARK2.3 // default // RK 2nd order at 3 levels
 
 ## matsuno period : integer ( default=5)
 #matsuno_period = 5
@@ -88,10 +88,10 @@ run_length=35740000
 ## output with XIOS (only if compiled with XIOS): true/false (default true)
 #xios_output=false
 
-# output field period (only when not using XIOS) : integer (default none)
-#write_period=7200
-# write_period=14400
-write_period=86400
+# output field period (valid XIOS or not) : integer (default none)
+# [should be equal to dt if XIOS dynamical outputs are wanted]
+# [because write_period sets synchronization frequency with XIOS]
+write_period = 111.6875
 
 
 #itau_write_etat0=380520
