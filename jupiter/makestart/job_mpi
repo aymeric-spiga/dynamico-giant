@@ -1,15 +1,15 @@
 #!/bin/bash
-##### TEST EHOUARN
+###### TEST EHOUARN
 ##SBATCH --nodes=1
 ##SBATCH --ntasks-per-node=10
-######
+###### MAKESTART CONFIG
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=20
-###### TEST MPI 
+###### TEST MPI
 ##SBATCH --nodes=50
 ##SBATCH --ntasks-per-node=24
-###SBATCH --cpus-per-task=1
-#####
+##SBATCH --cpus-per-task=1
+######
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J JUPITER
@@ -27,7 +27,7 @@ export EXEC_NAME=./icosa_lmdz.exe
 
 set -vx
 
-source ../code/ARCH/arch-X64_OCCIGEN.env
+source ../../code/ARCH/arch-X64_OCCIGEN.env
 ulimit -s unlimited
 
 #printenv | sort
@@ -47,7 +47,7 @@ srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n
 exit
 
 count=1
-limcount=$((count+4))
+limcount=$((count+1))
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
