@@ -36,7 +36,7 @@
 
   <file_definition type="one_file" par_access="collective">
 
-    <file id="output" name="output" enabled=".TRUE." 
+    <file id="output" name="output" enabled=".FALSE." 
                       output_freq="40ts" sync_freq="40ts" output_level="10" >
       <!--<field_group group_ref="standard_output"/>-->
       <field field_ref="ulon" domain_ref="dom_720_360" axis_ref="lev" />
@@ -45,7 +45,7 @@
       <field field_ref="dulat_phys" domain_ref="dom_720_360" axis_ref="lev" />
     </file>
 
-    <file id="dissip" name="Xdissip" enabled=".TRUE." 
+    <file id="dissip" name="Xdissip" enabled=".FALSE." 
           output_freq="80ts" sync_freq="80ts" output_level="10" >
       <field field_ref="dulon_diss1" name="dulon_diss1" domain_ref="dom_out"/>
       <field field_ref="dulat_diss1" name="dulat_diss1" domain_ref="dom_out"/>
