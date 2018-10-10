@@ -139,11 +139,11 @@ lon_ulvl64[:]               = lon_u
 bounds_lon_ulvl64[:]        = bounds_lon_u
 bounds_lat_ulvl64[:]        = bounds_lat_u
 iterationlvl64[:]           = 8.608032e+07 #time iteration value of this specific start file
-pslvl64[:]                  = ps
-phislvl64[:]                = phis
+pslvl64[:]                  = ps[0,:]
+phislvl64[:]                = phis[0,:]
 lev[:]                      = range(1,65,1)
 
-for i in range(32):
+for i in range(30):
 	ulvl64[i,:]     = u[0,i,:]
 	ulonlvl64[i,:]  = ulon[0,i,:]
 	ulatlvl64[i,:]  = ulat[0,i,:]
@@ -151,13 +151,13 @@ for i in range(32):
 	qlvl64[:,i,:]   = q[0,:,i,:]
         print i,u[0,i,3456]
 
-for i in range(32):
-	ulvl64[i+32,:]     = u[0,31,:]
-	ulonlvl64[i+32,:]  = ulon[0,31,:]
-	ulatlvl64[i+32,:]  = ulat[0,31,:]
-	thetalvl64[i+32,:] = theta[0,31,:]
-	qlvl64[:,i+32,:]   = q[0,:,31,:]
-        print i+32,ulvl64[i+32,3456]
+for i in range(34):
+	ulvl64[i+30,:]     = u[0,29,:]
+	ulonlvl64[i+30,:]  = ulon[0,29,:]
+	ulatlvl64[i+30,:]  = ulat[0,29,:]
+	thetalvl64[i+30,:] = theta[0,29,:]
+	qlvl64[:,i+30,:]   = q[0,:,29,:]
+        print i+30,ulvl64[i+30,3456]
 
 # tests
 print("q_lvl32",shape(q))
