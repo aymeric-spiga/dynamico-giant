@@ -30,6 +30,12 @@ set -vx
 source ../../code/ARCH/arch-X64_OCCIGEN.env
 ulimit -s unlimited
 
+# RECORD THE CURRENT VERSION OF CODE
+# (supposedly used to create exe)
+echo "****** CODE VERSION *******"
+svn info ../code/*
+echo "****** CODE VERSION *******"
+
 #printenv | sort
 export OMP_NUM_THREADS=1
 export OMP_STACKSIZE=256M
