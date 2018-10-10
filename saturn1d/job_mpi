@@ -4,8 +4,10 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN1D
-#SBATCH --time=06:00:00
+#SBATCH --time=02:40:00
 #SBATCH --constraint=HSW24
+
+ulimit -s unlimited
 srun --mpi=pmi2 -K1 -n $SLURM_NTASKS ./rcm1d.e > rcm1d.log
 
 

@@ -126,15 +126,15 @@ totcloudfrac_lvl64[:] = totcloudfrac
 hice_lvl64[:]         = hice
 dummy_lvl64[:]        = dummy
 
-for i in range(32):
+for i in range(30):
 	cloudfrac_lvl64[i,:] = cloudfrac[i,:]
-for i in range(33):
+for i in range(31):
 	q2_lvl64[i,:]        = q2[i,:]
 
-for i in range(32):
-	cloudfrac_lvl64[i+32,:] = cloudfrac[31,:]
-for i in range(32):
-	q2_lvl64[i+33,:]        = q2[32,:]
+for i in range(34):
+	cloudfrac_lvl64[i+30,:] = cloudfrac[29,:]
+for i in range(34):
+	q2_lvl64[i+31,:]        = q2[30,:]
 
 
 
