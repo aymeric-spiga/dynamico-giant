@@ -9,15 +9,15 @@ cd ../code
 
 
 # PRINT THE CURRENT VERSION OF CODE
-echo "****** CODE VERSION *******"
+\rm icosa_lmdz.version
+echo "****** CODE VERSION *******" >> icosa_lmdz.version
 var="DYNAMICO --> "`svn info ICOSAGCM 2> /dev/null | grep "Revision:"`
-echo $var
+echo $var >> icosa_lmdz.version
 var="PHYSICS --> "`svn info ICOSA_LMDZ 2> /dev/null | grep "Revision:"`
-echo $var
+echo $var >> icosa_lmdz.version
 var="XIOS --> "`svn info XIOS 2> /dev/null | grep "Revision:"`
-echo $var
-echo "****** CODE VERSION *******"
-
+echo $var >> icosa_lmdz.version
+echo "****** CODE VERSION *******" >> icosa_lmdz.version
 
 echo "----- compile code (please wait)"
 cd ICOSA_LMDZ
@@ -31,3 +31,4 @@ echo "----- copy executables to current directory"
 cd $here
 cp -rf ../code/ICOSA_LMDZ/bin/icosa_lmdz.exe ./
 cp -rf ../code/XIOS/bin/xios_server.exe ./
+cp -rf ../code/icosa_lmdz.version ./
