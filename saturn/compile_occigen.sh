@@ -7,6 +7,18 @@ cd ../code
 #svn update * | tail -n 7 > log_svn
 #cat log_svn
 
+
+# PRINT THE CURRENT VERSION OF CODE
+echo "****** CODE VERSION *******"
+var="DYNAMICO --> "`svn info ICOSAGCM 2> /dev/null | grep "Revision:"`
+echo $var
+var="PHYSICS --> "`svn info ICOSA_LMDZ 2> /dev/null | grep "Revision:"`
+echo $var
+var="XIOS --> "`svn info XIOS 2> /dev/null | grep "Revision:"`
+echo $var
+echo "****** CODE VERSION *******"
+
+
 echo "----- compile code (please wait)"
 cd ICOSA_LMDZ
 ./make_icosa_lmdz -p std -p_opt "-b 20x25 -s 1" -parallel mpi_omp -arch X64_OCCIGEN -arch_path ../ARCH -job 8 > $here/log_compile 2>&1
