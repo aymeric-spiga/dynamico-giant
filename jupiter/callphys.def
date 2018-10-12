@@ -113,7 +113,9 @@ calldifv    = .true.
 # use turbdiff instead of vdifc ?
 UseTurbDiff = .true.
 # call convective adjustment ?
-calladj     = .true.
+calladj     = .false.
+# call thermal plume model ?
+calltherm   = .true.
 # call thermal conduction in the soil ?
 callsoil    = .false.
 # Internal heat flux (matters only if callsoil=F)
