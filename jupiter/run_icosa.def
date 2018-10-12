@@ -33,7 +33,6 @@ nsplit_j = 12
 nsplit_i = 4
 nsplit_j = 6
 
-
 # Number of vertical layer (llm) : integer (default=19)
 llm = 64
 llm = 32
@@ -56,7 +55,7 @@ optim_it = 0
 # timestep : real (default=480s)
 dt = 111.6875
 dt = 446.75
-### attention 3 chiffres significatifs dans XIOS
+#### attention 3 chiffres significatifs dans XIOS
 
 # advection called every itau_adv time steps : integer (default 2)
 # standard : umax=100m/s vs c=340m/s (ratio 1:3)
@@ -71,18 +70,20 @@ itaumax = 10
 
 ####################################
 
-## 1000 saturn day
+#### 1000 saturn day
 #run_length=38052000
 
-## special 
-## -- to cross the 2y limit precisely
+#### special -- to cross the 2y limit precisely
 #run_length=32686668
 
-# 1000 jovian days
-run_length=35740000
+#### 1000 jovian days
+#run_length=35740000
 
-## A jovian year (less than 6h)
-## ... 10474 * 35740 = 374340760
+#### 100 jovian days
+run_length=3574000
+
+#### A jovian year (less than 14h)
+#### ... 10474 * 35740 = 374340760
 #run_length=374340760
 
 ####################################
@@ -98,6 +99,7 @@ run_length=35740000
 # [because write_period sets synchronization frequency with XIOS]
 write_period = 111.6875
 write_period = 446.75
+write-period = 357400.
 
 
 #itau_write_etat0=380520
@@ -226,5 +228,9 @@ dcmip4_testcase=1
 
 # ----------------------------- Conservation test -----------------------------
 
+# 
 check_conservation = detailed
+
+# (itau_check_conserv=320)*(dt=111.6875) --> one jovian day as checking timestep
 itau_check_conserv = 320
+itau_check_conserv = 80

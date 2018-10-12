@@ -16,14 +16,14 @@
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J JUPITER
-#SBATCH --time=24:00:00
+#SBATCH --time=00:10:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
 #SBATCH --exclusive
 ##SBATCH --mem=120G
-###SBATCH -p all
-###SBATCH -p highmem
+##SBATCH -p all
+##SBATCH -p highmem
 
 #export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
 export EXEC_NAME=./icosa_lmdz.exe
@@ -70,6 +70,3 @@ do
   mv restart_icosa.nc start_icosa_$count".nc"
   mv restartfi.nc     startfi_$count".nc"
 done
-
-
-
