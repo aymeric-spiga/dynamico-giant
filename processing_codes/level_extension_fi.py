@@ -80,6 +80,10 @@ totcloudfrac_lvl64 = output.createVariable('totcloudfrac','f4','physical_points'
 hice_lvl64         = output.createVariable('hice','f4','physical_points')
 dummy_lvl64        = output.createVariable('dummy','f4','physical_points')
 
+############################# GET GLOBAL ATTRIBUTE FOR NEW FILE ###################################
+
+output.title = 'Physics strat file'
+
 ############################### GET ATTRIBUTES FOR VARIABLES #######################################
 
 controle_lvl64.title     = 'Control parameter'
