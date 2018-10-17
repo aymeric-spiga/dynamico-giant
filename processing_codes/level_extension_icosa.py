@@ -77,7 +77,7 @@ ulonlvl64                = output.createVariable('ulon','f4',('lev','cell_mesh')
 
 ################################ GET GLOBAL ATTRIBUTES FOR NEW FILE ######################################
 
-output.name        = 'restart_icosa'
+output.name='restart_icosa'
 output.description = 'Created by DB'
 output.title       = 'Created by DB'
 output.convention  = 'CF-1.6'
