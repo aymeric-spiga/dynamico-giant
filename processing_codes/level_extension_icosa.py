@@ -75,6 +75,15 @@ ulvl64                   = output.createVariable('u','f4',('lev','cell_u'))
 ulatlvl64                = output.createVariable('ulat','f4',('lev','cell_mesh'))
 ulonlvl64                = output.createVariable('ulon','f4',('lev','cell_mesh'))
 
+################################ GET GLOBAL ATTRIBUTES FOR NEW FILE ######################################
+
+output.name='restart_icosa'
+output.description = 'Created by DB'
+output.title       = 'Created by DB'
+output.convention  = 'CF-1.6'
+output.timestamp   = '2018-Jun-01 20:49:38 GMT'
+output.uuid        = 'cfddba90-e494-44e1-b07d-1bd53a2a748a' 
+
 ################################# GET ATTRIBUTES FOR NEW VARIABLES #######################################
 
 qlvl64.online_operation     = 'once'
