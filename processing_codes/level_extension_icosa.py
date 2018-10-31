@@ -4,7 +4,12 @@ import netCDF4 as nc
 from scipy import *
 ##################################
 
-### NetCDF file on 32 levels that contains q, theta_rhodz, u, ulon, ulat
+### NetCDF file on 64 levels created by makestart: just to take theta_rhodz
+ncfile="start_icosa_1.nc"
+file = nc.Dataset(ncfile,'r')
+theta               = file.variables['theta_rhodz'][:,:]
+
+### NetCDF file on 32 levels that contains q,theta_rhodz, u, ulon, ulat
 ncfile="start_icosa_270_aspiga.nc"
 
 ### Get variables
@@ -23,11 +28,11 @@ bounds_lat_u        = file.variables['bounds_lat_u'][:,:]
 iteration           = file.variables['iteration'][:]
 ps                  = file.variables['ps'][:,:]
 phis                = file.variables['phis'][:,:]
-q     = file.variables['q'][:,:,:,:] 
-theta = file.variables['theta_rhodz'][:,:,:]
-u     = file.variables['u'][:,:,:]
-ulat  = file.variables['ulat'][:,:,:]
-ulon  = file.variables['ulon'][:,:,:]
+q                   = file.variables['q'][:,:,:,:] 
+#theta32             = file.variables['theta_rhodz'][:,:,:]
+u                   = file.variables['u'][:,:,:]
+ulat                = file.variables['ulat'][:,:,:]
+ulon                = file.variables['ulon'][:,:,:]
 
 file.close()
 
@@ -42,10 +47,11 @@ nq = 1
 cell_u = 758430
 nvertex_u= 2
 
-newlvl = 64
+newlvl = 61
 #newlvl = 32
 
-output = nc.Dataset('start_icosa_270.nc','w',format='NETCDF4')
+#output = nc.Dataset('start_icosa_270.nc','w',format='NETCDF4')
+output = nc.Dataset('start_icosa_270-smooth.nc','w',format='NETCDF4')
 
 output.createDimension('cell_mesh',cell_mesh)
 output.createDimension('lev',newlvl)
@@ -54,7 +60,7 @@ output.createDimension('cell_u',cell_u)
 output.createDimension('axis_nbounds',axis_nbounds)
 output.createDimension('nvertex_mesh',nvertex_mesh)
 output.createDimension('nvertex_u',nvertex_u)
-output.createDimension('time_instant',0)
+output.createDimension('time_counter',0)
 
 lat_meshlvl64            = output.createVariable('lat_mesh','f4','cell_mesh')
 lon_meshlvl64            = output.createVariable('lon_mesh','f4','cell_mesh')
@@ -78,10 +84,10 @@ ulonlvl64                = output.createVariable('ulon','f4',('lev','cell_mesh')
 ################################ GET GLOBAL ATTRIBUTES FOR NEW FILE ######################################
 
 output.name        = 'restart_icosa'
-output.description = 'Created by DB'
-output.title       = 'Created by DB'
-output.convention  = 'CF-1.6'
-output.timestamp   = '2018-Jun-01 20:49:38 GMT'
+output.description = 'Created by xios'
+output.title       = 'Created by xios'
+output.Conventions = 'CF-1.6'
+output.timeStamp   = '2018-Jun-01 20:49:38 GMT'
 output.uuid        = 'cfddba90-e494-44e1-b07d-1bd53a2a748a' 
 
 ################################# GET ATTRIBUTES FOR NEW VARIABLES #######################################
@@ -150,23 +156,40 @@ bounds_lat_ulvl64[:]        = bounds_lat_u
 iterationlvl64[:]           = 8.608032e+07 #time iteration value of this specific start file
 pslvl64[:]                  = ps[0,:]
 phislvl64[:]                = phis[0,:]
-lev[:]                      = range(1,65,1)
+lev[:]                      = range(1,62,1)
+thetalvl64[:]               = theta
 
+# Initialisation:
+ulvl64[:,:]    = 0.
+ulonlvl64[:,:] = 0.
+ulatlvl64[:,:] = 0.
+
+# Calculations:
 for i in range(30):
 	ulvl64[i,:]     = u[0,i,:]
 	ulonlvl64[i,:]  = ulon[0,i,:]
 	ulatlvl64[i,:]  = ulat[0,i,:]
-	thetalvl64[i,:] = theta[0,i,:]
+	#thetalvl64[i,:] = theta32[0,i,:]
 	qlvl64[:,i,:]   = q[0,:,i,:]
-        print i,u[0,i,3456]
 
-for i in range(34):
-	ulvl64[i+30,:]     = u[0,29,:]
-	ulonlvl64[i+30,:]  = ulon[0,29,:]
-	ulatlvl64[i+30,:]  = ulat[0,29,:]
-	thetalvl64[i+30,:] = theta[0,29,:]
+# Linear decreasing to zero between 30th and 45th vertical levels
+for i in range(15):
+	ulvl64[i+30,:]     = (15-i)*u[0,29,:]/15.
+	ulonlvl64[i+30,:]  = (15-i)*ulon[0,29,:]/15.
+	ulatlvl64[i+30,:]  = (15-i)*ulat[0,29,:]/15.
+# Exponential decreasing to zero between 30th and 45th vertical levels 
+#for i in range(15):
+#	ulvl64[i+30,:]     = 
+#	ulonlvl64[i+30,:]  = 
+#	ulatlvl64[i+30,:]  = 
+
+for i in range(31):
+	#thetalvl64[i+30,:] = theta[i+30,:]
 	qlvl64[:,i+30,:]   = q[0,:,29,:]
-        print i+30,ulvl64[i+30,3456]
+
+print "i, u_64, q_64"
+for i in range(61):
+        print i,ulvl64[i,3456],qlvl64[0,i,3456]
 
 # tests
 print("q_lvl32",shape(q))
