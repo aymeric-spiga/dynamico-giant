@@ -11,11 +11,11 @@ cd ../code
 # PRINT THE CURRENT VERSION OF CODE
 \rm icosa_lmdz.version
 echo "****** CODE VERSION *******" >> icosa_lmdz.version
-var="DYNAMICO --> "`svn info ICOSAGCM 2> /dev/null | grep "Revision:"`
+var="DYNAMICO --> "`svn info ICOSAGCM 2> /dev/null | grep "vision"`
 echo $var >> icosa_lmdz.version
-var="PHYSICS --> "`svn info ICOSA_LMDZ 2> /dev/null | grep "Revision:"`
+var="PHYSICS --> "`svn info ICOSA_LMDZ 2> /dev/null | grep "vision"`
 echo $var >> icosa_lmdz.version
-var="XIOS --> "`svn info XIOS 2> /dev/null | grep "Revision:"`
+var="XIOS --> "`svn info XIOS 2> /dev/null | grep "vision"`
 echo $var >> icosa_lmdz.version
 echo "****** CODE VERSION *******" >> icosa_lmdz.version
 
