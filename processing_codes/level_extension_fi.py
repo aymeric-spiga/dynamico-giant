@@ -41,9 +41,9 @@ file.close()
 index = 100
 physical_points = 252812
 subsurface_layers = 18
-nlayer_plus_1 = 65
+nlayer_plus_1 = 62
 number_of_advected_fields = 1
-nlayer = 64
+nlayer = 61
 #nlayer = 32
 ocean_layers = 2
 
@@ -82,7 +82,7 @@ dummy_lvl64        = output.createVariable('dummy','f4','physical_points')
 
 ############################# GET GLOBAL ATTRIBUTE FOR NEW FILE ###################################
 
-output.title = 'Physics strat file'
+output.title = 'Physics start file'
 
 ############################### GET ATTRIBUTES FOR VARIABLES #######################################
 
@@ -135,10 +135,10 @@ for i in range(30):
 for i in range(31):
 	q2_lvl64[i,:]        = q2[i,:]
 
-for i in range(34):
+for i in range(31):
 	cloudfrac_lvl64[i+30,:] = cloudfrac[29,:]
-for i in range(34):
-	q2_lvl64[i+31,:]        = q2[30,:]
+for i in range(32):
+	q2_lvl64[i+30,:]        = q2[29,:]
 
 
 
