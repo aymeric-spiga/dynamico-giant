@@ -3,7 +3,7 @@
         
         <context  id="xios">
             <variable_definition>
-            <variable id="print_file" type="bool"> false </variable>
+            <variable id="print_file" type="bool"> true </variable>
             <variable id="buffer_size_factor" type="double">4</variable>
                 <variable_group id="buffer">
                 </variable_group>
