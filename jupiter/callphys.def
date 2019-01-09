@@ -50,7 +50,8 @@ continuum        = .true.
 #corrkdir         = CH4_C2H6_C2H2_T_70-400K
 #corrkdir         = CH4_C2H6_C2H2_HITRAN2012
 #corrkdir         = CH4_C2H6_C2H2_HITRAN2012_Karko
-corrkdir         = Jupiter_NewMOSES_NH3_HITRAN2012_REY_ISO_ge-12_NoKarko
+#corrkdir         = Jupiter_NewMOSES_NH3_HITRAN2012_REY_ISO_ge-12_NoKarko
+corrkdir         = Jupiter_HITRAN2012_REY_ISO_NoKarko_T460K
 # call visible gaseous absorption in radiative transfer ?
 callgasvis       = .true.
 # Include Rayleigh scattering in the visible ?
@@ -91,8 +92,8 @@ startype = 1
 #
 #	startype = 1		Sol        (G2V-class main sequence)
 #	startype = 2		Ad Leo     (M-class, synthetic)
-#       startype = 3            GJ644
-#       startype = 4            HD128167
+#  startype = 3      GJ644
+#  startype = 4      HD128167
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Stellar flux at 1 AU. Examples:
 # 1366.0 W m-2		Sol today
@@ -109,7 +110,7 @@ sedimentation = .false.
 ## Other physics options
 ## ~~~~~~~~~~~~~~~~~~~~~
 # call turbulent vertical diffusion ?
-calldifv    = .true. 
+calldifv    = .true.
 # use turbdiff instead of vdifc ?
 UseTurbDiff = .true.
 # call convective adjustment ?
@@ -126,30 +127,31 @@ nosurf      = .true.
 #########################################################################
 ## extra non-standard definitions for Earth
 #########################################################################
- 
-## Tracer and aerosol options 
+
+## Tracer and aerosol options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Ammonia cloud (Saturn/Jupiter)?
+# ---- if set to true then s=s+1
+aeronh3             = .true.
+size_nh3_cloud      = 10.e-6  
+pres_nh3_cloud      = 9.0D4                        # old: 8.e4, new: 9.e4
+tau_nh3_cloud       = 1.5D1                        # old: 7.  , new: 15.
+# Radiatively active aerosol (Saturn/Jupiter)?
+# ---- if set to true then s=s+1
+aeroback2lay        = .true.
+optprop_back2lay_vis = optprop_jupiter_vis_n20.dat
+optprop_back2lay_ir  = optprop_jupiter_ir_n20.dat
+obs_tau_col_tropo   = 4.0                          # old: 2.  , new: 4. 
+size_tropo          = 5.e-7 
+pres_bottom_tropo   = 80000.
+pres_top_tropo      = 1.8D4
+obs_tau_col_strato  = 0.1D0
+# Auroral aerosols (Saturn/Jupiter)?
+# ---- if set to true then s=s+1
+aeroaurora          = .false.
+obs_tau_col_aurora = 2.0
 # Radiatively active CO2 aerosol?
 aeroco2            = .false.
-
-# Ammonia cloud (Saturn/Jupiter)?
-aeronh3            = .true.
-size_nh3_cloud     = 10.e-6  
-pres_nh3_cloud     = 80000
-tau_nh3_cloud      = 7.0 
-# Radiatively active aerosol (Saturn/Jupiter)?
-aeroback2lay       = .true.
-obs_tau_col_tropo  = 2.0 
-size_tropo         = 5.e-7 #2e-6 
-pres_bottom_tropo  = 80000.
-pres_top_tropo     = 18000.
-obs_tau_col_strato = 0.1D0 
-
-## Auroral aerosols (Saturn/Jupiter)?
-#aeroaurora    = .true.
-##obs_tau_col_aurora=2.0
-#### METTRE s=3
-
 # Fixed CO2 aerosol distribution?
 aerofixco2     = .false.
 # Radiatively active water aerosol?
@@ -176,7 +178,6 @@ rad_h2o        = 10.e-6
 rad_h2o_ice    = 35.e-6
 # atm mass update due to tracer evaporation/condensation?
 mass_redistrib = .false.
-
 
 ## Water options 
 ## ~~~~~~~~~~~~~
