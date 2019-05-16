@@ -1,0 +1,52 @@
+compil
+
+dans XIOS
+./make_xios --arch X64_OCCIGEN --j 8
+
+dans LMDZ.COMMON
+./makelmdz_fcm -s 1 -d 128x96x32 -b 20x30 -io XIOS -arch X64_OCCIGEN -parallel mpi_omp -j 8 -p std gcm
+
+dans ICOSAGCM
+\rm bin/icosa_gcm.exe #si pas de modif
+./make_icosa -prod -parallel mpi_omp -with_xios -arch X64_OCCIGEN -job 8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- modifier job (MPI seul) et run_icosa.def (sponge+depart profil) pour lancer 1 jour �|  partir d'un profil
+-- lancer ensuite un run normal OMP+MPI �|  partir d'un fichier start
+
+si on change les niveaux verticaux il faut recompiler la physique en changeant le nombre de niveaux verticaux
+
+TODO
+- sortir Ls
+- tester 0 traceurs --> OK
+
+OMP se bloque avec start_profile
+OK avec MPI only
+mais no output
+--> j'ai dû recompiler la physique avec IOS
+
+strategy
+- faire un MPI simple avec un profile pour creer restart
+- utiliser le restart avec un vrai gros run MPI_OMP
+
+
+LMDZ.COMMON
+no module purge
+makelmdz_fcm -s 1 -d 128x96x64 -b 20x30 -io XIOS -arch X64_OCCIGEN -parallel mpi_omp -j 8 -p std gcm
+
+~                     
