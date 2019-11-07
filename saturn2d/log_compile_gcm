@@ -1,0 +1,47 @@
+Path to fcm:
+/scratch/cnt0027/lmd1167/dbardet/dynamico-giant/code/FCM_V1.2/bin
+remove module netcdf/4.4.0_fortran-4.4.2 (Netcdf)
+ module purge
+remove module szip/2.1 (szip)
+remove module hdf5/1.8.17 (HDF5/1.8.17)
+remove module mkl/compilers_and_libraries_2017.0.098/linux (Intel MKL)
+remove module idb/compilers_and_libraries_2017.0.098/linux (Intel Debugger)
+remove module intel/17.0 (Intel Compiler Suite)
+load module mkl/compilers_and_libraries_2017.0.098/linux (Intel MKL)
+load module idb/compilers_and_libraries_2017.0.098/linux (Intel Debugger)
+load module intel/17.0 (Intel Compiler Suite)
+load module impi/2017.0.098 (intelmpi)
+load module szip/2.1 (szip)
+[00;32mModule hdf5/1.8.17 compiled with intel/17.0 and intelmpi/2017.0.098[0m
+load module hdf5/1.8.17 (HDF5/1.8.17)
+ 	 You have chosen intel/17.0  
+ 	 You have chosen intelmpi/2017.0.098  
+ 	 You have chosen hdf5/1.8.17  
+ 	 You have chosen netcdf/4.4.0_fortran-4.4.2  
+ Checking the directory /opt/software/occigen/libraries/netcdf/4.4.0_fortran-4.4.2/hdf5/1.8.17/intel/17.0/intelmpi/2017.0.098/lib
+ Your configuration hdf5 1.8.17 compiler 17.0 MPI 2017.0.098 is available for this release of netcdf
+	====================================================================================================
+	              Netcdf C environment               
+	=================================================
+ 	  see the preset environment variables  NETCDFHOME  NETCDF_LDFLAGS NETCDF_INCDIR  NETCDF_LIBDIR   
+	====================================================================================================
+	====================================================================================================
+	            Netcdf Fortran environment           
+	=================================================
+	   see the preset environment variables  NETCDFFHOME  NETCDFF_LDFLAGS NETCDFF_INCDIR  NETCDFF_LIBDIR   
+	====================================================================================================
+load module netcdf/4.4.0_fortran-4.4.2 (Netcdf)
+calcul de la dimension
+dim 8 360 61
+dimc 3
+ATTENTION: vous etes sans doute en train de compiler le modele par ailleurs
+Attendez que la premiere compilation soit terminee pour relancer la suivante.
+Si vous etes sur que vous ne compilez pas le modele par ailleurs,
+vous pouvez continuer en repondant oui.
+Voulez-vous vraiment continuer?
+
+WARNING: you are probably already compiling the model somewhere else.
+Wait until the first compilation is finished before launching this one.
+If you are sure that you are not compiling elsewhere, just answer 
+yes (or 'oui') to the question below to proceed.
+Do you wish to continue?
