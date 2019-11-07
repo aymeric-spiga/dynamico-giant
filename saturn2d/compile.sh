@@ -20,5 +20,3 @@ cd ../code/LMDZ.COMMON
  gcm
 cd -
 ln -sf ../code/LMDZ.COMMON/bin/gcm_8x128x${vert}_phystd_para.e gcm.e
-
-# -t 1
