@@ -37,5 +37,3 @@ cd ../code/LMDZ.COMMON
 cd -
 cp ../code/LMDZ.COMMON/bin/gcm_8x${lati}x${vert}_phystd_para.e ./
 cp ../code/LMDZ.COMMON/bin/newstart_8x${lati}x${vert}_phystd_seq.e ./makestart/
-
-
