@@ -1,0 +1,9 @@
+### Guidelines to start a run with the radiative-convective model
+
+You have to:
+ - compile the GCM and the newstart executables using the compile.sh program. You can change meridional and vertical resolutions
+ - run the newstart executable (located in makestart directory) with the saturn_newstart.ref answers
+ - move/copy/link the restart.nc and restartfi.nc files in saturn2d directory as start.nc and startfi.nc files
+ - run the GCM with the new start files 
+
+Easy isn't it ? :) 
