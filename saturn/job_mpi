@@ -1,25 +1,14 @@
 #!/bin/bash
-##### TEST EHOUARN
-##SBATCH --nodes=1
-##SBATCH --ntasks-per-node=10
-######
-##SBATCH --nodes=2
-##SBATCH --ntasks-per-node=20
-###### TEST MPI 
-#SBATCH --nodes=50
-##SBATCH --nodes=51
+################################################
+#SBATCH --nodes=40
 #SBATCH --ntasks-per-node=24
 ##SBATCH --cpus-per-task=1
-#####
+################################################
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN
-##SBATCH --time=24:00:00
-##SBATCH --time=00:15:00
-#SBATCH --time=01:30:00
-##SBATCH --time=04:30:00
+#SBATCH --time=24:00:00
 #SBATCH --output job_mpi.%j.out
-###SBATCH --constraint=BDW28
 #SBATCH --constraint=HSW24
 #SBATCH --exclusive
 ##SBATCH --mem=120G
@@ -40,26 +29,19 @@ export OMP_NUM_THREADS=1
 export OMP_STACKSIZE=256M
 export KMP_AFFINITY=granularity=fine,compact,1,0,verbose
 
-nproc=$((SLURM_NTASKS-2))
+nproc=$((SLURM_NTASKS-1))
 nlast=$((SLURM_NTASKS-1))
 echo "# srun configuration file" > srun.conf
 echo "0-$nproc icosa_lmdz.exe" >> srun.conf
-echo "$nlast xios_server.exe" >> srun.conf
+#echo "$nlast xios_server.exe" >> srun.conf
 
-### 1200: see run_icosa.def 10*nsplit_i*nsplit_j
-### 24(SLURM_JOB_NUM_NODES - 50) gives number of XIOS servers
-#build_srun_conf.bash -nodes $SLURM_JOB_NUM_NODES -cores 1200
-
-### just one
-#srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
-#exit
-
-count=1
+count=270
 ##############
-#limcount=$((count+15)) #12h
-#limcount=$((count+30)) #24h
-limcount=$((count+1)) #1h30
-#limcount=$((count+3)) #4h30
+#limcount=$((count+10)) #24h
+#limcount=$((count+8)) # 20h
+limcount=$((count+1))  #2h30
+#limcount=$((count+2))  #2h30
+#limcount=$((count+4))  #4h30
 while [ $count -lt $limcount ]
 do
   echo "**************************************"
@@ -72,12 +54,12 @@ do
   srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
   ##
   sleep 30
-  mv Xhistins.nc      Xhistins_$count".nc"
-  mv icosa_lmdz.out   icosa_lmdz_$count".out"
+  mv Xhistins.nc      Xhistins_daily_$count".nc"
+  mv icosa_lmdz.out   icosa_lmdz_daily_$count".out"
   ##
   count=$((count+1))
-  mv restart_icosa.nc start_icosa_$count".nc"
-  mv restartfi.nc     startfi_$count".nc"
+  mv restart_icosa.nc start_icosa_daily_$count".nc"
+  mv restartfi.nc     startfi_daily_$count".nc"
 done
 
 

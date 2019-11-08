@@ -1,7 +1,7 @@
 #! /bin/bash
 
-vert=64
-vert=32
+#vert=64
+#vert=32
 vert=61
 
 cd ../code/LMDZ.COMMON

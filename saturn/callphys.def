@@ -1,7 +1,7 @@
 ## Orbit / general options
 ## ~~~~~~~~~~~~~~~~~~~~~~~
 # Run with or without tracer transport ?
-tracer    = .true.
+tracer    = .false.
 # Diurnal cycle ?  if diurnal=false, diurnally averaged solar heating
 diurnal   = .false. #.true.
 # Seasonal cycle ? if season=false, Ls stays constant, to value set in "start"

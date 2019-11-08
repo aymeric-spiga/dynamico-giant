@@ -23,12 +23,13 @@ nbp=160
 ## typically for pure MPI runs, let nproc = 10 x nsplit_i x nsplit_j
 ## it is better to have nbp/split >~ 10
 ###########################################
-## 40 procs
-#nsplit_i=2
-#nsplit_j=2
+#### 40 noeuds de 24 processeurs = 960 procs
+nsplit_i=12
+nsplit_j=8
+
 #### 50 noeuds de 24 processeurs = 1200 procs
-nsplit_i=10
-nsplit_j=12
+#nsplit_i=10
+#nsplit_j=12
 
 # Number of vertical layer (llm) : integer (default=19)
 llm=61
@@ -51,6 +52,7 @@ optim_it=0
 
 # timestep : real (default=480s)
 dt = 118.9125
+#dt = 29.728125 #test dispersion diagram
 ### attention 3 chiffres significatifs dans XIOS
 
 # advection called every itau_adv time steps : integer (default 2)

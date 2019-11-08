@@ -31,7 +31,7 @@ nsplit_j=2
 ### minimum bien: 1 proc par nbp
 
 # Number of vertical layer (llm) : integer (default=19)
-llm=64
+#llm=64
 #llm=32
 llm=61
 
