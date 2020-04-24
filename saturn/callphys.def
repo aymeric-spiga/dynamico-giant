@@ -162,10 +162,23 @@ mass_redistrib = .false.
 
 
 # Radiatively active SATURN aerosol?
-aeroback2lay       = .true.
+aeroback2lay       = .false.
 obs_tau_col_tropo = 8.0
 size_tropo = 2.e-6
 
+# Generic n-layer aerosols (replaces the former 2-layer) ?
+# ---- if set to true then s=s+nlayaero
+aeronlay  = .true.
+nlayaero  = 2  # Strato haze, Tropo haze
+aeronlay_tauref       = 0.08D0 8.0
+aeronlay_lamref       = 0.8e-6 0.8e-6
+aeronlay_choice       = 1 1
+aeronlay_pbot         = 2000.0 66000.
+aeronlay_ptop         = 100.0 18000.
+aeronlay_sclhght      = 1.0 1.0
+aeronlay_size         = 1.e-7 2.e-6
+optprop_aeronlay_vis  = optprop_saturn_vis_n20.dat optprop_saturn_vis_n20.dat
+optprop_aeronlay_ir   = optprop_saturn_ir_n20.dat optprop_saturn_ir_n20.dat 
 
 
 ## Water options 

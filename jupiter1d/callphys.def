@@ -131,13 +131,13 @@ nosurf      = .true.
 ## Tracer and aerosol options 
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Ammonia cloud (Saturn/Jupiter)?
-aeronh3        = .true.
+aeronh3        = .false.
 size_nh3_cloud = 10.e-6
 pres_nh3_cloud = 9.D4               # 9.D4  new ; 8.D4 old
 tau_nh3_cloud  = 15.D0              # 15.D0 new ; 7.D0 old
 # Radiatively active aerosol (Saturn/Jupiter)?
 # ---- if set to true then s=s+1
-aeroback2lay         = .true.
+aeroback2lay         = .false.
 optprop_back2lay_vis = optprop_jupiter_vis_n20.dat
 optprop_back2lay_ir  = optprop_jupiter_ir_n20.dat
 obs_tau_col_tropo    = 4.0          # 4.0  new ; 2.0   old
@@ -149,6 +149,21 @@ obs_tau_col_strato   = 0.1D0
 # ---- if set to true then s=s+1
 aeroaurora     = .false.
 obs_tau_col_aurora=2.0
+
+# Generic n-layer aerosols (replaces the former 2-layer and NH3 cloud) ?
+# ---- if set to true then s=s+nlayaero
+aeronlay  = .true.
+nlayaero  = 3  # NH3 cloud, Strato haze, Tropo haze
+aeronlay_tauref       = 15.D0 0.1D0 4.0
+aeronlay_lamref       = 0.756e-6 0.8e-6 0.8e-6
+aeronlay_choice       = 2 1 1
+aeronlay_pbot         = 9.D4 2000.0 80000.
+aeronlay_ptop         = 0.0 100.0 18000.
+aeronlay_sclhght      = 0.2 1.0 1.0
+aeronlay_size         = 10.e-6 1.e-7 5.e-7
+optprop_aeronlay_vis  = optprop_nh3ice_vis.dat optprop_jupiter_vis_n20.dat optprop_jupiter_vis_n20.dat
+optprop_aeronlay_ir   = optprop_nh3ice_ir.dat optprop_jupiter_ir_n20.dat optprop_jupiter_ir_n20.dat 
+
 # Radiatively active CO2 aerosol?
 aeroco2        = .false.
 # Fixed CO2 aerosol distribution?
