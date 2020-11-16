@@ -19,7 +19,7 @@ periastr       = 18.27533
 ## MAX DIST STAR-PLANET in AU [apoastron]
 apoastr        = 20.02413
 ## DATE OF PERIASTRON in days
-peri_day       = 21578 #Lsp=182
+peri_day       = 21578
 ## OBLIQUITY in deg
 obliquit       = 97.77
 ## SURFACE PRESSURE in Pa
@@ -35,9 +35,18 @@ time           = 12
 # Number of time steps per sol
 day_step       = 1 
 # Number of sols to run 
-ndt            = 6900000
+ndt            = 2991000
 # ecriture physiq
 ecritphy = 1000
+
+# OVERRIDE callphys.def settings
+# ... this to ensure compliancy with the low day_step value above
+iradia = 25
+# no tracers
+tracer=.false.
+####
+phi0 = 180.
+randompert = 0.0
 
 ## Vertical levels
 ## ~~~~~~~~~~~~~~~
@@ -95,4 +104,3 @@ pic            = 26.522
 largeur        = 10
 # height of the gaussian perturbation (for ichoice=6 or 7)
 hauteur        = 30.
-
