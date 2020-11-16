@@ -11,7 +11,7 @@ daysec         = 57996.
 ## GRAVITY in m s-2
 g              = 11.15
 ##PLANETARY RADIUS in m
-rad            = 2.4764E+07
+rad            = 24622000
 ## LENGTH OF A YEAR in days
 year_day       = 89657.
 ## MIN DIST STAR-PLANET in AU [periastron]
@@ -19,25 +19,35 @@ periastr       = 29.62967
 ## MAX DIST STAR-PLANET in AU [apoastron]
 apoastr        = 30.30447
 ## DATE OF PERIASTRON in days
-peri_day       = 87896. #Lsp=352
+peri_day       = 87896.
 ## OBLIQUITY in deg
 obliquit       = 28.32
 ## SURFACE PRESSURE in Pa
-psurf          = 3.e5
+psurf          = 3.0e5
 
 
 ## Time integration parameters
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Initial date (in solar days,=0 at Ls=0)
-day0           = 0
+day0           = 0 
 # Initial local time (in hours, between 0 and 24)
 time           = 12 
 # Number of time steps per sol
-day_step       = 10
+day_step       = 1 
 # Number of sols to run 
-ndt            = 100000.
-# Number of steps between each writing in diagfi
-ecritphy=1000
+# 11 years
+ndt            = 986227
+# ecriture physiq
+ecritphy = 1000
+
+# OVERRIDE callphys.def settings
+# ... this to ensure compliancy with the low day_step value above
+iradia = 25
+# no tracers
+tracer=.false.
+####
+phi0 = 180.
+randompert = 0.0
 
 ## Vertical levels
 ## ~~~~~~~~~~~~~~~
@@ -46,24 +56,24 @@ hybrid         = .false.
 # autocompute vertical discretisation? (useful for exoplanet runs)
 autozlevs      = .false.
 # Ceiling pressure (Pa) ? (only used if autozlevs = .true.)
-pceil          = 10.
+pceil          = 0.2
 
 ## Thermal properties
 ## ~~~~~~~~~~~~~~~~~~
 # Simulate global averaged conditions ? 
 global1d       = .true.
 # Latitude (deg) [only used if global1d = F]
-latitude       = 0.
+latitude       = -30.0000
 # Solar Zenith angle (deg) [only used if global1d = T]
-szangle        = 60. 
+szangle        = 60
 # Albedo of bare ground
-albedo         = 0.0
+albedo         = 0.
 # Emissivity of bare ground
 emis           = 1.0
 # Soil thermal inertia (SI)
 inertia        = 0.001
 # Initial CO2 ice on the surface (kg.m-2)
-co2ice         = 0.
+co2ice         = 0
 
 ## Wind profile
 ## ~~~~~~~~~~~~
@@ -86,7 +96,7 @@ v              = 0.
 #         ichoice=8   Read in an ascii file "profile" 
 ichoice        = 8
 # Reference temperature tref (K)
-tref           = 85.
+tref           = 240
 # Add a perturbation to profile if isin=1
 isin           = 0
 # peak of gaussian perturbation (for ichoice=6 or 7)
@@ -95,4 +105,3 @@ pic            = 26.522
 largeur        = 10
 # height of the gaussian perturbation (for ichoice=6 or 7)
 hauteur        = 30.
-
