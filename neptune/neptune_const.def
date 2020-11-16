@@ -1,0 +1,59 @@
+#planetary radius : real (default=37122E6)
+radius=24622000
+
+# gravity : real (default=9.80616)
+g=11.15
+
+#planetary rotation rate (default=7.292E-5)
+omega=0.108338E-03
+
+# WARNING MUST BE COMPLIANT WITH PHYSIQ
+# kappa=Rd/cpp (default=0.2857143)
+# kappa = 8314.45986145 / (cpp*mugaz) 
+kappa=0.355093904691559
+
+# Heat capacity at constant pressure real (default=1004.70885)
+cpp =  8187.
+
+# Reference pressure : real (default=101325.)
+preff=300000.
+
+# length of the day (s) (default=86400)
+day_length = 57996
+
+# length of the year (s) (default=365.25*86400)
+# -> year_length = 57996 *89657
+year_length = 5199747372
+
+#starting day
+start_day = 0
+
+# Scale height of the atmosphere (m) : real (default=8000.)
+scale_height=20000.
+
+# Scale factor for small planet experiment : real (default=1.)
+scale_factor=1.
+
+# Precision of NetCDF output
+netcdf_prec = double
+
+
+daysec=57996
+
+## additional stuff for LMDZ physics:
+#################################################
+# length of year, in days (somewhat redundant)
+year_day=89657
+# Orbital parameters:
+# periastron (AU)
+periastron=29.62967
+# apoastron (AU)
+apoastron=30.30447
+# periatron date, in days
+periastron_day=87896.
+# obliquity (degrees)
+obliquity=28.32
+
+
+
+

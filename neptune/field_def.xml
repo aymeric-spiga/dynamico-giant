@@ -1,0 +1,91 @@
+<field_definition level="1" enabled=".TRUE." operation="instant">
+  
+  <field_group id="standard_output"> 
+    
+    <field id="timestep" grid_ref="scalar" unit="s"/>
+    <field id="preff" grid_ref="scalar"    unit="Pa"/>
+    <field id="ap" axis_ref="levp1"   long_name="hybrid A coefficient at layer interface" />
+    <field id="bp" axis_ref="levp1"  long_name="hybrid B coefficient at layer interface" />
+    <field id="mid_ap" axis_ref="lev"   long_name="hybrid A coefficient at midpoints" />
+    <field id="mid_bp" axis_ref="lev"  long_name="hybrid B coefficient at midpoints" />
+    
+    <field_group domain_ref="i">
+      <field id="ps" />
+      <field id="dps"  />
+      <field id="Ai" />
+      <field id="phis" />
+      <field id="phi" />
+      <field id="precl" />
+      <field id="Q1_col_int" />     
+      <field id="Q2_col_int" />     
+      <field id="ps_init" />
+      
+      <field_group axis_ref="lev"> 
+        <field id="mass" />
+        <field id="p" />
+        <field id="dmass"/>
+        <field id="theta" />
+        <field id="dyn_q" />
+        <field id="pk"/>
+        <field id="ulon"/>
+        <field id="ulat"/>
+        <field id="dulon_phys"/>
+        <field id="dulat_phys"/>
+        <field id="dulon_diss1"/>
+        <field id="dulat_diss1"/>
+        <field id="dulon_diss2"/>
+        <field id="dulat_diss2"/>
+        <field id="uz"/>
+        <field id="omega"/>
+        <field id="temp"/>
+
+<!--        
+        <field id="q1"/>
+        <field id="q2"/>
+        <field id="q3"/>
+        <field id="q4"/>
+        <field id="q5"/>
+-->
+        
+        <field id="mass_init" />
+        <field id="p_init" />
+        <field id="theta_init" />
+        <field id="dyn_q_init" />
+        <field id="ulon_init"/>
+        <field id="ulat_init"/>
+        <field id="uz_init"/>
+        <field id="temp_init"/>
+        
+      </field_group>
+      <field id="u850" />
+      <field id="v850" />
+      <field id="w850" />
+      <field id="t850" />
+      <field id="omega850"/>                  
+      <field id="u500" />
+      <field id="v500" />
+      <field id="w500" />
+      <field id="t500" />
+      <field id="omega500"/>                  
+      <field id="SST"/>
+      
+      <field id="ulon_850_500" field_ref="p" axis_ref="lev_pressure" />
+      
+      <field_group axis_ref="levp1"> 
+        <field id="geopot"/>
+        <field id="geopot_init"/>
+      </field_group>
+    </field_group> 
+    <field id="q_init" grid_ref="grid_q" />    
+    <field id="q" grid_ref="grid_q" />    
+    
+    <field_group domain_ref="v" axis_ref="lev">
+      <field id="vort" />
+      <field id="pv" />
+    </field_group>
+    
+  </field_group>
+  
+  
+</field_definition>
+
