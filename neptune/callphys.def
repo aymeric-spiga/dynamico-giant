@@ -12,7 +12,7 @@ tlocked   = .false.
 nres      = 1
 # Planet with rings?
 rings_shadow = .false.
-# Compute latitude-dependent gravity field??
+# Compute latitude-dependent gravity field?
 oblate = .true.
 # Flattening (a-b)/a
 flatten = 0.01708
