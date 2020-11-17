@@ -1,0 +1,169 @@
+<context id="icosagcm" >
+  <calendar type="d360" start_date="2000-01-01 00:00:00" time_origin="2000-01-01 00:00:00"/>
+  
+<!-- LINK TO DYNAMICAL DIAGNOSTICS -->
+<!--  <field_definition src="./field_def_icosa.xml" /> -->
+  
+  <field_definition src="./field_def.xml" />
+
+<!--  <file_definition src="./filedef_debug.xml" /> -->     
+<!--  <file_definition src="./filedef_dcmip2016.xml" /> -->
+  
+<!-- LINK TO DYNAMICAL DIAGNOSTICS -->
+<!--  <file_definition src="./file_def_histmth_icosa.xml"/> -->
+
+  <field_definition>
+
+     <field_group id="read_fields" enabled="false" operation="instant">
+      
+        <field id="relief_db" field_ref="relief_reg" domain_ref="from_relief" read_access="true"  />
+        <field_group domain_ref="from_ecdyn" read_access="true" >
+           <field id="ps_db" field_ref="ps_reg" />
+           <field id="z_db"  field_ref="z_reg"  />
+           <field id="ts_db" field_ref="ts_reg" />
+           <field_group axis_ref="lev_ecdyn" >
+              <field id="u_db" field_ref="u_reg"  />
+              <field id="v_db" field_ref="v_reg"   />
+              <field id="temp_db" field_ref="temp_reg" />
+              <field id="q_db"    field_ref="q_reg"    />
+           </field_group>
+        </field_group>
+    
+     </field_group>
+
+  </field_definition> 
+
+
+  <file_definition type="one_file" par_access="collective">
+
+    <file id="output" name="output" enabled=".FALSE." 
+                      output_freq="40ts" sync_freq="40ts" output_level="10" >
+      <!--<field_group group_ref="standard_output"/>-->
+      <field field_ref="ulon" domain_ref="dom_720_360" axis_ref="lev" />
+      <field field_ref="ulat" domain_ref="dom_720_360" axis_ref="lev" />
+      <field field_ref="dulon_phys" domain_ref="dom_720_360" axis_ref="lev" />
+      <field field_ref="dulat_phys" domain_ref="dom_720_360" axis_ref="lev" />
+    </file>
+
+    <file id="dissip" name="Xdissip" enabled=".FALSE." 
+          output_freq="80ts" sync_freq="80ts" output_level="10" >
+      <field field_ref="dulon_diss1" name="dulon_diss1" domain_ref="dom_out"/>
+      <field field_ref="dulat_diss1" name="dulat_diss1" domain_ref="dom_out"/>
+      <field field_ref="dulon_diss2" name="dulon_diss2" domain_ref="dom_out"/>
+      <field field_ref="dulat_diss2" name="dulat_diss2" domain_ref="dom_out"/>
+    </file>
+
+
+    <file id="restart" name="restart" enabled="true">
+       <field_group id="group_restart" operation="once"> 
+          <field id="it_restart" name="iteration"  grid_ref="scalar" />
+          <field id="q_restart" name="q"  grid_ref="grid_q" />
+          <field_group domain_ref="i"> 
+             <field id="ps_restart" name="ps" />
+             <field id="phis_restart" name="phis" />
+             <field_group axis_ref="lev" >
+                <field id="theta_rhodz_restart" name="theta_rhodz" />
+                <field id="u_restart" name="u" domain_ref="u"/>
+                <field id="ulon_restart" name="ulon" />
+                <field id="ulat_restart" name="ulat" />
+             </field_group>
+          </field_group>
+       </field_group>
+    </file>
+
+    <file id="start" name="start" enabled="false" mode="write">
+       <field_group id="group_start" operation="once"> 
+          <field id="it_start" name="iteration"  grid_ref="scalar" />
+          <field id="q_start" name="q"  grid_ref="grid_q" />
+          <field_group domain_ref="i"> 
+             <field id="ps_start" name="ps" />
+             <field id="phis_start" name="phis" />
+             <field_group axis_ref="lev" >
+                <field id="theta_rhodz_start" name="theta_rhodz" />
+                <field id="u_start" name="u" domain_ref="u"/>
+                <field id="ulon_start" name="ulon" />
+                <field id="ulat_start" name="ulat" />
+             </field_group>
+          </field_group>
+       </field_group>
+    </file>
+
+    <file_group id="read_files" enabled="false" >
+
+       <file id="relief" name="Relief" type="one_file" mode="read" output_freq="10ts">
+           <field id="relief_reg" name="RELIEF" domain_ref="domain_relief" operation="instant" />
+       </file>
+      
+       <file id="ECDYN"  name="ECDYN" type="one_file" mode="read" output_freq="10ts">
+          <field_group domain_ref="domain_ecdyn" operation="instant">
+             <field id="ps_reg"   name="SP"      />
+             <field id="z_reg"    name="Z"       />
+             <field id="ts_reg"   name="ST"      />
+             <field_group axis_ref="lev_ecdyn"   >
+                <field id="u_reg"    name="U"     />
+                <field id="v_reg"    name="V"     />
+                <field id="temp_reg" name="TEMP"  />
+                <field id="q_reg"    name="R"     />
+             </field_group>
+          </field_group>
+       </file>
+    
+    </file_group>    
+  </file_definition>
+    
+  <axis_definition>
+    <axis id="lev" name="lev" positive="down" standard_name="atmopshere_hybrid_sigma_pressure_coordinate" long_name="hybrid level at midpoints" />
+    <axis id="levp1" name="ilev"  unit="level" positive="down" standard_name="atmopshere_hybride_sigma_pressure_coordinate" long_name="hybrid level at interface" />
+    <axis id="lev_pressure" positive="down"  n_glo="2" unit="Pa" value="(0,1)[85000 50000]" >
+      <interpolate_axis order="1" coordinate="p" />
+    </axis>    
+    <axis id="nq" name="nq" n_glo="5" value="(0,4)[1 2 3 4 5]"/> 
+    <!-- <axis id="nq" name="nq" n_glo="1" value="(0,0)[1]"/> -->
+    <axis id="lev_ecdyn" />
+  </axis_definition>    
+  
+  <domain_definition>
+    
+     <domain_group id="i"> 
+
+       <domain id="i" name="mesh"/>     
+    
+       <domain id="from_relief" >
+          <interpolate_domain/>
+       </domain>
+      
+       <domain id="from_ecdyn" >
+          <interpolate_domain/>
+       </domain>
+
+     </domain_group> 
+
+     <domain id="v" />
+     <domain id="u" />
+     
+    
+     <domain id="domain_relief" type="rectilinear" >
+        <generate_rectilinear_domain />
+     </domain>
+
+     <domain id="domain_ecdyn" type="rectilinear" >
+        <generate_rectilinear_domain />
+     </domain>
+     
+  </domain_definition>    
+  
+  <domain_definition src="./domain_def.xml"/>
+  
+  <grid_definition>    
+    <grid id="scalar">
+      <scalar />
+    </grid>
+    
+    <grid id="grid_q">
+      <domain domain_ref="i" />
+      <axis axis_ref="lev" />
+      <axis axis_ref="nq" />
+    </grid >
+
+  </grid_definition>   
+</context>
