@@ -146,7 +146,7 @@ tau_graddiv = 10800
 nitergdiv = 1
 
 # dissipation time nxgradrot (default=5000)
-tau_gradrot = 10800
+tau_gradrot = 14400
 
 # number of iteration for nxgradrot : integer (default=1)
 nitergrot=2

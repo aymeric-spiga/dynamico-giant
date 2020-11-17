@@ -47,7 +47,7 @@ optim_it=0
 #matsuno_period = 5
 
 # timestep : real (default=480s) (dynamical timestep)
-dt = 386.64
+dt = 579.96
 ### attention 3 chiffres significatifs dans XIOS
 
 # advection called every itau_adv time steps : integer (default 2)
@@ -75,7 +75,7 @@ run_length=1159920000
 # output field period (valid XIOS or not) : integer (default none)
 # [should be equal to dt if XIOS dynamical outputs are wanted]
 # [because write_period sets synchronization frequency with XIOS]
-write_period = 386.64
+write_period = 579.96
 
 # ---------------------------------- Misc --------------------------------
 

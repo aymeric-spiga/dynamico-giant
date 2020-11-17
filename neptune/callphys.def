@@ -12,7 +12,7 @@ tlocked   = .false.
 nres      = 1
 # Planet with rings?
 rings_shadow = .false.
-# Compute latitude-dependent gravity field?
+# Compute latitude-dependent gravity field??
 oblate = .true.
 # Flattening (a-b)/a
 flatten = 0.01708
@@ -40,7 +40,7 @@ datadir = datadir
 # call radiative transfer?
 callrad    = .true.
 # the rad. transfer is computed every "iradia" physical timestep
-iradia     = 50
+iradia     = 60
 # call multilayer correlated-k radiative transfer ?
 corrk      = .true.
 # Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
