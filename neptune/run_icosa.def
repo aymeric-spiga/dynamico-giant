@@ -23,8 +23,7 @@ nbp=40
 ## typically for pure MPI runs, let nproc = 10 x nsplit_i x nsplit_j
 ## it is better to have nbp/split >~ 10
 ###########################################
-## 40 procs: 10 x 2 x 2
-## nbp/nsplit_{i,j} = 20 >~ 10 GOOD
+## 40 procs: 10 x 2 x 2  nbp/nsplit_{i,j} = 20 >~ 10 GOOD
 nsplit_i=2
 nsplit_j=2
 
@@ -40,8 +39,8 @@ optim_it=0
 
 # ---------------------------------- Time---------------------------------
 
-## scheme type : string : euler, leapfrog_matsuno, runge_kutta )
-# time_scheme = ARK2.3 // default // RK 2nd order at 3 levels  
+## scheme type : string ( default='runge_kutta') euler, leapfrog_matsuno, runge_kutta )
+#scheme = runge_kutta   leapfrog_matsuno 
 
 ## matsuno period : integer ( default=5)
 #matsuno_period = 5
@@ -58,11 +57,17 @@ itau_adv=3
 # number of timestep (default 100) (ignored if run_length is set)
  itaumax = 10
 
+# run length : real (default=dt*itaumax)
+
+
 ####################################
 
 # run length : real (default=dt*itaumax)
-## 20000 neptunian day
-run_length=1159920000
+### 20000 neptunian day (not recommended: better write frequent restarts)
+#run_length=1159920000
+## 1000 neptunian day
+run_length=57996000
+
 
 ####################################
 

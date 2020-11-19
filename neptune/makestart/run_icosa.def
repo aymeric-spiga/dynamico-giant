@@ -23,8 +23,7 @@ nbp=40
 ## typically for pure MPI runs, let nproc = 10 x nsplit_i x nsplit_j
 ## it is better to have nbp/split >~ 10
 ###########################################
-## 40 procs: 10 x 2 x 2
-## nbp/nsplit_{i,j} = 20 >~ 10 GOOD
+## 40 procs: 10 x 2 x 2  nbp/nsplit_{i,j} = 20 >~ 10 GOOD
 nsplit_i=2
 nsplit_j=2
 
@@ -46,7 +45,7 @@ optim_it=0
 ## matsuno period : integer ( default=5)
 #matsuno_period = 5
 
-# timestep : real (default=480s)
+# timestep : real (default=480s) (dynamical timestep)
 dt = 579.96
 ### attention 3 chiffres significatifs dans XIOS
 
@@ -64,8 +63,11 @@ itau_adv=3
 ####################################
 
 # run length : real (default=dt*itaumax)
+### 20000 neptunian day (not recommended: better write frequent restarts)
+#run_length=1159920000
 ## 1000 neptunian day
 run_length=57996000
+
 
 ####################################
 
@@ -75,8 +77,10 @@ run_length=57996000
 ## output with XIOS (only if compiled with XIOS): true/false (default true)
 #xios_output=false
 
-# output field period (only when not using XIOS) : integer (default none)
-write_period=579.96
+# output field period (valid XIOS or not) : integer (default none)
+# [should be equal to dt if XIOS dynamical outputs are wanted]
+# [because write_period sets synchronization frequency with XIOS]
+write_period = 579.96
 
 # ---------------------------------- Misc --------------------------------
 
@@ -104,6 +108,7 @@ restart_file_name=restart_icosa
 #######################################
 etat0=temperature_profile
 temperature_profile_file=temp_profile.txt
+run_length=57996
 
 # ------------------------------ Dynamics --------------------------------
 
@@ -131,7 +136,6 @@ guided_type=none
 ### mode_sponge=1 for u,v --> 0
 ### mode_sponge=2 for u,v --> zonal mean (NOT IMPLEMENTED)
 ### mode_sponge=3 for u,v,h --> zonal mean (NOT IMPLEMENTED)
-#iflag_sponge = 1
 iflag_sponge = 0
 #tau_sponge = 1.e-4
 #mode_sponge = 1
@@ -160,7 +164,7 @@ niterdivgrad=2
 rayleigh_friction_type=none
 #rayleigh_friction_type=giant_liu_schneider
 rayleigh_limlat = 33.
-rayleigh_friction_tau = 864000.
+rayleigh_friction_tau = 8640000.
 
 # -------------------------------- Physics -------------------------------------
 
