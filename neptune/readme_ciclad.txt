@@ -16,6 +16,7 @@ source ~/.bashrc
 
 *** Modification avant compilation ***
 
+Version: svn info
 
 - Version ICOSAGCM: 1055
 - Version XIOS: 1944
