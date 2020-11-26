@@ -10,10 +10,10 @@ ver_ioipsl=HEAD
 
 ###############
 #### CONFIG ###
-#ver_dyn=687 # ICOSAGCM
-#ver_phys=1911 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
-#ver_xios=1459 # XIOS
-#ver_ioipsl=302 # IOIPSL
+ver_dyn=765 # ICOSAGCM
+ver_phys=2413 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
+ver_xios=1944 # XIOS
+ver_ioipsl=431 # IOIPSL
 ###############
 
 rm -rf code

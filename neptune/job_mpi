@@ -3,20 +3,20 @@
 ##SBATCH --nodes=1
 ##SBATCH --ntasks-per-node=10
 ######
-##SBATCH --nodes=2
-##SBATCH --ntasks-per-node=20
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=20
 ###### TEST MPI 
-#SBATCH --nodes=50
-##SBATCH --nodes=51
-#SBATCH --ntasks-per-node=24
+##SBATCH --nodes=50
+###SBATCH --nodes=51
+##SBATCH --ntasks-per-node=24
 ##SBATCH --cpus-per-task=1
 #####
 ### set --threads-per-core=2 for hyperthreading
 #SBATCH --threads-per-core=1
 #SBATCH -J SATURN
-##SBATCH --time=24:00:00
+#SBATCH --time=24:00:00
 ##SBATCH --time=00:15:00
-#SBATCH --time=01:30:00
+##SBATCH --time=01:30:00
 ##SBATCH --time=04:30:00
 #SBATCH --output job_mpi.%j.out
 ###SBATCH --constraint=BDW28
@@ -55,10 +55,11 @@ echo "$nlast xios_server.exe" >> srun.conf
 #exit
 
 count=1
+count=2
 ##############
 #limcount=$((count+15)) #12h
-#limcount=$((count+30)) #24h
-limcount=$((count+1)) #1h30
+limcount=$((count+30)) #24h
+#limcount=$((count+1)) #1h30
 #limcount=$((count+3)) #4h30
 while [ $count -lt $limcount ]
 do
