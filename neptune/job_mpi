@@ -55,7 +55,6 @@ echo "$nlast xios_server.exe" >> srun.conf
 #exit
 
 count=1
-count=2
 ##############
 #limcount=$((count+15)) #12h
 limcount=$((count+30)) #24h
