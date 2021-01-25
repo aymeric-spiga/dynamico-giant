@@ -33,6 +33,11 @@ cp -rf ../code/ICOSA_LMDZ/bin/icosa_lmdz.exe ./
 cp -rf ../code/XIOS/bin/xios_server.exe ./
 cp -rf ../code/icosa_lmdz.version ./
 
-echo "----- create symbolic links for initial start files"
+echo "----- create symbolic links of initial start files"
 ln -s makestart/restart_icosa.nc start_icosa.nc
 ln -s makestart/restartfi.nc startfi.nc
+
+echo "----- create symbolic links of executables to makestart directory"
+cd makestart
+ln -s ../icosa_lmdz.exe icosa_lmdz.exe
+ln -s ../xios_server.exe xios_server.exe
