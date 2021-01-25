@@ -32,3 +32,7 @@ cd $here
 cp -rf ../code/ICOSA_LMDZ/bin/icosa_lmdz.exe ./
 cp -rf ../code/XIOS/bin/xios_server.exe ./
 cp -rf ../code/icosa_lmdz.version ./
+
+echo "----- create symbolic links for initial start files"
+ln -s makestart/restart_icosa.nc start_icosa.nc
+ln -s makestart/restartfi.nc startfi.nc
