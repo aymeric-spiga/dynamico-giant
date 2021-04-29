@@ -2,10 +2,10 @@
 
 ##############
 ### CONFIG ###
-ver_dyn=HEAD
-ver_phys=HEAD
-ver_xios=HEAD
-ver_ioipsl=HEAD
+ver_dyn="5df634f9cd565660ad324a10d489baf44b3e6204"
+ver_phys=2471
+ver_xios=2060
+ver_ioipsl=310
 ##############
 
 ###############
@@ -24,6 +24,9 @@ cd code
 echo "get DYNAMICO..."
 #svn co -r $ver_dyn -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
 git clone https://gitlab.in2p3.fr/ipsl/projets/dynamico/dynamico.git ICOSAGCM
+cd ICOSAGCM
+git checkout $ver_dyn
+cd ..
 
 echo "get PHYSICS..."
 svn update -r $ver_phys -q LMDZ.COMMON
