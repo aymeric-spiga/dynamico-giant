@@ -2,8 +2,11 @@
 
 here=$PWD
 
+code=/scratch/cnt0027/lmd1167/adelavois/models/code
+code=../code
+
 #echo "----- update code"
-cd /scratch/cnt0027/lmd1167/adelavois/models/code
+cd $code
 #svn update * | tail -n 7 > log_svn
 #cat log_svn
 
@@ -29,6 +32,6 @@ ls -l ../XIOS/bin/xios_server.exe
 
 echo "----- copy executables to current directory"
 cd $here
-cp -rf /scratch/cnt0027/lmd1167/adelavois/models/code/ICOSA_LMDZ/bin/icosa_lmdz.exe ./
-cp -rf /scratch/cnt0027/lmd1167/adelavois/models/code/XIOS/bin/xios_server.exe ./
-cp -rf /scratch/cnt0027/lmd1167/adelavois/models/code/icosa_lmdz.version ./
+cp -rf $code/ICOSA_LMDZ/bin/icosa_lmdz.exe ./
+cp -rf $code/XIOS/bin/xios_server.exe ./
+cp -rf $code/icosa_lmdz.version ./
