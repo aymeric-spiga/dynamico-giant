@@ -22,7 +22,8 @@ svn co -q -N http://svn.lmd.jussieu.fr/Planeto/trunk code
 cd code
 
 echo "get DYNAMICO..."
-svn co -r $ver_dyn -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
+#svn co -r $ver_dyn -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
+git clone https://gitlab.in2p3.fr/ipsl/projets/dynamico/dynamico.git ICOSAGCM
 
 echo "get PHYSICS..."
 svn update -r $ver_phys -q LMDZ.COMMON
