@@ -16,7 +16,7 @@ kappa          = 0.314346314
 cpp            = 11500.
 
 # Reference pressure : real (default=101325.)
-preff          = 1000000.
+preff          = 2000000.
 
 # length of the day (s) (default=86400)
 #day_length     = 35733
@@ -44,7 +44,7 @@ scale_factor   = 1.
 netcdf_prec    = double
 
 
-daysec = 35733
+
 daysec = 35740
 
 ## Additional stuff for LMDZ physics:
