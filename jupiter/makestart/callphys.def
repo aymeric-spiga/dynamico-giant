@@ -40,14 +40,14 @@ surfemis     = 1.0
 
 ## Directory where external input files are
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-datadir = datadir
+datadir = DATAGENERIC_Jupiter
 
 ## Radiative transfer options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # call radiative transfer?
 callrad          = .true.
 # the rad. transfer is computed every "iradia" physical timestep
-iradia           = 1600
+iradia           = 160
 # call multilayer correlated-k radiative transfer ?
 corrk            = .true.
 # Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
@@ -58,7 +58,7 @@ continuum        = .true.
 #corrkdir         = CH4_C2H6_C2H2_HITRAN2012
 #corrkdir         = CH4_C2H6_C2H2_HITRAN2012_Karko
 #corrkdir         = Jupiter_NewMOSES_NH3_HITRAN2012_REY_ISO_ge-12_NoKarko
-corrkdir         = Jupiter_HITRAN2012_REY_ISO_NoKarko_T460K
+corrkdir         = Jupiter_HITRAN2012_REY_ISO_NoKarko_T460K_article2019_gauss8p8_095
 # call visible gaseous absorption in radiative transfer ?
 callgasvis       = .true.
 # Include Rayleigh scattering in the visible ?
@@ -88,6 +88,8 @@ mugaz            = 2.30
 ### DEBUG
 # To not call abort when temperature is outside boundaries:
 strictboundcorrk = .false.
+# To not stop run when temperature is greater than 400 K for H2-H2 CIA dataset:   
+strictboundH2H2cia = .false.
 # Add temperature sponge effect after radiative transfer?
 callradsponge    = .false.
 
@@ -123,7 +125,7 @@ UseTurbDiff = .true.
 # call convective adjustment ?
 calladj     = .true.
 # call thermal plume model ?
-calltherm   = .true.
+calltherm   = .false.
 # call thermal conduction in the soil ?
 callsoil    = .false.
 # Internal heat flux (matters only if callsoil=F)

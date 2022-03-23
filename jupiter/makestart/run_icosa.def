@@ -5,11 +5,14 @@
 
 #halo_i=0
 #halo_j=1
-# ------------------------------- Mesh ---------------------------------
+
+# -------------------------------------------------------------------------------------
+# --------------------------------------- Mesh ----------------------------------------
+# -------------------------------------------------------------------------------------
 
 # Number of subdivision on a main triangle (nbp) : integer (default=40)
 nbp = 160
-nbp = 40
+#nbp = 40
 
 # nbp                 20  40  80 160
 # T-edge length (km) 500 250 120  60
@@ -23,6 +26,9 @@ nbp = 40
 ## typically for pure MPI runs, let nproc = 10 x nsplit_i x nsplit_j
 ## it is better to have nbp/split >~ 10
 ###########################################
+## 2 procs
+#nsplit_i = 1
+#nsplit_j = 1
 ## 40 procs
 nsplit_i = 2
 nsplit_j = 2
@@ -32,7 +38,6 @@ nsplit_j = 2
 
 # Number of vertical layer (llm) : integer (default=19)
 llm = 64
-llm = 32
 
 # disvert : vertical discretisation : string (default='std') : std, ncar, ncar30l
 disvert=read_apbp
@@ -41,45 +46,27 @@ disvert=read_apbp
 #optim_it = 1000
 optim_it = 0
 
-# ---------------------------------- Time ---------------------------------
+# -------------------------------------------------------------------------------------
+# --------------------------------------- Time ----------------------------------------
+# -------------------------------------------------------------------------------------
 
-## scheme type : string : euler, leapfrog_matsuno, runge_kutta
-# time_scheme = ARK2.3 // default // RK 2nd order at 3 levels
+## scheme type : string ( default='runge_kutta') euler, leapfrog_matsuno, runge_kutta )
+#scheme = runge_kutta   leapfrog_matsuno
 
 ## matsuno period : integer ( default=5)
 #matsuno_period = 5
 
-# timestep : real (default=480s)
-dt = 111.6875
-dt = 446.75
-### attention 3 chiffres significatifs dans XIOS
+# number of dynamical time step per day
+day_step = 80
 
 # advection called every itau_adv time steps : integer (default 2)
 # standard : umax=100m/s vs c=340m/s (ratio 1:3)
 # in JW06 umax=35m/s vs c=340m/s (ratio 1:10)
 itau_adv=3
 
-# number of timestep (default=100) (ignored if run_length is set)
-itaumax = 10
+# number of days to run (substitute run_length) !!!!
+ndays = 5
 
-# run length : real (default=dt*itaumax)
-
-
-####################################
-
-## 1000 saturn day
-#run_length=38052000
-
-## special 
-## -- to cross the 2y limit precisely
-#run_length=32686668
-
-# 1000 jovian days
-run_length=35740000
-
-## A jovian year (less than 6h)
-## ... 10474 * 35740 = 374340760
-#run_length=374340760
 
 ####################################
 
@@ -89,19 +76,21 @@ run_length=35740000
 ## output with XIOS (only if compiled with XIOS): true/false (default true)
 #xios_output=false
 
-# output field period (valid XIOS or not) : integer (default none)
-# [should be equal to dt if XIOS dynamical outputs are wanted]
-# [because write_period sets synchronization frequency with XIOS]
-write_period = 111.6875
+# output field period (only when not using XIOS) : integer (default none)
+#write_period=7200
+# write_period=14400
+#write_period=118.9125
 write_period = 446.75
 
 
 #itau_write_etat0=380520
 
-# ---------------------------------- Misc --------------------------------
+# -------------------------------------------------------------------------------------
+# -------------------------------------- Misc -----------------------------------------
+# -------------------------------------------------------------------------------------
 
 # number of tracer (nqtot) : integer (default 1)
-nqtot=1
+nqtot=2
 
 # pression value where output is interpolated : real (default=0, no output)
 out_pression_level=85000
@@ -131,9 +120,11 @@ restart_file_name=restart_icosa
 #######################################
 etat0=temperature_profile
 temperature_profile_file=temp_profile.txt
-run_length=35740
 
-# ------------------------------ Dynamics --------------------------------
+
+# -------------------------------------------------------------------------------------
+# ----------------------------------- Dynamics ----------------------------------------
+# -------------------------------------------------------------------------------------
 
 # caldyn : computation type for gcm equation : string (default=gcm) : gcm, adv
 caldyn=gcm
@@ -165,7 +156,9 @@ iflag_sponge = 0
 #mode_sponge = 1
 
 
-# ------------------------------- Dissipation ---------------------------------
+# -------------------------------------------------------------------------------------
+# ---------------------------------- Dissipation --------------------------------------
+# -------------------------------------------------------------------------------------
 
 # dissipation time graddiv : real (default=5000)
 tau_graddiv = 10000
@@ -185,17 +178,20 @@ tau_divgrad= 10000
 # number of iteration for divgrad : integer (default=1)
 niterdivgrad=2
 
-# Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear, giant_liu_schneider
+# Rayleigh friction : string (default=none) : 
+#            none, dcmip2_schaer_noshear, dcmip2_schaer_shear, giant_liu_schneider
 rayleigh_friction_type = giant_liu_schneider
 rayleigh_limlat = 16.
 rayleigh_friction_tau = 8640000.
 
-# ---------------------------------- Physics ----------------------------------
+# -------------------------------------------------------------------------------------
+# ------------------------------------- Physics ---------------------------------------
+# -------------------------------------------------------------------------------------
 
 # (itau_physics=160)*(dt=111.6875) --> half a jupiter day as physical timestep
 # ---- for some reason (day consistency, physical timestep must be less a day)
 # ---- change also in run.def
-itau_physics = 160
+#itau_physics = 160
 itau_physics = 40
 
 # kind of physics : string : none, dcmip (default=none)
@@ -228,4 +224,5 @@ ncar_disvert_c=1
 
 # dcmip 4 testcase : integer (default=1) : 1, 2
 dcmip4_testcase=1
-#-----------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
