@@ -10,13 +10,13 @@ import netCDF4 as nc
 
 
 ## ncfile_name  netcdf file to be modified
-ncfile_name = '/store/aboissinot/Makestarts/start_icosa_nbp40_64lvl_p10bar_1SA.nc'
+ncfile_name = '/scratch/cnt0027/lmd1167/dbardet/dynamico-giant-recent/jupiter/start_icosa_water.nc'
 
 ## profile      new vertical profile
-profile = '/home/aboissinot/profiles/h2o_profile/h2o_profile_1SAp10-2bar_64lvlp10bar.txt'
+profile = '/scratch/cnt0027/lmd1167/dbardet/dynamico-giant-recent/jupiter/h2o_ice_profile.txt'
 
 ## tracer q index
-iq = 0
+iq = 1
 
 
 # =============================================================

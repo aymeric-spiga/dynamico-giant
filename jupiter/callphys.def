@@ -29,25 +29,35 @@ callstats    = .false.
 # Test energy conservation of model physics ?
 enertest     = .false.
 # Check to see if cpp, mugaz values used match gas mixture defined in gases.def (recommended) ?
-check_cpp_match = .false.
+check_cpp_match = .false. 
+
+# use (read/write) a startfi.nc file? (default=.true.)
+startphy_file = .false.
+# constant value for surface albedo (if startphy_file = .false.)
+surfalbedo   = 0.0
+# constant value for surface emissivity (if startphy_file = .false.)
+surfemis     = 1.0
 
 ## Directory where external input files are
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-datadir = datadir
+datadir = DATAGENERIC_Jupiter
 
 ## Radiative transfer options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # call radiative transfer?
 callrad          = .true.
 # the rad. transfer is computed every "iradia" physical timestep
-iradia           = 400
+iradia           = 160
 # call multilayer correlated-k radiative transfer ?
 corrk            = .true.
 # Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
 continuum        = .true.
 # folder in which correlated-k data is stored ?
+#corrkdir         = CH4_C2H6_C2H2_Profils
+#corrkdir         = CH4_C2H6_C2H2_T_70-400K
+#corrkdir         = CH4_C2H6_C2H2_HITRAN2012
+#corrkdir         = CH4_C2H6_C2H2_HITRAN2012_Karko
 #corrkdir         = Jupiter_NewMOSES_NH3_HITRAN2012_REY_ISO_ge-12_NoKarko
-#corrkdir         = Jupiter_HITRAN2012_REY_ISO_NoKarko_T460K
 corrkdir         = Jupiter_HITRAN2012_REY_ISO_NoKarko_T460K_article2019_gauss8p8_095
 # call visible gaseous absorption in radiative transfer ?
 callgasvis       = .true.
@@ -78,6 +88,8 @@ mugaz            = 2.30
 ### DEBUG
 # To not call abort when temperature is outside boundaries:
 strictboundcorrk = .false.
+# To not stop run when temperature is greater than 400 K for H2-H2 CIA dataset:   
+strictboundH2H2cia = .false.
 # Add temperature sponge effect after radiative transfer?
 callradsponge    = .false.
 
@@ -125,6 +137,18 @@ nosurf      = .true.
 ## extra non-standard definitions for Earth
 #########################################################################
 
+## Thermal plume model options
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+dvimpl               = .true.
+r_aspect_thermals    = 2.0
+tau_thermals         = 0.0
+betalpha             = 0.9
+afact                = 0.7
+fact_epsilon         = 2.e-4
+alpha_max            = 0.7
+fomass_max           = 0.5
+pres_limit           = 2.e5
+
 ## Tracer and aerosol options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Ammonia cloud (Saturn/Jupiter)?
@@ -147,7 +171,7 @@ size_aurora        = 3.e-7
 obs_tau_col_aurora = 2.0
 
 # Radiatively active CO2 aerosol?
-aeroco2        = .false.
+aeroco2            = .false.
 # Fixed CO2 aerosol distribution?
 aerofixco2     = .false.
 # Radiatively active water aerosol?
@@ -178,18 +202,16 @@ mass_redistrib = .false.
 ## Water options 
 ## ~~~~~~~~~~~~~
 # Model water cycle
-water         = .false.
+water         = .true.
 # Model water cloud formation
-watercond     = .false.
-# Vapor distribution width (default=0.2)
-ratqs         = 1.e-5
+watercond     = .true.
 # Model water precipitation (including coagulation etc.)
-waterrain     = .false.
+waterrain     = .true.
 # Use simple precipitation scheme?
 precip_scheme = 1
 # Evaporate precipitation?
-evap_prec     = .false.
-# Multiplicative constant in Boucher 95 precip scheme
+evap_prec     = .true.
+# multiplicative constant in Boucher 95 precip scheme
 Cboucher      = 1.
 # Include hydrology ?
 hydrology     = .false.
