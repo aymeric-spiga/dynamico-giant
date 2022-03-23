@@ -1,0 +1,68 @@
+<!-- =========================================================================================================== -->
+<!-- field_def_physics.xml                                                                                       -->
+<!-- Definition of all existing variables that can be output from Dynamico physics                               -->
+<!-- =========================================================================================================== -->
+
+    <field_definition prec="4" 
+                      freq_op="1ts"
+                      enabled="true">
+
+        <!-- 0D variables -->
+        <field_group id="fields_0D" grid_ref="scalarpoint">
+            <field id="ls"
+                   long_name="Solar longitude"
+                   unit="degrees" />
+        </field_group>
+
+        <!-- 2D variables -->
+        <field_group id="fields_2D" grid_ref="grid_2D">
+            <field id="ps"
+                   long_name="Surface Pressure" 
+                   unit="Pa" />
+            <field id="area"
+                   long_name="Mesh area"
+                   unit="m2" />
+            <field id="OLR"
+                   long_name="outgoing longwave radiation" 
+                   unit="W/m2" />
+            <field id="ISR"
+                   long_name="incoming solar radiation"  
+                   unit="W/m2" />
+        </field_group>
+
+        <!-- 3D variables -->
+        <field_group id="fields_3D" grid_ref="grid_3D">
+        <!--<field_group id="fields_3D" grid_ref="grid_3d">-->
+            <field id="temperature"
+                   long_name="Atmospheric temperature"
+                   unit="K" />
+            <field id="u"
+                   long_name="Eastward Zonal Wind"
+                   unit="m/s" />
+            <field id="v" 
+                   long_name="Northward Meridional Wind" 
+                   unit="m/s" />
+            <field id="omega" 
+                   long_name="Downward omega velocity" 
+                   unit="Pa/s" />
+            <field id="h2o_vap" 
+                   long_name="Vapor mass mixing ratio" 
+                   unit="kg/kg" />
+            <field id="h2o_ice" 
+                   long_name="Vapor mass mixing ratio" 
+                   unit="kg/kg" />
+            <field id="detr" 
+                   long_name="Detrainment" 
+                   unit="kg/m2/s" />
+            <field id="entr" 
+                   long_name="Entrainment" 
+                   unit="kg/m2/s" />
+            <field id="w_plm" 
+                   long_name="Plume vertical velocity" 
+                   unit="m/s" />
+
+        </field_group>
+
+    </field_definition>
+
+
