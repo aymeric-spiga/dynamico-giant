@@ -4,7 +4,8 @@ here=$PWD
 
 #vert=64
 #vert=32
-vert=61
+#vert=61
+vert=96
 
 #lati=128
 lati=360
@@ -17,12 +18,12 @@ cd ../code/LMDZ.COMMON
 ###
 echo "------ compile gcm (please wait) ------"
 ./makelmdz_fcm \
- -d 8x360x61 \
+ -d 8x360x96 \
  -p std \
  -p_opt "-b 20x25 -s 1" \
  -parallel mpi \
  -arch X64_OCCIGEN \
- -arch_path ../ARCH \
+ -arch_path arch \
  -full \
  -job 8 \
  -cpp NODYN \
@@ -36,11 +37,11 @@ cd ../code/LMDZ.COMMON
 ###
 echo "------ compile newstart (please wait) ------"
 ./makelmdz_fcm \
- -d 8x360x61 \
+ -d 8x360x96 \
  -p std \
  -p_opt "-b 20x25 -s 1" \
  -arch X64_OCCIGEN \
- -arch_path ../ARCH \
+ -arch_path arch \
  -full \
  -job 8 \
  -cpp NODYN \

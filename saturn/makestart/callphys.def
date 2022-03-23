@@ -122,12 +122,18 @@ calldifv = .true.
 UseTurbDiff = .true.
 # call convective adjustment ?
 calladj  = .true.
+# call thermal plume model ?
+calltherm = .false. 
 # call thermal conduction in the soil ?
 callsoil = .false.
 # Internal heat flux (matters only if callsoil=F)
 intheat = 2.6
 # Remove lower boundary (e.g. for gas giant sims)
 nosurf = .true.
+# call non-orographic gravity waves drag ? 
+calllott_nonoro = .false.
+#Eliassen-Palm flux maximum value for non-orographic gravity waves drag
+epflux_max = 1.E-20
 
 #########################################################################
 ## extra non-standard definitions for Earth

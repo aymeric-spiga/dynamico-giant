@@ -1,7 +1,7 @@
 ## Orbit / general options
 ## ~~~~~~~~~~~~~~~~~~~~~~~
 # Run with or without tracer transport ?
-tracer    = .true.
+tracer    = .false.
 # Diurnal cycle ?  if diurnal=false, diurnally averaged solar heating
 diurnal   = .false. #.true.
 # Seasonal cycle ? if season=false, Ls stays constant, to value set in "start"
@@ -116,12 +116,18 @@ calldifv = .true.
 UseTurbDiff = .true.
 # call convective adjustment ?
 calladj  = .true.
+# call thermal plume model ?
+calltherm = .false. 
 # call thermal conduction in the soil ?
 callsoil = .false.
 # Internal heat flux (matters only if callsoil=F)
 intheat = 2.6
 # Remove lower boundary (e.g. for gas giant sims)
 nosurf = .true.
+# cal non-orographic gravity waves drag ? 
+calllott_nonoro = .false.
+#Eliassen-Palm flux maximum value for non-orographic gravity waves drag
+epflux_max = 1.E-5
 
 #########################################################################
 ## extra non-standard definitions for Earth

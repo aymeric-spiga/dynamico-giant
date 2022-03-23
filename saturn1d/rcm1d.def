@@ -40,8 +40,10 @@ time           = 12
 day_step       = 1
 # Number of sols to run 
 ndt            = 488600
+#ndt            = 24430
 # Number of steps between each writing in diagfi
 ecritphy=24430
+#ecritphy=25
 
 # OVERRIDE callphys.def settings
 # ... this to ensure compliancy with the low day_step value above

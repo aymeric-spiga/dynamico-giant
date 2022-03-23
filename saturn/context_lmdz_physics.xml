@@ -117,9 +117,15 @@
         <file id="histins"
               name="Xhistins"
               output_freq="40ts"
+              sync_freq="20ts"
               type="one_file"
               enabled=".true.">
-
+               
+              <!-- Setup for dispersion diagramm
+              output_freq="2ts"
+              sync_freq="20ts"
+                   Setup for referente simulation
+              output_freq="40ts" -->
             
             <!-- VARS 0D -->
             <field_group operation="instant"
