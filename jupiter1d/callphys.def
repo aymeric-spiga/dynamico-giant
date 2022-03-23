@@ -40,7 +40,7 @@ datadir = datadir
 # call radiative transfer?
 callrad          = .true.
 # the rad. transfer is computed every "iradia" physical timestep
-iradia           = 40
+iradia           = 2
 # call multilayer correlated-k radiative transfer ?
 corrk            = .true.
 # Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
@@ -116,7 +116,7 @@ UseTurbDiff = .true.
 # call convective adjustment ?
 calladj     = .false.
 # call thermal plume model ?
-calltherm   = .true.
+calltherm   = .false.
 # call thermal conduction in the soil ?
 callsoil    = .false.
 # Internal heat flux (matters only if callsoil=F)
