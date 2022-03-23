@@ -2,7 +2,7 @@
 
 ##############
 ### CONFIG ###
-ver_dyn=HEAD
+ver_dyn=HEAD # obsolete. should be a gitlab code.
 ver_phys=HEAD
 ver_xios=HEAD
 ver_ioipsl=HEAD
@@ -21,9 +21,6 @@ svn co -q -N http://svn.lmd.jussieu.fr/Planeto/trunk code
 
 cd code
 
-echo "get DYNAMICO..."
-svn co -r $ver_dyn -q http://forge.ipsl.jussieu.fr/dynamico/svn/codes/icosagcm/trunk ICOSAGCM
-
 echo "get PHYSICS..."
 svn update -r $ver_phys -q LMDZ.COMMON
 svn update -r $ver_phys -q LMDZ.GENERIC
@@ -40,3 +37,7 @@ echo "get FCM..."
 svn -q co http://forge.ipsl.jussieu.fr/fcm/svn/PATCHED/FCM_V1.2
 echo "please add "$PWD"/FCM_V1.2/bin/ to PATH environment variable"
 
+echo "from gitlab, get DYNAMICO..."
+git clone https://gitlab.in2p3.fr/ipsl/projets/dynamico/dynamico.git ICOSAGCM
+
+echo "...end"
