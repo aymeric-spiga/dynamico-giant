@@ -124,10 +124,10 @@ callsoil = .false.
 intheat = 2.6
 # Remove lower boundary (e.g. for gas giant sims)
 nosurf = .true.
-# call non-orographic gravity waves drag ? 
-calllott_nonoro = .true.
+# cal non-orographic gravity waves drag ? 
+calllott_nonoro = .false.
 #Eliassen-Palm flux maximum value for non-orographic gravity waves drag
-epflux_max = 1.E-20
+epflux_max = 1.E-5
 
 #########################################################################
 ## extra non-standard definitions for Earth

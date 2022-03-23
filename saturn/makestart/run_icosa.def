@@ -33,7 +33,8 @@ nsplit_j=2
 # Number of vertical layer (llm) : integer (default=19)
 #llm=64
 #llm=32
-llm=61
+#llm=61
+llm=96
 
 # disvert : vertical discretisation : string (default='std') : std, ncar, ncar30l
 disvert=read_apbp

@@ -2,7 +2,8 @@
 
 #vert=64
 #vert=32
-vert=61
+#vert=61
+vert=96
 
 cd ../code/LMDZ.COMMON
 ./makelmdz_fcm -full \

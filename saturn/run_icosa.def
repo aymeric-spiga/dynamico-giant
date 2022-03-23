@@ -32,7 +32,8 @@ nsplit_j=8
 #nsplit_j=12
 
 # Number of vertical layer (llm) : integer (default=19)
-llm=61
+llm=96
+#llm=61
 #llm=32
 
 # disvert : vertical discretisation : string (default='std') : std, ncar, ncar30l
