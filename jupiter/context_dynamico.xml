@@ -1,0 +1,374 @@
+<!-- =========================================================================================================== -->
+<!-- DYNAMICO context                                                                                            -->
+<!-- context_dynamico.xml : Configuration file for DYNAMICO for reading and writing  files using XIOS            -->
+<!--                                                                                                             -->
+<!-- =========================================================================================================== -->
+
+<context id="icosagcm" >
+  <calendar type="d360" start_date="2000-01-01 00:00:00" time_origin="2000-01-01 00:00:00"/>
+  
+  <!-- =========================================================================================================== -->
+  <!-- Definition of all existing variables in field_def_dynamico.xml                                              -->
+  <!-- =========================================================================================================== -->
+  <field_definition src="./field_def_dynamico.xml" />
+
+
+  <!-- =========================================================================================================== -->
+  <!-- Definition of restart files and other input files                                                           -->
+  <!-- =========================================================================================================== -->
+  <file_definition type="one_file" par_access="collective">
+
+    <file id="output" name="output" enabled=".FALSE."  output_freq="2h" sync_freq="2h" output_level="10" >
+      <field_group group_ref="standard_output"/>
+    </file>
+
+  <!-- =========================================================================================================== -->
+  <!-- Writing restart file                                                                                         -->
+  <!-- =========================================================================================================== -->
+
+    <file id="restart"  enabled="true">
+       <field_group id="group_restart" operation="once"> 
+          <field id="it_restart" name="iteration"  grid_ref="scalar" />
+          <field id="q_restart" name="q"  grid_ref="grid_q" prec="8"/>
+     
+          <field_group domain_ref="i" prec="8"> 
+             <field id="xcell_restart" name="xcell" />
+             <field id="ycell_restart" name="ycell" />
+             <field id="zcell_restart" name="zcell" />
+             <field id="ps_restart" name="ps" />
+             <field id="phis_restart" name="phis" />
+             <field_group axis_ref="lev" >
+                <field id="theta_rhodz_restart" name="theta_rhodz" />
+                <field id="u_restart" name="u" domain_ref="u"/>
+                <field id="ulon_restart" name="ulon" />
+                <field id="ulat_restart" name="ulat" />
+                <field id="p_restart" name="p" />
+               
+                <field_group id="tracers_restart">
+                  <!-- tracers will be add atomatically here-->
+                </field_group>
+             
+             </field_group>
+
+             <field_group axis_ref="levp1" >
+               <field id="geopot_restart" name="geopot" />
+               <field id="W_restart" name="W" />
+             </field_group>
+
+          </field_group>
+       </field_group>
+    </file>
+
+   <!-- =========================================================================================================== -->
+   <!-- Writing initial state file (when not previously read from start file)                                       -->
+   <!-- =========================================================================================================== -->
+  
+   <file id="start0"  mode="write" enabled="false">
+       <field_group id="group_start0" operation="once"> 
+          <field id="it_start0" name="iteration"  grid_ref="scalar" />
+          <field id="q_start0" name="q"  grid_ref="grid_q" prec="8"/>
+     
+          <field_group domain_ref="i" prec="8"> 
+             <field id="xcell_start0" name="xcell" />
+             <field id="ycell_start0" name="ycell" />
+             <field id="zcell_start0" name="zcell" />
+             <field id="ps_start0" name="ps" />
+             <field id="phis_start0" name="phis" />
+             <field_group axis_ref="lev" >
+                <field id="theta_rhodz_start0" name="theta_rhodz" />
+                <field id="u_start0" name="u" domain_ref="u"/>
+                <field id="ulon_start0" name="ulon" />
+                <field id="ulat_start0" name="ulat" />
+                <field id="p_start0" name="p" />
+               
+                <field_group id="tracers_start0">
+                  <!-- tracers will be add atomatically here-->
+                </field_group>
+                          
+             </field_group>
+          </field_group>
+       </field_group>
+    </file>
+
+   <!-- =========================================================================================================== -->
+   <!-- reading start file                                                                                          -->
+   <!-- =========================================================================================================== -->
+
+    <file id="start" enabled="false" mode="read">
+       <field_group id="group_start" operation="once"> 
+          <field id="it_start" name="iteration"  grid_ref="scalar" />
+          <field_group domain_ref="i" prec="8"> 
+	    
+            <field id="xcell_start" name="xcell" />
+            <field id="ycell_start" name="ycell" />
+            <field id="zcell_start" name="zcell" />
+            <field id="ps_start" name="ps" />
+            <field id="phis_start" name="phis" />
+	    
+            <field_group axis_ref="lev" >
+              <field id="theta_rhodz_start" name="theta_rhodz" />
+              <field id="u_start" name="u" domain_ref="u"/>
+              <field id="ulon_start" name="ulon" />
+              <field id="ulat_start" name="ulat" />
+	      
+              <field_group id="tracers_start">
+                <!-- tracers will be add atomatically here-->
+              </field_group>
+	    </field_group>
+
+	    <field_group axis_ref="levp1" >
+              <field id="geopot_start" name="geopot" />
+              <field id="W_start" name="W" />
+            </field_group>
+	    
+          </field_group>
+          <field id="q_start" name="q"  grid_ref="grid_q_start" prec="8"/>
+       </field_group>
+    </file>
+    
+   <!-- =========================================================================================================== -->
+   <!-- reading start file and perform interpolation (restarting from a different resolution)                       -->
+   <!-- =========================================================================================================== -->
+
+    <file id="start_interp" enabled="false" mode="read">
+       <field_group operation="once"> 
+          <field id="it_start_interp" name="iteration"  grid_ref="scalar" />
+          <field_group domain_ref="i_start_interp_read" prec="8"> 
+             <field id="ps_start_interp_read" name="ps" />
+             <field id="phis_start_interp_read" name="phis" />
+             <field_group axis_ref="lev_start_interp_read" >
+                <field id="theta_rhodz_start_interp_read" name="theta_rhodz" />
+                <field id="ulon_start_interp_read" name="ulon" />
+                <field id="ulat_start_interp_read" name="ulat" />
+                <field id="p_start_interp_read" name="p" />
+
+                <field_group id="tracers_start_interp_read">
+                  <!-- tracers will be add atomatically here-->
+                </field_group>
+
+             </field_group>
+          </field_group>
+       </field_group>
+    </file>
+
+  </file_definition>
+  
+  <field_definition>
+    <field_group id="start_interp">
+      <field_group domain_ref="i_start_interp" >
+         <field id="ps_start_interp" field_ref="ps_start_interp_read" />
+         <field id="phis_start_interp" field_ref="phis_start_interp_read" />
+
+         <field id="p_start_interp_horiz" field_ref="p_start_interp_read" axis_ref="lev_start_interp_read"/>
+       
+          <field_group axis_ref="lev_start_interp" >
+             <field id="theta_rhodz_start_interp" field_ref="theta_rhodz_start_interp_read"  />
+             <field id="ulon_start_interp" field_ref="ulon_start_interp_read" />
+             <field id="ulat_start_interp" field_ref="ulat_start_interp_read" />
+ 
+             <field_group id="tracers_start_interp">
+               <!-- tracers will be add atomatically here-->
+             </field_group>
+          </field_group>
+
+       </field_group>
+    </field_group>
+
+    <field id="p_start_interp" domain_ref="i" axis_ref="lev" />
+    
+  </field_definition>  
+
+  <domain_definition>
+    <domain id="i_start_interp_read" type="unstructured" >
+      <generate_rectilinear_domain/>
+    </domain>
+
+    <domain id="i_start_interp" domain_ref="i">
+      <interpolate_domain order="1" />
+    </domain>
+
+  </domain_definition>
+  
+  <axis_definition>
+    <axis id="lev_start_interp_read" />
+    <axis id="lev_start_interp"      axis_ref="lev">
+      <interpolate_axis order="1" coordinate_src="p_start_interp_horiz" coordinate_dst="p_start_interp" extrapolate="true"/>
+    </axis>
+  </axis_definition>
+  
+  
+<!-- ========================================================================================================================= -->
+<!-- Pressure is automatically resent at initialization to XIOS workflow to optionnaly do an interpolation in pressure level   --> 
+<!-- And reinject tracer in the initial state                                                                                  --> 
+<!-- ========================================================================================================================= -->
+
+  <field_definition>
+    <field id="p_init0" domain_ref="i" axis_ref="lev"/>
+    <field id="ps_init0" domain_ref="i" />
+  </field_definition>
+     
+
+
+
+  <!-- =========================================================================================================== -->
+  <!-- read field from file for etat0_database                                                                                  -->
+  <!-- =========================================================================================================== -->
+  <field_definition>
+
+     <field_group id="read_fields" enabled="false" operation="instant">
+      
+        <field id="relief_db" field_ref="relief_reg" domain_ref="from_relief" read_access="true"  />
+        <field_group domain_ref="from_ecdyn" read_access="true" >
+           <field id="ps_db" field_ref="ps_reg" />
+           <field id="z_db"  field_ref="z_reg"  />
+           <field id="ts_db" field_ref="ts_reg" />
+           <field_group axis_ref="lev_ecdyn" >
+              <field id="u_db" field_ref="u_reg"  />
+              <field id="v_db" field_ref="v_reg"   />
+              <field id="temp_db" field_ref="temp_reg" />
+              <field id="q_db"    field_ref="q_reg"    />
+           </field_group>
+        </field_group>
+    
+     </field_group>
+
+  </field_definition> 
+
+
+
+  <file_definition>    
+    <file_group id="read_files" enabled="false" >
+
+       <file id="relief" name="Relief" type="one_file" mode="read" output_freq="10ts">
+           <field id="relief_reg" name="RELIEF" domain_ref="domain_relief" operation="instant" />
+       </file>
+      
+       <file id="ECDYN"  name="ECDYN" type="one_file" mode="read" output_freq="10ts">
+          <field_group domain_ref="domain_ecdyn" operation="instant">
+             <field id="ps_reg"   name="SP"      />
+             <field id="z_reg"    name="Z"       />
+             <field id="ts_reg"   name="ST"      />
+             <field_group axis_ref="lev_ecdyn"   >
+                <field id="u_reg"    name="U"     />
+                <field id="v_reg"    name="V"     />
+                <field id="temp_reg" name="TEMP"  />
+                <field id="q_reg"    name="R"     />
+             </field_group>
+          </field_group>
+       </file>
+    
+    </file_group>    
+  </file_definition>
+    
+
+  <!-- =========================================================================================================== -->
+  <!-- Axis definitions                                                                                            -->
+  <!-- =========================================================================================================== -->
+  <axis_definition prec="8">
+    <axis id="lev"      name="lev"                positive="down" standard_name="atmopshere_hybrid_sigma_pressure_coordinate"  long_name="hybrid level at midpoints" axis_type="Z"/>
+    <axis id="levp1"    name="ilev"  unit="level" positive="down" standard_name="atmopshere_hybride_sigma_pressure_coordinate" long_name="hybrid level at interface" axis_type="Z" />
+    <axis id="nq"       name="nq" />
+    <axis id="nq_start" name="nq" />
+    <axis id="lev_ecdyn" />
+
+
+    <axis id="lev_pressure" positive="down"  n_glo="2" unit="Pa" value="(0,1)[85000 50000]" >
+      <interpolate_axis order="1" coordinate="p" />
+    </axis>
+
+    <axis id="presnivs_mb" > 
+      <interpolate_axis order="1" /> 
+    </axis>
+  </axis_definition>
+
+  <!-- =========================================================================================================== -->
+  <!-- Domain definitions                                                                                          -->
+  <!-- =========================================================================================================== -->
+  <domain_definition prec="8">
+
+    <domain_group id="i"> 
+      <domain id="i" name="mesh"/>     
+
+      <domain id="from_relief" >
+        <interpolate_domain/>
+      </domain>
+      
+      <domain id="from_ecdyn" >
+        <interpolate_domain/>
+      </domain>
+    </domain_group> 
+
+    <domain id="v" />
+    <domain id="u" />
+     
+    <domain id="regular_half_degree" type="rectilinear" ni_glo="720" nj_glo="360" >
+      <generate_rectilinear_domain />
+      <interpolate_domain order="1"/>
+    </domain> 
+    
+    <domain id="regular_one_degree" type="rectilinear" ni_glo="360" nj_glo="180" >
+      <generate_rectilinear_domain />
+      <interpolate_domain order="1"/>
+    </domain> 
+    
+    <domain id="regular_two_degree" type="rectilinear" ni_glo="180" nj_glo="90" >
+      <generate_rectilinear_domain />
+      <interpolate_domain order="1"/>
+    </domain> 
+    
+    <domain id="domain_relief" type="rectilinear" >
+      <generate_rectilinear_domain />
+    </domain>
+    
+    <domain id="domain_ecdyn" type="rectilinear" >
+      <generate_rectilinear_domain />
+    </domain>
+    
+  </domain_definition>    
+  
+  <scalar_definition>
+     <scalar id="scalar" />
+  </scalar_definition>   
+
+  <!-- =========================================================================================================== -->
+  <!-- Grid definitions                                                                                            -->
+  <!-- =========================================================================================================== -->
+  <grid_definition>    
+    <grid id="scalar">
+      <scalar />
+    </grid>
+    
+    <grid id="grid_q">
+      <domain domain_ref="i" />
+      <axis axis_ref="lev" />
+      <axis axis_ref="nq" />
+    </grid>
+
+    <grid id="grid_q_start">
+      <domain domain_ref="i" />
+      <axis axis_ref="lev" />
+      <axis axis_ref="nq_start" />
+    </grid>
+
+    <grid id="grid_q_regular_two_degree">
+      <domain domain_ref="regular_two_degree" />
+      <axis axis_ref="lev" />
+      <axis axis_ref="nq" />
+    </grid>
+
+    <grid id="grid_q_regular_one_degree">
+      <domain domain_ref="regular_one_degree" />
+      <axis axis_ref="lev" />
+      <axis axis_ref="nq" />
+    </grid>
+
+    <grid id="grid_q_regular_alf_degree">
+      <domain domain_ref="regular_half_degree" />
+      <axis axis_ref="lev" />
+      <axis axis_ref="nq" />
+    </grid>
+
+
+  </grid_definition>   
+
+</context>
