@@ -36,7 +36,7 @@ nproc=$((SLURM_NTASKS-1))
 echo "# srun configuration file" > srun.conf
 echo "0-$nproc icosa_lmdz.exe" >> srun.conf
 
-# Case doesn't use xios_client.exe
+# Case does use xios_client.exe
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # which means that several processors can
 # be specifically dedicated to writing 
