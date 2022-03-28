@@ -1,19 +1,11 @@
 #! /bin/bash
 
-##############
-### CONFIG ###
-ver_dyn=HEAD # obsolete. should be a gitlab code.
-ver_phys=HEAD
-ver_xios=HEAD
-ver_ioipsl=HEAD
-##############
-
 ###############
-#### CONFIG ###
-#ver_dyn=687 # ICOSAGCM
-#ver_phys=1911 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
-#ver_xios=1459 # XIOS
-#ver_ioipsl=302 # IOIPSL
+### CONFIG ###
+ver_dyn=90f7138a60ebd3644fbbc42bc9dfa22923386385 # ICOSAGCM
+ver_phys=2633 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
+ver_xios=2298 # XIOS
+ver_ioipsl=450 # IOIPSL
 ###############
 
 rm -rf code
@@ -39,5 +31,8 @@ echo "please add "$PWD"/FCM_V1.2/bin/ to PATH environment variable"
 
 echo "from gitlab, get DYNAMICO..."
 git clone https://gitlab.in2p3.fr/ipsl/projets/dynamico/dynamico.git ICOSAGCM
+cd ICOSAGCM
+git checkout $ver_dyn
+cd ..
 
 echo "...end"
