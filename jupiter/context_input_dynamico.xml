@@ -1,17 +1,1 @@
-<context id="icosagcm_input" >
-  <calendar type="d360" start_date="2000-01-01 00:00:00" time_origin="2000-01-01 00:00:00"/>
-  
-   <file_definition type="one_file" par_access="collective">
-
-      <file id="start" name="start" enabled="true" mode="read" output_freq="1d">
-          <field id="xcell_start" name="xcell" domain_ref="i" operation="instant" prec="8"/>
-          <field id="ycell_start" name="ycell" domain_ref="i" operation="instant" prec="8"/>
-          <field id="zcell_start" name="zcell" domain_ref="i" operation="instant" prec="8"/>
-      </file>
-   </file_definition>
-
-  <domain_definition>
-    <domain id="i"/>
-  </domain_definition>
-     
-</context>
+../code/ICOSAGCM/xml/context_input_dynamico.xml
