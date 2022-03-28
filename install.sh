@@ -3,7 +3,7 @@
 ###############
 ### CONFIG ###
 ver_dyn=90f7138a60ebd3644fbbc42bc9dfa22923386385 # ICOSAGCM
-ver_phys=2633 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
+ver_phys=2652 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
 ver_xios=2298 # XIOS
 ver_ioipsl=450 # IOIPSL
 ###############
