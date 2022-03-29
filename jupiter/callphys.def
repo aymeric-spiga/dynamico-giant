@@ -28,8 +28,6 @@ lwrite       = .false.
 callstats    = .false.
 # Test energy conservation of model physics ?
 enertest     = .false.
-# Check to see if cpp, mugaz values used match gas mixture defined in gases.def (recommended) ?
-check_cpp_match = .false. 
 
 # use (read/write) a startfi.nc file? (default=.true.)
 startphy_file = .false.
@@ -79,12 +77,17 @@ varactive        = .false.
 varfixed         = .false.
 # Variable gas species: Saturation percentage value at ground ?
 satval           = 0.0
-# Force specific heat capacity and molecular mass values
-force_cpp        = .true.
-# Specific heat capacity in J K-1 kg-1 [only used if force_cpp = T]
-cpp              = 11500.
-# Molecular mass in g mol-1 [only used if force_cpp = T]
 mugaz            = 2.30
+# Computes atmospheric specific heat capacity and
+# could calculated by the dynamics, set in callphys.def or calculeted from gases.def.
+# You have to choose: 0 for dynamics (3d), 1 for forced in callfis (1d) or 2: computed from gases.def (1d)
+# Force_cpp and check_cpp_match are now deprecated.  
+cpp_mugaz_mode = 0
+# Specific heat capacity in J K-1 kg-1 [only used if cpp_mugaz_mode = 2]
+cpp              = 11500.
+# Molecular mass in g mol-1 [only used if cpp_mugaz_mode = 2]
+mugaz            = 2.30
+### DEBUG
 ### DEBUG
 # To not call abort when temperature is outside boundaries:
 strictboundcorrk = .false.
