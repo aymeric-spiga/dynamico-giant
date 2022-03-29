@@ -28,10 +28,6 @@ lwrite       = .false.
 callstats    = .false.
 # Test energy conservation of model physics ?
 enertest     = .false.
-# Cpp and mugaz could calculated by the dynamics, set in callphys.def or calculeted from gases.def.
-# You have to choose: 0 for dynamics (3d), 1 for forced in callfis (1d) or 2: computed from gases.def (1d)
-# Force_cpp and check_cpp_match are now deprecated.  
-
 # use (read/write) a startfi.nc file? (default=.true.)
 startphy_file = .false.
 # constant value for surface albedo (if startphy_file = .false.)
@@ -84,10 +80,10 @@ satval           = 0.0
 # could calculated by the dynamics, set in callphys.def or calculeted from gases.def.
 # You have to choose: 0 for dynamics (3d), 1 for forced in callfis (1d) or 2: computed from gases.def (1d)
 # Force_cpp and check_cpp_match are now deprecated.  
-cpp_mugaz_mode = 2
-# Specific heat capacity in J K-1 kg-1 [only used if cpp_mugaz_mode = 2]
+cpp_mugaz_mode = 1
+# Specific heat capacity in J K-1 kg-1 [only used if cpp_mugaz_mode = 1]
 cpp              = 11500.
-# Molecular mass in g mol-1 [only used if cpp_mugaz_mode = 2]
+# Molecular mass in g mol-1 [only used if cpp_mugaz_mode = 1]
 mugaz            = 2.30
 ### DEBUG
 # To not call abort when temperature is outside boundaries:
