@@ -27,7 +27,7 @@ export EXEC_NAME=./icosa_lmdz.exe
 
 set -vx
 
-source ../code/ARCH/arch-X64_OCCIGEN.env
+source ../../code/ARCH/arch-X64_OCCIGEN.env
 
 
 #printenv | sort
