@@ -37,7 +37,7 @@
 nbp = 80
 nsplit_i = 4
 nsplit_j = 7
-omp_level_size = 7
+omp_level_size = 4
 llm = 48
 disvert = plugin
 hybrid = false
