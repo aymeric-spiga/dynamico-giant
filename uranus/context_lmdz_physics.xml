@@ -2,20 +2,57 @@
 
     <!-- Definition of a calendar is done in code via wxios_set_cal -->
     
-    <!-- %%%% Definition of domains and groups of domains %%%% -->
-    <!-- Definition du domaine global (les icosahedres) -->
-    <!-- Definition de dom_out "./domain_def.xml" la resolution du fichier de sortie -->
+    <!-- Definition of domains and groups of domains -->
     <domain_definition>
         <domain_group id="dom_glo" data_dim="1">
           <domain id="dom_glo" />
         </domain_group>
+
     </domain_definition>
-    
-    <domain_definition src="./domain_def.xml"/>
+
+    <domain_definition>
+        <domain id="dom_64_48" type="rectilinear" ni_glo="64" nj_glo="48"   >
+          <generate_rectilinear_domain/>
+          <interpolate_domain order="1"/>
+        </domain>
+
+        <domain id="dom_96_95" type="rectilinear"  ni_glo="96" nj_glo="95"  >
+          <generate_rectilinear_domain/>
+          <interpolate_domain order="1"/>
+        </domain>
+
+        <domain id="dom_144_142" type="rectilinear" ni_glo="144" nj_glo="142"   >
+          <generate_rectilinear_domain/>
+          <interpolate_domain order="1"/>
+        </domain>
+
+        <domain id="dom_512_360" type="rectilinear" ni_glo="512" nj_glo="360"   >
+          <generate_rectilinear_domain/>
+          <interpolate_domain order="1"/>
+        </domain>
+
+        <domain id="dom_720_360" type="rectilinear" ni_glo="720" nj_glo="360" >
+          <generate_rectilinear_domain/>
+          <interpolate_domain order="1"/>
+        </domain>
+
+        <domain id="dom_128_96" type="rectilinear" ni_glo="128" nj_glo="96" >
+          <generate_rectilinear_domain/>
+          <interpolate_domain order="1"/>
+        </domain>
+
+        <domain id="dom_256_192" type="rectilinear" ni_glo="256" nj_glo="192" >
+          <generate_rectilinear_domain/>
+          <interpolate_domain order="1"/>
+        </domain>
+
+        <domain id="dom_out" domain_ref="dom_720_360"/>
+    </domain_definition>
+    <!-- <domain_definition src="./domain_def.xml"/> -->
         
-    <!-- %%%% Definition of vertical axes %%%%
+    <!-- Definition of vertical axes 
          NB: these must be defined and set in code via
-         wxios_add_vaxis -->
+         xios_output_mod -->
     <axis_definition>
         <axis id="presnivs" 
               standard_name="Pseudo-pressure of model vertical levels" 
@@ -27,73 +64,40 @@
         </axis>
     </axis_definition>
     
-    <!-- %%%% Definition of a grid %%%% -->
+    <scalar_definition>
+           <scalar id="scalar" />
+    </scalar_definition>
+    
     <grid_definition>
         <!-- toggle axis id below to change output vertical axis -->
-        <grid id="grid_3d">
+        <grid id="grid_3D">
             <domain domain_ref="dom_glo" />
-                <!-- <axis id="presnivs" /> -->
-             <axis axis_ref="altitude" /> 
+            <axis axis_ref="presnivs" /> 
         </grid>
-        <!-- grid for interpolated lon-lat outputs
-        <grid id="grid_3d_regular">
-            <domain domain_ref="dom_out" />
+        <grid id="grid_2D">
+            <domain domain_ref="dom_glo" />
+        </grid>
+        <!-- grid for interpolated lon-lat outputs -->
+        <!--<grid id="grid_3d_regular">
+            <domain domain_ref="dom_regular" />
              <axis axis_ref="altitude" /> 
         </grid>-->
         <!-- to output scalars -->
         <grid id="scalarpoint" >
-            <scalar />
+            <scalar scalar_ref="scalar" />
+        </grid>
+        <!-- output grids -->
+        <grid id="grid_3D_out">
+            <domain domain_ref="dom_out" />
+            <axis axis_ref="presnivs" />
+        </grid>
+        <grid id="grid_2D_out">
+            <domain domain_ref="dom_out" />
         </grid>
     </grid_definition>
     
     <!-- Definition of model variables -->
-    <!-- En-tete du fichier Netcdf de sortie -->
-    <field_definition prec="4" 
-                      freq_op="1ts"
-                      enabled=".TRUE.">
-        
-        <!-- 0D variables -->
-        <field_group id="fields_0D" grid_ref="scalarpoint">
-            <field id="ls"
-                   long_name="Solar longitude"
-                   unit="degrees" />
-        </field_group>    
-        
-        <!-- 2D variables -->
-        <field_group id="fields_2D" domain_ref="dom_glo">
-            <field id="ps"
-                   long_name="Surface Pressure" 
-                   unit="Pa" />
-            <field id="area"
-                   long_name="Mesh area"
-                   unit="m2" />
-		   <!-- Aire de la maille -->
-            <field id="OLR"
-                   long_name="outgoing longwave radiation (W/m2)" 
-                   unit="W/m2" />
-            <field id="ISR"
-                   long_name="incoming solar radiation (W/m2)"  
-                   unit="W/m2" />
-        </field_group>
-
-        <!-- 3D variables -->
-        <field_group id="fields_3D" domain_ref="dom_glo" axis_ref="altitude">
-        <!--<field_group id="fields_3D" grid_ref="grid_3d">-->
-            <field id="temperature"
-                   long_name="Atmospheric temperature"
-                   unit="K" />
-            <field id="u"
-                   long_name="Eastward Zonal Wind"
-                   unit="m/s" />
-            <field id="v" 
-                   long_name="Northward Meridional Wind" 
-                   unit="m/s" />
-            <field id="omega" 
-                   long_name="Downward omega velocity" 
-                   unit="Pa/s" />
-        </field_group>
-
-    </field_definition>
+    <field_definition src="./field_def_physics.xml" />
     
     <!-- Definition of output files -->
     <file_definition>
@@ -114,86 +118,47 @@
         -->
         <file id="histins"
               name="Xhistins"
-              output_freq="500ts"
-	      sync_freq="500ts"
+              output_freq="200ts"
+              sync_freq="200ts"
               type="one_file"
-              enabled=".true.">
+              time_units="days"
+              enabled="true">
 
             
             <!-- VARS 0D -->
             <field_group operation="instant"
-                         freq_op="1ts">
-                <field field_ref="ls" /> 
-		<!-- Solar longitude -->
-            </field_group>
-
-            <!--<field_group domain_ref="dom_glo"> -->
-            <field_group domain_ref="dom_out">
-            <!-- toggle domain_ref to output on native or lon-lat domain -->
-            
-              <!-- VARS 2D -->
-              <field_group operation="instant"
-                           freq_op="1ts">
-                  <field field_ref="area" operation="once" />
-                  <field field_ref="ps" />
-                  <field field_ref="ISR" />
-                  <field field_ref="OLR" />
-              </field_group>
-
-              <!-- VARS 3D -->
-              <field_group operation="instant"
-                           freq_op="1ts">
-                  <field field_ref="temperature" />
-                  <field field_ref="u" />
-                  <field field_ref="v" />
-                  <field field_ref="omega" />
-              </field_group>
-              
-            </field_group>
-        </file>
-
-        <!-- diurnal averages outputs; output_freq is every day -->
-        <file id="diurnalave"
-              name="Xdiurnalave"
-              output_freq="1d" 
-              type="one_file"
-              enabled=".false.">
-	      <!-- enabled=".false." = pas de fichier de sortie -->
-                    
-            <!-- VARS 0D -->
-            <field_group operation="average"
+                         grid_ref="scalarpoint"
                          freq_op="1ts">
                 <field field_ref="ls" />
             </field_group>
 
-            <!-- VARS 2D -->
-<!--            <field_group operation="average"
-                         domain_ref="dom_regular"
-                         freq_op="1ts">
--->
-            <field_group operation="average"
-                         domain_ref="dom_glo"
-                         freq_op="1ts">
-                <field field_ref="area" operation="once" />
-                <field field_ref="ps" />
-            </field_group>
+            <!--<field_group domain_ref="dom_glo"> -->
+            <!--<field_group domain_ref="dom_out"> -->
+            <!-- toggle domain_ref to output on native or lon-lat domain -->
+            
+              <!-- VARS 2D -->
+              <field_group operation="instant" prec="4"
+                           grid_ref="grid_2D_out"
+                           freq_op="1ts">
+                  <field field_ref="area" operation="once" />
+                  <field field_ref="ps" enabled="true" />
+                  <field field_ref="ISR" enabled="true" />
+                  <field field_ref="OLR" enabled="true" />
+              </field_group>
 
-            <!-- VARS 3D -->
-            <!--<field_group operation="average"
-                         grid_ref="grid_3d_regular"
-                         freq_op="1ts">-->
-<!--            <field_group operation="average"
-                         domain_ref="dom_regular"
-                         freq_op="1ts">
--->
-            <field_group operation="average"
-                         domain_ref="dom_glo"
-                         freq_op="1ts">
-                <field field_ref="temperature" />
-                <field field_ref="u" />
-                <field field_ref="v" />
-            </field_group>
+              <!-- VARS 3D -->
+              <field_group operation="instant"
+                           grid_ref="grid_3D_out"
+                           freq_op="1ts">
+                  <field field_ref="u" />
+                  <field field_ref="v" />
+                  <field field_ref="omega"/>
+                  <field field_ref="temperature" />
+              </field_group>
+              
+            <!--</field_group>-->
         </file>
+
     </file_definition>
 
 </context>
