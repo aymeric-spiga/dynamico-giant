@@ -1,0 +1,85 @@
+<!-- =========================================================================================================== -->
+<!-- file_def_dynamico                                                                                           -->
+<!-- Definition of output diagnostic files (not including restart files)                                         -->
+<!-- =========================================================================================================== -->
+<context id="icosagcm" >
+
+
+  <field_definition>
+  
+    <field_group id="H&S_scalar" >
+      <field field_ref="timestep" />
+      <field field_ref="preff"/>
+      <field field_ref="ap" />
+      <field field_ref="bp" />
+      <field field_ref="mid_ap" />
+      <field field_ref="mid_bp" />
+    </field_group>
+  
+    <field_group id="H&S" operation="average" >
+      <field field_ref="ps" />
+      <field field_ref="phis" operation="once" />
+      <field field_ref="geopot" />
+      <field field_ref="ulon"/>
+      <field field_ref="ulat"/>
+      <field field_ref="uz"/>
+      <field field_ref="omega" />
+      <field field_ref="p"  />
+      <field field_ref="temp"  />
+      <field field_ref="u850" />
+      <field field_ref="v850" />
+      <field field_ref="w850" />
+      <field field_ref="t850" />
+      <field field_ref="omega850" />
+      <field field_ref="u500" />
+      <field field_ref="v500" />
+      <field field_ref="w500" />
+      <field field_ref="t500" />
+      <field field_ref="omega500" />
+    </field_group>
+
+    <field_group id="H&S_tracer" operation="average" >
+      <field field_ref="q" />
+    </field_group>
+
+  </field_definition>
+
+
+
+  <file_definition> 
+
+    <file id="daily_output" convention="CF" enabled="false" output_freq="1d" sync_freq="1d" output_level="10" timeseries="none" description="daily output for Held & Suarez test case" > 
+    
+      <field_group group_ref="H&S_scalar"/>
+      <field_group group_ref="H&S" domain_ref="regular_one_degree"              freq_op="1d" expr="@this_ref"/>
+      <field_group group_ref="H&S_tracer" grid_ref="grid_q_regular_one_degree" freq_op="1d" expr="@this_ref"/>
+      
+      <variable name="model" type="string" > dynamico </variable>
+      <variable name="test_case" type="string" > held & Suarez </variable>
+      <variable name="horizontal_resolution" type="string" > 2 degree native (grid points : 40x40x39) </variable>
+      <variable name="levels" type="string" > L39 </variable>
+      <variable name="grid" type="string" > hex </variable>
+      <variable name="equation" type="string" > hydro </variable>
+      <variable name="time_frequency" type="string" > 1day </variable>    
+
+    </file>
+
+    <file id="daily_output_native" convention="CF" enabled="false" output_freq="1d" sync_freq="1d" output_level="10" timeseries="none" description="daily output for Held & Suarez test case" > 
+    
+      <field_group group_ref="H&S_scalar"/>
+      <field_group group_ref="H&S"          freq_op="1d" expr="@this_ref"/>
+      <field_group group_ref="H&S_tracer"   freq_op="1d" expr="@this_ref"/>
+      
+      <variable name="model" type="string" > dynamico </variable>
+      <variable name="test_case" type="string" > held & Suarez </variable>
+      <variable name="horizontal_resolution" type="string" > 2 degree native (grid points : 40x40x39) </variable>
+      <variable name="levels" type="string" > L39 </variable>
+      <variable name="grid" type="string" > hex </variable>
+      <variable name="equation" type="string" > hydro </variable>
+      <variable name="time_frequency" type="string" > 1day </variable>    
+
+    </file>
+
+  </file_definition>
+
+</context> 
