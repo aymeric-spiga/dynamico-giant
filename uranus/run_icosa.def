@@ -1,3 +1,11 @@
+###########################################################################
+### RUN_ICOSA.DEF ### RUN_ICOSA.DEF ### RUN_ICOSA.DEF ### RUN_ICOSA.DEF ###
+###########################################################################
+
+###########################################################################
+### INITIALIZATION
+###########################################################################
+
 #INCLUDEDEF=uranus_const.def
 
 ##mpi_threading_mode=serialized
@@ -5,192 +13,230 @@
 
 #halo_i=0
 #halo_j=1
-# ------------------------------- Mesh ---------------------------------
 
-# Number of subdivision on a main triangle (nbp) : integer (default=40)
-# nbp = sqrt((nbr_lat x nbr_lon)/10)
-nbp=40
+###########################################################################
+### MESH GRID
+###########################################################################
+### nbp --> number of subdivision on a main triangle: integer (default=40)
+###         nbp = sqrt((nbr_lat x nbr_lon)/10)
+###         nbp                 20  40  80 160
+###         T-edge length (km) 500 250 120  60
+### nsplit_i, nsplit_j --> sub splitting of main rhombus: integer (default=1)
+###                        It is better to have nbp/split >~ 10
+###                        if nsplit_i = 4 & nsplit_j = 6
+###                        nbp/nsplit_{i,j} = 20 > 10 & 13 > 10 --> GOOD
+### omp_level_size --> integer (default=1)
+###                    must be equal to 1 on MPI case
+###                    must be equal to cpus-per-task on hybrid OpenMP/MPI case
+### llm --> number of vertical layer: integer (default=19)
+### disvert --> vertical discretisation : string (default='std') : std, ncar, ncar30l, plugin, read_apbp
+### hybrid --> logical: hybrid (default=.true.) or sigma coordinates (.false.)
+### optim_it --> mesh optimisation : number of iteration : integer (default=0)
+###########################################################################
 
-# nbp                 20  40  80 160
-# T-edge length (km) 500 250 120  60
+nbp = 80
+nsplit_i = 4
+nsplit_j = 7
+omp_level_size = 7
+llm = 48
+disvert = plugin
+hybrid = false
+optim_it = 0
 
-## sub splitting of main rhombus : integer (default=1)
-#nsplit_i=1
-#nsplit_j=1
-#omp_level_size=1
-###########################################
-## There must be less MPIxOpenMP processes than the 10 x nsplit_i x nsplit_j tiles
-## typically for pure MPI runs, let nproc = 10 x nsplit_i x nsplit_j
-## it is better to have nbp/split >~ 10
-###########################################
-## 40 procs: 10 x 2 x 2
-## nbp/nsplit_{i,j} = 20 >~ 10 GOOD
-nsplit_i=2
-nsplit_j=2
+###########################################################################
+### XIOS
+###########################################################################
+### enable_io --> activate IO (default = true)
+### xios_output --> output with XIOS (only if compiled with XIOS): true/false (default=true)
+###########################################################################
 
-# Number of vertical layer (llm) : integer (default=19)
-llm=40
-
-# disvert : vertical discretisation : string (default='std') : std, ncar, ncar30l
-disvert=read_apbp
-
-# optim_it : mesh optimisation : number of iteration : integer (default=0)
-#optim_it=1000
-optim_it=0
-
-# ---------------------------------- Time---------------------------------
-
-## scheme type : string : euler, leapfrog_matsuno, runge_kutta )
-# time_scheme = ARK2.3 // default // RK 2nd order at 3 levels  
-
-## matsuno period : integer ( default=5)
-#matsuno_period = 5
-
-# timestep : real (default=480s) (dynamical timestep)
-dt = 77.58
-### attention 3 chiffres significatifs dans XIOS
-
-# advection called every itau_adv time steps : integer (default 2)
-# standard : umax=100m/s vs c=340m/s (ratio 1:3)
-# in JW06 umax=35m/s vs c=340m/s (ratio 1:10)
-itau_adv=3
-
-# number of timestep (default 100) (ignored if run_length is set)
- itaumax = 10
-
-####################################
-
-# run length : real (default=dt*itaumax)
-## 5000 uranian day
-run_length=310320000
-
-####################################
-
-##activate IO (default = true)
 #enable_io = false
+#xios_output = false
 
-## output with XIOS (only if compiled with XIOS): true/false (default true)
-#xios_output=false
+###########################################################################
+### TIME
+###########################################################################
+### scheme --> scheme type : string (default=runge_kutta) :
+###            euler, leapfrog_matsuno, runge_kutta
+### time_scheme --> ARK2.3 (RK 2nd order at 3 levels) (default) | leapfrog_matsuno | runge_kutta | euler | RK2.5
+### matsuno_period --> matsuno period : integer (default=5)
+### dt --> dynamical timestep : real (s) (default=480s)
+###        Attention 3 chiffres significatifs dans XIOS
+###        dt = day length (s) / day_step 
+###        dt = duration of a dynamical time step
+###        day_step = number of dynamical time step per day
+###        Exemple: day_step = 100 per day and day length = 57996.s dt = 579.96 s
+###        ts (physical timestep) = dt x itau_physics
+###        Physics called (day_step / itau_physics)   per day
+###        Physics called day_length / ts    per day
+###        Radiative called every Physics x iradia    physical timestep
+###        Radiative called every iradia/Physics      days
+### day_step --> number of dynamical time step per day (default=0)
+### itau_adv --> advection called every itau_adv time steps : integer (default=1)
+###              standard : umax=100m/s vs c=340m/s (ratio 1:3)
+###              in JW06 umax=35m/s vs c=340m/s (ratio 1:10)
+### itaumax --> number of timestep (default=0) (ignored if run_length is set)
+### run_length --> run length in planet day: real (s) (default=dt*itaumax)
+###                In makestart = run_length must be equal to 1 day
+### ndays --> number of days to run (substitute run_length) !!!! (default=0)
+### write_period --> output field period (valid XIOS or not) : integer (s) (default=0)
+###                  [should be equal to dt if XIOS dynamical outputs are wanted]
+###                  [because write_period sets synchronization frequency with XIOS]
+###########################################################################
 
-# output field period (valid XIOS or not) : integer (default none)
-# [should be equal to dt if XIOS dynamical outputs are wanted]
-# [because write_period sets synchronization frequency with XIOS]
-write_period = 386.64
+time_scheme = runge_kutta
+#matsuno_period = 5
+#dt = 310.32
+day_step = 200
+itau_adv = 3
+#itaumax = 10
+#run_length = 62064000
+ndays = 1000
+write_period = 310.32
 
-# ---------------------------------- Misc --------------------------------
+###########################################################################
+### MISCELLANEOUS
+###########################################################################
+### nqtot --> number of tracer : integer (default=1)
+### out_pression_level --> pressure value where output is interpolated : real (default=0, no output)
+### etat0 --> initial state : string (default=jablonowsky06) : 
+###           jablonowsky06, academic, ncar, temperature_profile, start_file
+###           if etat0=temperature_profile -> 
+###              temperature_profile_file --> temperature profile file name
+###           if etat0=start_file : 
+###              etat0_start_file_colocated --> (default=.false.)
+###              start_file_name --> start file name
+###              restart_file_name --> restart file name
+### etat0_start_iteration_reset --> Necessary if we do long simulation (default=.false.)
+### etat0_start_iteration --> default = 0 (if etat0_start_iteration_reset = true)
+###########################################################################
 
-# number of tracer (nqtot) : integer (default 1)
-nqtot=1
+nqtot = 0
+#out_pression_level = 85000
+#etat0 = temperature_profile
+#temperature_profile_file = temp_profile.txt
+etat0 = start_file
+etat0_start_file_colocated = false
+start_file_name = start_icosa
+restart_file_name = restart_icosa
+etat0_start_iteration_reset=true
+etat0_start_iteration=0
 
-# pression value where output is interpolated : real (default=0, no output)
-out_pression_level=85000
+###########################################################################
+### DYNAMICS
+###########################################################################
+### caldyn --> computation type for gcm equation : string (default=gcm) : gcm, adv
+### caldyn_conserv --> string (default=energy) : energy,enstrophy
+### caldyn_exner --> scheme for computing Exner function : string (default=direct) : direct,lmdz
+### guided_type --> string (default=none) : none, ncar
+###########################################################################
 
-# etat0 : initial state : string (default=jablonowsky06) : 
-# jablonowsky06, academic, ncar
+caldyn = gcm
+caldyn_conserv = energy
+caldyn_exner = direct
+guided_type = none
 
-etat0=start_file
-etat0_start_file_colocated=false
-
-# start file name (default is start.nc)
-# restart file name (default is restart.nc)
-start_file_name=start_icosa
-restart_file_name=restart_icosa
-
-# ------------------------------ Dynamics --------------------------------
-
-# caldyn : computation type for gcm equation : string (default=gcm) : gcm, adv
-caldyn=gcm
-
-# caldyn_conserv : string (default=energy) : energy,enstrophy
-caldyn_conserv=energy
-
-# caldyn_exner : scheme for computing Exner function : string (default=direct) : direct,lmdz
-caldyn_exner=direct
-
-# caldyn_hydrostat : scheme for computing geopotential : string (default=direct) : direct,lmdz
-caldyn_hydrostat=direct
-
-# guided_type : string (default=none) : none, ncar
-guided_type=none
-
-#Sponge layer
-### iflag_sponge=0 for no sponge
+###########################################################################
+### DAMPING ("SPONGE") LAYER AT MODEL TOP
+###########################################################################
+### iflag_sponge=0 for no sponge (default)
 ### iflag_sponge=1 for sponge over 4 topmost layers
 ### iflag_sponge=2 for sponge from top to ~1% of top layer pressure
-### tau_sponge --> damping frequency at last layer
-### e-5 medium / e-4 strong yet reasonable / e-3 very strong
 ### mode_sponge=1 for u,v --> 0
-### mode_sponge=2 for u,v --> zonal mean (NOT IMPLEMENTED)
-### mode_sponge=3 for u,v,h --> zonal mean (NOT IMPLEMENTED)
+### mode_sponge=2 for u,v --> zonal mean
+### mode_sponge=3 for u,v,h --> zonal mean
+### tau_sponge --> damping frequency at last layer
+###            --> e-5 medium / e-4 strong yet reasonable / e-3 very strong
+###########################################################################
+
 iflag_sponge = 0
-#tau_sponge = 1.e-4
 #mode_sponge = 1
+#tau_sponge = 1.e-4
 
+###########################################################################
+### HORIZONTAL DISSIPATION
+###########################################################################
+### tau_graddiv --> dissipation timescale of smallest wvl: u,v (gradiv) : real (default=5000)
+### tau_gradrot --> dissipation timescale of smallest wvl: u,v (nxgradrot) : real (default=5000)
+### tau_divgrad --> dissipation timescale of smallest wvl: h (divgrad) : real (default=5000)
+### nitergdiv --> number of iterations for gradiv operator : integer (default=1)
+### nitergrot --> number of iterations for nxgradrot operator : integer (default=1)
+### niterdivgrad --> number of iterations for divgrad operator : integer (default=1)
+###########################################################################
 
-# ---------------------------------- Dissipation ---------------------------------
+tau_graddiv = 10000
+tau_gradrot = 10000
+tau_divgrad = 10000
+nitergdiv = 2
+nitergrot = 2
+niterdivgrad = 2
 
-# dissipation time graddiv : real (default=5000)
-tau_graddiv = 700
+###########################################################################
+### ENHANCEMENT OF HORIZONTAL DISSIPATION IN UPPERMOST LEVELS 
+###########################################################################
+### vert_prof_dissip_type --> (default = legacy) legacy, plugin
+### vert_prof_dissip_setup --> none (default, no vertical variation), 
+###                            altitude (mars model setup),  
+###                            pressure (venus model setup)
+### dissip_fac_mid --> multiplicative coefficient in the middle atmosphere
+###                    if vert_prof_dissip_setup == altitude, default value = 3
+###                    if vert_prof_dissip_setup == pressure, default value = 2
+### dissip_fac_up --> multiplicative coefficient in the upper atmosphere
+###                    if vert_prof_dissip_setup == altitude, default value = 30
+###                    if vert_prof_dissip_setup == pressure, default value = 10
+### dissip_startalt --> pseudo-altitude (km) for the middle to upper transition (ONLY on mars model setup)
+###                    if vert_prof_dissip_setup == altitude, default value = 70
+### dissip_deltaz --> size (km) of the middle-upper transition region
+###                    if vert_prof_dissip_setup == altitude, default value = 30
+###                    if vert_prof_dissip_setup == pressure, default value = 10
+### dissip_pupstart --> pressure (Pa) at which the transition starts (ONLY on venus model setup)
+###                    if vert_prof_dissip_setup == pressure, default value = 1.e3
+### dissip_hdelta --> scale height (km) in the transition region (ONLY on venus model setup)
+###                    if vert_prof_dissip_setup == pressure, default value = 5
+###########################################################################
 
-# number of iteration for graddiv : integer (default=1)
-nitergdiv = 1
+vert_prof_dissip_type = plugin
+vert_prof_dissip_setup = altitude
+#dissip_fac_mid = 2.
+#dissip_fac_up = 8.
+#dissip_startalt = 100.
+#dissip_deltaz = 40.
+#dissip_pupstart = 0
+#dissip_hdelta = 0
 
-# dissipation time nxgradrot (default=5000)
-tau_gradrot = 900
+###########################################################################
+### RAYLEIGH FRICTION
+###########################################################################
+### rayleigh_friction_type --> Rayleigh friction : string (default=none) :
+###                            none, dcmip2_schaer_noshear, dcmip2_schaer_shear, giant_liu_schneider
+### rayleigh_limlat --> angle : real
+### rayleigh_friction_tau --> real
+###########################################################################
 
-# number of iteration for nxgradrot : integer (default=1)
-nitergrot=2
-
-# dissipation time divgrad (theta) (default=5000)
-tau_divgrad= 900
-# number of iteration for divgrad : integer (default=1)
-niterdivgrad=2
-
-# Rayleigh friction : string (default=none) : none, dcmip2_schaer_noshear, dcmip2_schaer_shear
-rayleigh_friction_type=none
-#rayleigh_friction_type=giant_liu_schneider
-rayleigh_limlat = 33.
+rayleigh_friction_type = giant_liu_schneider
+rayleigh_limlat = 16.94
 rayleigh_friction_tau = 8640000.
 
-# -------------------------------- Physics -------------------------------------
+###########################################################################
+### PHYSICS
+###########################################################################
+### itau_physics --> physics (ts) called every dt x itau_physics seconds (default=1)
+###                  Physics called (day_step (in run.def for LMDZ GENERIC) / itau_physics) per day
+###                  Physics called day_length / ts per day
+###                  For some reason, physical timestep must be less a day
+###                  Beware! iphysiq (in run.def for DYNAMICO) must be same as itau_physics
+### physics --> kind of physics : string (default=none) : none, dcmip, phys_external
+###########################################################################
 
-# (itau_physics=160)*(dt=118.9125) --> half a saturn day as physical timestep
-# ---- for some reason (day consistency, physical timestep must be less a day)
-# ---- change also in run.def
-itau_physics=50
+itau_physics = 50
+physics = phys_external
 
-# kind of physics : string : none, dcmip (default=none)
-physics=phys_external
-
-## testcase physics for dcmip : INTEGER : 1, 2 (default=1)
-#dcmip_physics=1
-
-# -------------------- parameters for NCAR test cases ------------------------
-
-# NCAR advection test, initial tracer : string ( default='cos_bell')
-# const, slotted_cyl, cos_bell, dbl_cos_bell_q1, dbl_cos_bell_q2, complement, hadley
-ncar_adv_shape=cos_bell
-
-# NCAR advection test, wind field : string (default='deform') : solid, deform, hadley
-ncar_adv_wind=solid
-
-# ncar_T0 : reference temperature for NCAR test cases : real (default=300) 
-# also used by disvert if disvert=ncar
-ncar_T0=300
-
-# ncar_p0 : reference pressure for NCAR test cases : real (default=1e5) 
-# also used by disvert if disvert=ncar
-ncar_p0=1e5
-
-# ncar_disvert_c : exponent for B(eta) : integer (default=1)
-# used by disvert if disvert=ncar
-
-ncar_disvert_c=1
-
-# dcmip 4 testcase : integer (default=1) : 1, 2
-dcmip4_testcase=1
-#-----------------------------------------------------------------------
-
+###########################################################################
+### CHECK CONSERVATION
+###########################################################################
+### check_conservation -> basic (default) or detailed
+### itau_check_conserv -> time step for check_conservation
+###########################################################################
 
 check_conservation = detailed
 itau_check_conserv = 320
