@@ -1,5 +1,2 @@
 &version=1.0
 &dynamico
-default parent=air phases=g hadv=0 vadv=0
-h2o_vap default_init_value=0.00
-h2o_ice default_init_value=0.00
