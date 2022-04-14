@@ -83,9 +83,9 @@ satval     = 0.0
 # Force specific heat capacity and molecular mass values (default=0)
 cpp_mugaz_mode      = 1
 # Specific heat capacity in J K-1 kg-1 [only used if cpp_mugaz_mode=1]
-cpp            = 8643.
+cpp            = 8187.
 # Molecular mass in g mol-1 [only used if cpp_mugaz_mode=1]
-mugaz          = 2.63
+mugaz          = 2.86
 
 ## Star type
 ## ~~~~~~~~~
