@@ -21,7 +21,7 @@ echo "****** CODE VERSION *******" >> icosa_lmdz.version
 
 echo "----- compile code (please wait)"
 cd ICOSA_LMDZ
-./make_icosa_lmdz -p std -p_opt "-b 20x25 -s 2" -parallel mpi_omp -arch X64_OCCIGEN -arch_path ../ARCH -job 8 > $here/log_compile 2>&1
+./make_icosa_lmdz -p std -p_opt "-b 20x25 -s 3" -parallel mpi_omp -arch X64_OCCIGEN -arch_path ../ARCH -job 8 > $here/log_compile 2>&1
 
 echo "----- executables should be here"
 ls -l bin/icosa_lmdz.exe
