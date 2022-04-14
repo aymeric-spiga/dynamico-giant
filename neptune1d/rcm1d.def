@@ -36,7 +36,7 @@ time           = 12
 day_step       = 1 
 # Number of sols to run 
 # 11 years
-ndt            = 986227
+ndt            = 1075884
 # ecriture physiq
 ecritphy = 1000
 
@@ -63,7 +63,7 @@ pceil          = 0.2
 # Simulate global averaged conditions ? 
 global1d       = .true.
 # Latitude (deg) [only used if global1d = F]
-latitude       = -30.0000
+latitude       = 60.5000 #Voyager2
 # Solar Zenith angle (deg) [only used if global1d = T]
 szangle        = 60
 # Albedo of bare ground
