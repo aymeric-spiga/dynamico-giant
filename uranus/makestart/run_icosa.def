@@ -197,12 +197,12 @@ niterdivgrad = 2
 
 vert_prof_dissip_type = plugin
 vert_prof_dissip_setup = altitude
-#dissip_fac_mid = 2.
-#dissip_fac_up = 8.
-#dissip_startalt = 100.
-#dissip_deltaz = 40.
-#dissip_pupstart = 0
-#dissip_hdelta = 0
+dissip_fac_mid = 2.
+dissip_fac_up = 8.
+dissip_startalt = 100.
+dissip_deltaz = 40.
+dissip_pupstart = 0
+dissip_hdelta = 0
 
 ###########################################################################
 ### RAYLEIGH FRICTION
