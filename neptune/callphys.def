@@ -1,35 +1,37 @@
 ## Orbit / general options
 ## ~~~~~~~~~~~~~~~~~~~~~~~
-# Run with or without tracer transport ?
-tracer    = .true.
-# Diurnal cycle ?  if diurnal=false, diurnally averaged solar heating
-diurnal   = .false. #.true.
-# Seasonal cycle ? if season=false, Ls stays constant, to value set in "start"
+# Run with or without tracer transport ? (default=.false.)
+tracer    = .false.
+# Diurnal cycle ?  if diurnal=false, diurnally averaged solar heating (default=.true.)
+diurnal   = .false.
+# Seasonal cycle ? if season=false, Ls stays constant, to value set in "start" (default=.true.)
 season    = .true. 
-# Tidally resonant orbit ? must have diurnal=false, correct rotation rate in newstart
+# Tidally resonant orbit ? must have diurnal=false, correct rotation rate in newstart (default=.false.)
 tlocked   = .false.
-# Tidal resonance ratio ? ratio T_orbit to T_rotation
+# Tidal resonance ratio ? ratio T_orbit to T_rotation (default=0)
 nres      = 1
-# Planet with rings?
+# Planet with rings? (default=.false.)
 rings_shadow = .false.
-# Compute latitude-dependent gravity field??
+# Compute latitude-dependent gravity field? (default=.false.)
 oblate = .true.
-# Flattening (a-b)/a
+# Flattening (a-b)/a (default=0.0)
 flatten = 0.01708
-# Needed if oblate=.true.: J2
+# Needed if oblate=.true.: J2 (default=0.0)
 J2 = 0.003411
-# Needed if oblate=.true.: Planet mean radius (m)
+# Needed if oblate=.true.: Planet mean radius (m) (default=0.0)
 Rmean = 24622000.
-# Needed if oblate=.true.: Mass of the planet (*1e24 kg)
+# Needed if oblate=.true.: Mass of the planet (*1e24 kg) (default=0.0)
 MassPlanet = 102.43
-# Write some more output on the screen ?
+# Write some more output on the screen ? (default=.false.)
 lwrite    = .false.
-# Save statistics in file "stats.nc" ?
+# Save statistics in file "stats.nc" ? (default=.true.)
 callstats = .false.
-# Test energy conservation of model physics ?
+# Test energy conservation of model physics ? (default=.false.)
 enertest  = .false.
-# Check to see if cpp, mugaz values used match gas mixture defined in gases.def (recommended) ?
-check_cpp_match=.false. 
+# Stop the simulation if radiative temperature is below minimum corrk temperature (default=.true.)
+strictboundcorrk = .false.
+# Stop the simulation if radiative temperature is below minimum cia temperature (default=.true.)
+strictboundcia = .false.
 
 ## Directory where external input files are
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,49 +39,46 @@ datadir = datadir
 
 ## Radiative transfer options
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
-# call radiative transfer?
+# call radiative transfer? (default=.true.)
 callrad    = .true.
-# the rad. transfer is computed every "iradia" physical timestep
-iradia     = 60
-# call multilayer correlated-k radiative transfer ?
+# the rad. transfer is computed every "iradia" physical timestep (default=1)
+iradia     = 100
+# call multilayer correlated-k radiative transfer ? (default=.true.)
 corrk      = .true.
-# Include continuum absorption in radiative transfer (note CO2 is treated separately) ?
+# Include continuum absorption in radiative transfer (note CO2 is treated separately) ? (default=.true.)
 continuum  = .true.
 # folder in which correlated-k data is stored ?
 corrkdir   = Neptune_REY_ISO_ge-12_NoKarko_40K
-# H2H2 CIA file version (2011 or 2018) ?
-versH2H2cia = 2011
-# call visible gaseous absorption in radiative transfer ?
+# H2H2 CIA file version (2011 or 2018) ? (default=2011)
+versH2H2cia = 2018
+# normal or equilibrium H2 ortho-para mixture for CIA? (default=normal)
+H2orthopara_mixture = equilibrium
+# call visible gaseous absorption in radiative transfer ? (default=.false.)
 callgasvis = .true.
-# Include Rayleigh scattering in the visible ?
+# Include Rayleigh scattering in the visible ? (default=.false.)
 rayleigh   = .true.
-# Uniform absorption coefficient in radiative transfer?
+# Uniform absorption coefficient in radiative transfer? (default=.false.)
 graybody     = .false.
-# Characteristic planetary equilibrium (black body) temperature
+# Characteristic planetary equilibrium (black body) temperature (default=215.0)
 # This is used only in the aerosol radiative transfer setup. (see aerave.F)
 tplanet    = 100.
-# Output spectral OLR in 1D/3D?
+# Output spectral OLR in 1D/3D? (default=.false.)
 specOLR    = .false.
-# Output global radiative balance in file 'rad_bal.out' - slow for 1D!!
+# Output global radiative balance in file 'rad_bal.out' - slow for 1D!! (default=.false.)
 meanOLR    = .false.
-# Variable gas species: Radiatively active ?
+# Variable gas species: Radiatively active ? (default=.false.)
 varactive  = .false.
-# Variable gas species: Fixed vertical distribution ?
+# Variable gas species: Fixed vertical distribution ? (default=.false.)
 #   (not to be used in time integration mode)
 varfixed   = .false.
-# Variable gas species: Saturation percentage value at ground ?
+# Variable gas species: Saturation percentage value at ground ? (default=0.8)
 satval     = 0.0
-# Force specific heat capacity and molecular mass values
-force_cpp      = .true.
-# Specific heat capacity in J K-1 kg-1 [only used if force_cpp = T]
+# Force specific heat capacity and molecular mass values (default=0)
+cpp_mugaz_mode      = 0
+# Specific heat capacity in J K-1 kg-1 [only used if cpp_mugaz_mode=1]
 cpp            = 8187.
-# Molecular mass in g mol-1 [only used if force_cpp = T]
+# Molecular mass in g mol-1 [only used if cpp_mugaz_mode=1]
 mugaz          = 2.86
-### DEBUG
-# To not call abort when temperature is outside boundaries:
-strictboundcorrk = .false.
-# Add temperature sponge effect after radiative transfer?
-callradsponge = .false.
 
 ## Star type
 ## ~~~~~~~~~
@@ -101,101 +100,40 @@ Fat1AU = 1366.0
 
 ## Tracer and aerosol options 
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Gravitational sedimentation of tracers (just H2O ice for now) ?
+# Gravitational sedimentation of tracers (just H2O ice for now) ? (default=.false.)
 sedimentation = .false.
+# atm mass update due to tracer evaporation/condensation? (default=.false.)
+mass_redistrib = .false.
 
 ## Other physics options
 ## ~~~~~~~~~~~~~~~~~~~~~
-# call turbulent vertical diffusion ?
+# call turbulent vertical diffusion ? (default=.true.)
 calldifv = .true. 
-# use turbdiff instead of vdifc ?
+# use turbdiff instead of vdifc ? (default=.true.)
 UseTurbDiff = .true.
-# call convective adjustment ?
+# call convective adjustment ? (default=.true.)
 calladj  = .true.
-# call thermal conduction in the soil ?
+# call thermal conduction in the soil ? (default=.true.)
 callsoil = .false.
-# Internal heat flux (matters only if callsoil=F)
+# Internal heat flux (matters only if callsoil=F) (default=0.)
 intheat = 0.43
-# Remove lower boundary (e.g. for gas giant sims)
+# Remove lower boundary (e.g. for gas giant sims) (default=.false.)
 nosurf = .true.
 
-#########################################################################
-## extra non-standard definitions for Earth
-#########################################################################
- 
-## Tracer and aerosol options 
-## ~~~~~~~~~~~~~~~~~~~~~~~~~~
-#Ammonia cloud?
-aeronh3       = .false.
-# Radiatively active CO2 aerosol?
-aeroco2       = .false.
-# Fixed CO2 aerosol distribution?
-aerofixco2    = .false.
-# Radiatively active water aerosol?
-aeroh2o       = .false.
-# Fixed water aerosol distribution?
-aerofixh2o    = .false.
-# basic dust opacity
-dusttau       = 0.0
-# Varying H2O cloud fraction?
-CLFvarying    = .false.
-# H2O cloud fraction if fixed?
-CLFfixval     = 0.0
-# fixed radii for cloud particles?
-radfixed=.false.
-# number mixing ratio of CO2 ice particles
-Nmix_co2      = 100000.
-# number mixing ratio of water particles (for rafixed=.false.)
-Nmix_h2o      = 1.e7
-# number mixing ratio of water ice particles (for rafixed=.false.)
-Nmix_h2o_ice  = 5.e5
-# radius of H2O water particles (for rafixed=.true.):
-rad_h2o=10.e-6
-# radius of H2O ice particles (for rafixed=.true.):
-rad_h2o_ice=35.e-6
-# atm mass update due to tracer evaporation/condensation?
-mass_redistrib = .false.
-
 # Generic n-layer aerosols (replaces the former 2-layer and NH3 cloud)
-# - - - - if set to true then s=s+nlayaero
+# - - - - if set to true then s=s+nlayaero (default=.false.)
 aeronlay = .true.
-nlayaero = 2 # CH4 and H2S cloud
-aeronlay_tauref       = 0.7 1.1
-aeronlay_lamref       = 1.6e-6 1.6e-6
-aeronlay_choice       = 1 1
-aeronlay_pbot         = 0.35e5 3.0e5
-aeronlay_ptop         = 0.10e5 2.0e5
-aeronlay_sclhght      = 0.2 1.0
-aeronlay_size         = 1.0e-6 1.0e-6
-optprop_aeronlay_vis  = optprop_ch4_vis.dat optprop_h2s_vis.dat
-optprop_aeronlay_ir   = optprop_ch4_ir.dat optprop_h2s_ir.dat
+nlayaero = 3
+aeronlay_tauref       = 1.0 0.05 0.03
+aeronlay_lamref       = 0.8e-6 0.8e-6 0.8e-6
+aeronlay_choice       = 2 2 2
+aeronlay_pbot         = 2.0e5 1.6e5 0.2e5
+aeronlay_ptop         = 0.10e5 2.0e5 1.
+aeronlay_sclhght      = 0.1 2.0 0.1
+aeronlay_size         = 0.8e-6 0.05e-6 2.5e-6
+aeronlay_nueff        = 0.3 0.3 0.3
+#aeronlay_stddev      = 0 0 0
+#aeronlay_mid         = 0 0 0
+optprop_aeronlay_vis  = optprop_aerosol2n_vis.dat optprop_aerosol3n_vis.dat optprop_ch4_vis.dat
+optprop_aeronlay_ir   = optprop_aerosol2n_ir.dat optprop_aerosol3n_ir.dat optprop_ch4_ir.dat
 
-## Water options 
-## ~~~~~~~~~~~~~
-# Model water cycle
-water         = .false.
-# Model water cloud formation
-watercond     = .false.
-# Model water precipitation (including coagulation etc.)
-waterrain     = .false.
-# Use simple precipitation scheme?
-precip_scheme=4
-# multiplicative constant in Boucher 95 precip scheme
-Cboucher=1.
-# Include hydrology ?
-hydrology     = .false.
-# H2O snow (and ice) albedo ?
-albedosnow    = 0.6
-# Maximum sea ice thickness ?
-maxicethick   = 10.
-# Freezing point of seawater (degrees C) ?
-Tsaldiff      = 0.0
-# Evolve surface water sources ?
-sourceevol    = .false.
-
-## CO2 options 
-## ~~~~~~~~~~~
-# call CO2 condensation ?
-co2cond       = .false.
-# Set initial temperature profile to 1 K above CO2 condensation everywhere?
-nearco2cond   = .false.
