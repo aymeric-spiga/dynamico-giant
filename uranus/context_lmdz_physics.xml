@@ -46,7 +46,7 @@
           <interpolate_domain order="1"/>
         </domain>
 
-        <domain id="dom_out" domain_ref="dom_720_360"/>
+        <domain id="dom_out" domain_ref="dom_256_192"/>
     </domain_definition>
     <!-- <domain_definition src="./domain_def.xml"/> -->
         
