@@ -87,11 +87,10 @@ cpp              = 11500.
 # Molecular mass in g mol-1 [only used if cpp_mugaz_mode = 1]
 mugaz            = 2.30
 ### DEBUG
-### DEBUG
 # To not call abort when temperature is outside boundaries:
 strictboundcorrk = .false.
 # To not stop run when temperature is greater than 400 K for H2-H2 CIA dataset:   
-strictboundH2H2cia = .false.
+strictboundcia = .false.
 # Add temperature sponge effect after radiative transfer?
 callradsponge    = .false.
 
