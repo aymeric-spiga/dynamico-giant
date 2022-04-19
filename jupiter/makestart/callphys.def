@@ -1,3 +1,7 @@
+# Do you want to check the values of the physical fields before and after the transfers between dynamics and physics?
+check_physics_inputs  = .true.
+check_physics_outputs = .true.
+
 ## Orbit / general options
 ## ~~~~~~~~~~~~~~~~~~~~~~~
 # Run with or without tracer transport ?
