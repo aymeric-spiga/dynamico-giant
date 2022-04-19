@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1
+#SBATCH --threads-per-core=1
+#SBATCH -J NEPTUNE1D
+#SBATCH --time=6:00:00
+#SBATCH --constraint=BDW28
+
+ulimit -s unlimited
+module purge
+
+module load gcc/6.2.0
+module load intel/19.4
+module load intelmpi/2019.4.243
+module load hdf5/1.10.5-intel-19.0.4-intelmpi-2019.4.243
+module load netcdf/4.6.3-intel-19.0.4-intelmpi-2019.4.243
+module load netcdf-fortran/4.4.4-intel-19.0.4-intelmpi-2019.4.243
+
+srun --mpi=pmi2 -K1 -n $SLURM_NTASKS ./rcm1d.e > rcm1d.log
