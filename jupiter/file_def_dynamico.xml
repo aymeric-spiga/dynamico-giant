@@ -36,6 +36,7 @@
       <field field_ref="w500" />
       <field field_ref="t500" />
       <field field_ref="omega500" />
+      <field_group group_ref="standard_output_tracers" />
     </field_group>
 
     <field_group id="H&S_tracer" operation="average" >
@@ -48,7 +49,7 @@
 
   <file_definition> 
 
-    <file id="daily_output" convention="CF" enabled="false" output_freq="1d" sync_freq="1d" output_level="10" timeseries="none" description="daily output for Held & Suarez test case" > 
+    <file id="daily_output" convention="CF" enabled="true" output_freq="1d" sync_freq="1d" output_level="10" timeseries="none" description="daily output for Held & Suarez test case" > 
     
       <field_group group_ref="H&S_scalar"/>
       <field_group group_ref="H&S" domain_ref="regular_one_degree"              freq_op="1d" expr="@this_ref"/>
@@ -64,7 +65,7 @@
 
     </file>
 
-    <file id="daily_output_native" convention="CF" enabled="false" output_freq="1d" sync_freq="1d" output_level="10" timeseries="none" description="daily output for Held & Suarez test case" > 
+    <file id="daily_output_native" convention="CF" enabled="true" output_freq="1d" sync_freq="1d" output_level="10" timeseries="none" description="daily output for Held & Suarez test case" > 
     
       <field_group group_ref="H&S_scalar"/>
       <field_group group_ref="H&S"          freq_op="1d" expr="@this_ref"/>
