@@ -2,11 +2,19 @@
 
 ###############
 ### CONFIG ###
-ver_dyn=90f7138a60ebd3644fbbc42bc9dfa22923386385 # ICOSAGCM
-ver_phys=2653 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
+ver_dyn=HEAD # ICOSAGCM
+ver_phys=2655 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
 ver_xios=2298 # XIOS
 ver_ioipsl=453 # IOIPSL
 ###############
+
+# ###############
+# ### CONFIG ###
+# ver_dyn=90f7138a60ebd3644fbbc42bc9dfa22923386385 # ICOSAGCM
+# ver_phys=2655 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
+# ver_xios=2298 # XIOS
+# ver_ioipsl=453 # IOIPSL
+# ###############
 
 rm -rf code
 svn co -q -N http://svn.lmd.jussieu.fr/Planeto/trunk code

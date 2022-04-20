@@ -1,0 +1,108 @@
+#---------------------------------#
+# Run parameters for the 1D model #                                         
+#---------------------------------#
+
+## Planetary constants
+## ~~~~~~~~~~~~~~~~~~~~~~~
+## NB: those are mandatory
+## ~~~~~~~~~~~~~~~~~~~~~~~
+## LENGTH OF A DAY in s
+daysec         = 70284.0
+## GRAVITY in m s-2
+g              = 47.45
+## LENGTH OF A YEAR in days
+year_day       = 1.
+## MIN DIST STAR-PLANET in AU [periastron]
+periastr       = 0.01526
+## MAX DIST STAR-PLANET in AU [apoastron]
+apoastr        = 0.01526
+## DATE OF PERIASTRON in days
+peri_day       = 0.
+## OBLIQUITY in deg
+obliquit       = 0.
+## SURFACE PRESSURE in Pa
+psurf          = 80000000.0 
+
+## Time integration parameters
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Initial date (in solar days,=0 at Ls=0)
+day0           = 0
+# Initial local time (in hours, between 0 and 24)
+time           = 0 
+# Number of time steps per sol
+day_step       = 250
+# Number of sols to run 
+ndt            = 25
+# Number of steps between each writting in diagfi 
+ecritphy= 1000
+
+
+## Vertical levels
+## ~~~~~~~~~~~~~~~
+# hybrid vertical coordinate ? (.true. for hybrid and .false. for sigma levels)
+hybrid         = .false.
+# autocompute vertical discretisation? (useful for exoplanet runs)
+autozlevs      = .false.
+# Ceiling pressure (Pa) ?
+pceil          = 0.00001
+
+## Thermal properties
+## ~~~~~~~~~~~~~~~~~~
+# Simulate global averaged conditions ? 
+global1d       = .true.
+# Latitude (deg) [only used if global1d = F]
+latitude       = 0.0
+# Solar Zenith angle (deg) [only used if global1d = T]
+szangle        = 60. 
+# Force specific heat capacity and molecular mass values
+force_cpp      = .false.
+# Specific heat capacity in J K-1 kg-1 [only used if force_cpp = T]
+#cpp            = 12907.7 
+# Molecular mass in g mol-1 [only used if force_cpp = T]
+mugaz          = 2.326 
+
+# Albedo of bare ground
+albedo         = 0.
+# Emissivity of bare ground
+emis           = 1.0
+# Soil thermal inertia (SI)
+inertia        = 10000.
+# Initial CO2 ice on the surface (kg.m-2)
+co2ice         = 0.
+
+## Wind profile
+## ~~~~~~~~~~~~
+## zonal eastward component of the geostrophic wind (m/s)
+u              = 100.
+# meridional northward component of the geostrophic wind (m/s)
+v              = 0.
+
+## Initial atmospheric temperature profile
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# Type of initial temperature profile
+#         ichoice=1   Constant Temperature:  T=tref
+#         [Mars] ichoice=2   Savidjari profile (as Seiff but with dT/dz=cte)
+#         [Mars] ichoice=3   Lindner (polar profile)
+#         [Mars] ichoice=4   inversion
+#         [Mars] ichoice=5   Seiff  (standard profile, based on Viking entry)
+#         ichoice=6   constant T  +  gaussian perturbation (levels)
+#         ichoice=7   constant T  + gaussian perturbation (km)
+#         ichoice=8   Read in an ascii file "profile" 
+ichoice        = 8
+# Reference temperature tref (K)
+tref           = 1100. 
+# Add a perturbation to profile if isin=1
+isin           = 0
+# peak of gaussian perturbation (for ichoice=6 or 7)
+pic            = 26.522
+# width of the gaussian perturbation (for ichoice=6 or 7)
+largeur        = 10
+# height of the gaussian perturbation (for ichoice=6 or 7)
+hauteur        = 30.
+
+##Acceleration of convergence 
+#fix the temperature if true 
+fixed_temperature = .false. 
+#accelerate_temperature is true if we accelerate the CV in the deep atmosphere
+accelerate_temperature = .true.

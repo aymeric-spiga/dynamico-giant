@@ -1,0 +1,14 @@
+#gases
+3
+H2
+He
+H2O
+0.7139 
+0.1199
+0.005
+
+# First line is number of gases
+# Followed by gas names (always 3 characters)
+# and then mixing ratios.
+# mixing ratio -1 means the gas is variable.
+
