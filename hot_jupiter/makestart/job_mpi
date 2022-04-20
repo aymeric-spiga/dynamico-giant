@@ -1,0 +1,43 @@
+#!/bin/bash
+#SBATCH --job-name=Dynamico
+#SBATCH --nodes=1 --ntasks-per-node=20
+#SBATCH --time=05:00:00
+#SBATCH --mail-user=lucas.teinturier@obspm.fr --mail-type=ALL
+#SBATCH --clusters=astro_thin
+#SBATCH --partition=def
+#SBATCH --qos=astro_thin_def_long
+#SBATCH --account=lteinturier
+#SBATCH --threads-per-core=1
+#SBATCH -J makestart_HOTJ
+#SBATCH --exclusive
+##SBATCH --cpus-per-task=1
+###SBATCH -p all
+###SBATCH -p highmem
+
+#export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
+export EXEC_NAME=./icosa_lmdz.exe
+
+set -vx
+
+source ../../code/ARCH/arch-MesoPSL.env
+ulimit -s unlimited
+
+#printenv | sort
+export OMP_NUM_THREADS=1
+export OMP_STACKSIZE=256M
+export KMP_AFFINITY=granularity=fine,compact,1,0,verbose
+
+nproc=$((SLURM_NTASKS-1))
+nlast=$((SLURM_NTASKS-1))
+echo "# srun configuration file" > srun.conf
+echo "0-$nproc icosa_lmdz.exe" >> srun.conf
+#echo "$nlast xios_server.exe" >> srun.conf
+#ln -sf srun.conf.$SLURM_NTASKS srun.conf
+
+## just one
+srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
+exit
+
+
+
+

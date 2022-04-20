@@ -1,0 +1,71 @@
+#planetary radius : real (default=37122E6)
+radius         = 7.41e+07 
+
+# gravity : real (default=9.80616)
+g              = 47.10
+
+#planetary rotation rate (default=7.292E-5)
+omega          = 8.9397e-05 
+
+# WARNING MUST BE COMPLIANT WITH PHYSIQ
+# kappa = Rd/cpp (default=0.2857143)
+# kappa = 8314.45986145 / (cpp*mugaz) 
+kappa          = 0.25986753994031314
+
+# Heat capacity at constant pressure real (default=1004.70885)
+cpp            = 13557.2
+
+# Reference pressure : real (default=101325.)
+preff          = 8.0E7
+
+# length of the day (s) (default=86400)
+#day_length     = 35733
+day_length     = 70284
+
+# length of the year (s) (default=365.25*86400)
+# -> year_length = 10475.5 * 35733
+#year_length    = 374321041.5
+year_length    = 70284.0
+
+# truc pour decomposition
+# 1/3 jour manquant
+# ... 10474 * 35740 = 374340760
+
+#starting day
+start_day      = 0
+
+# Scale height of the atmosphere (m) : real (default=8000.)
+scale_height   = 106259.25
+
+# Scale factor for small planet experiment : real (default=1.)
+scale_factor   = 1.
+
+# Precision of NetCDF output
+netcdf_prec    = double
+
+
+
+daysec = 70284
+
+## Additional stuff for LMDZ physics:
+#################################################
+#�Length of year, in days (somewhat redundant)
+#year_day       = 10475.5
+year_day       = 1
+
+# Orbital parameters:
+# Periastron (AU)
+periastron     = 0.01526
+
+#�Apoastron (AU)
+apoastron      = 0.01526
+
+# Periastron date, in days
+periastron_day = 0
+
+#�Obliquity (degrees)
+obliquity      = 0.0
+
+
+
+
