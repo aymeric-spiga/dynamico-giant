@@ -1,0 +1,15 @@
+#!/bin/bash
+nummax=10
+echo "We have nummax= ${nummax}"
+echo "starting the sbatch part"
+echo "sbatch #1"
+sbatch long_job_mpi $nummax
+count=2
+while [ $count -le $nummax ]
+do 
+    echo "sbatch #${count}"
+    sbatch -d singleton long_job_mpi $nummax
+    count=$((count +1))
+done
+
+echo "we're done here"

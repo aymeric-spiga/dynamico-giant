@@ -1,0 +1,154 @@
+#!/bin/bash
+#SBATCH --job-name=Dynamico
+#SBATCH --nodes=1 --ntasks-per-node=20
+#SBATCH --time=60:00:00
+#SBATCH --mail-user=lucas.teinturier@obspm.fr --mail-type=ALL
+#SBATCH --clusters=astro_thin
+#SBATCH --partition=def
+#SBATCH --qos=astro_thin_def_long
+#SBATCH --account=lteinturier
+#SBATCH --threads-per-core=1
+#SBATCH -J dynamico_HOTJ
+#SBATCH --exclusive
+##SBATCH --cpus-per-task=1
+###SBATCH -p all
+###SBATCH -p highmem
+##############################################################################
+##this script if for long simulation ONLY ! 
+#it will copy everything on /travail/lteinturier/ and run the job from there
+# it runs 100 days simulation at a time, and it is launched using the run_longjob script 
+#run_icosa.def needs to be modified for the number of days to run to go to 100
+##############################################################################
+#export EXEC_NAME=/scratch/cnt0026/lmd7357/aspigaheat/MODELES/ICOSA_LMDZ/bin/icosa_lmdz.exe
+export EXEC_NAME=./icosa_lmdz.exe
+
+set -vx
+
+source ../code/ARCH/arch-MesoPSL.env
+ulimit -s unlimited
+
+#printenv | sort
+export OMP_NUM_THREADS=1
+export OMP_STACKSIZE=256M
+export KMP_AFFINITY=granularity=fine,compact,1,0,verbose
+
+
+dir=$(pwd)
+SCRATCH=/travail/lteinturier/Dynamico/first_wasp43b
+mkdir -p $SCRATCH
+cd $SCRATCH
+nummax=$*
+
+###let's copy everything we need in the working directory
+cp -r $dir/*.def .
+cp -r $dir/*.xml . 
+cp -r $dir/*.exe .
+cp -r $dir/datadir .
+cp -r $dir/apbp.txt .
+#let's create the srun.conf
+nproc=$((SLURM_NTASKS-1))
+nlast=$((SLURM_NTASKS-1))
+echo "# srun configuration file" > srun.conf
+echo "0-$nproc icosa_lmdz.exe" >> srun.conf
+#echo "$nlast xios_server.exe" >> srun.conf
+#ln -sf srun.conf.$SLURM_NTASKS srun.conf
+
+##now need to check if there are symbolic links and if broken fix them
+for file in *
+do 
+  if [[ -L $file ]] ; then #check if symlink
+    if [[ !(-e $file) ]] ; then #if broken link
+      ln -sf $dir/$(readlink $file) $file
+    fi
+  fi
+done
+# Look for file "num_run" which should contain 
+# the value of the previously computed season
+# (defaults to 1 if file "num_run" does not exist)
+if [[ -r num_run ]] ; then 
+  echo "found file num_run"
+  numold=`cat num_run`
+else 
+  numold=1
+fi 
+echo "numold is set to "${numold}
+##Set value of current run
+(( numnew = ${numold}+1))
+echo "numnew is set to "${numnew}
+## Stop if over nummax
+if (( $numnew > $nummax )) ; then 
+  echo "stopping because over nummax"
+  exit 
+fi 
+###let's link the start_icosa.nc and the startfi.nc
+  ln -sf $dir/start_icosa_$numold.nc start_icosa_$numold.nc
+  ln -sf $dir/startfi_$numold.nc     startfi_$numold.nc
+#Let's look for initialisation data files (start_icosa and startfi)
+# We symbolically link them if they exist
+if [[ (-r start_icosa_${numold}.nc && -r startfi_${numold}.nc )]] ; then 
+  ln -sf start_icosa_${numold}.nc start_icosa.nc 
+  ln -sf startfi_${numold}.nc startfi.nc 
+else 
+  if (( ${numold} == 99999 )) ; then 
+    echo "No run because previous one has crashed ! (99999 in numrun)"
+    exit 
+    else 
+    echo "Where is file start_icosa_${numold}.nc and/or startfi_${numold}.nc ?"
+    exit 
+  fi 
+fi 
+
+echo "Running the GCM now"
+# Run GCM 
+srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
+sleep 30 # we just wait a bit to make sure everything is done
+## Check if run ended normally and we copy back the data file after renaming them
+if [[ ( -r restartfi.nc && restart_icosa.nc ) ]] ; then 
+  echo "run seems to have ended without trouble"
+  mv Xhistins.nc Xhistins_${numnew}".nc"
+  mv icosa_lmdz.out icosa_lmdz_${numnew}".nc"
+  mv restart.nc start_icosa_${numnew}".nc"
+  mv restartfi.nc startfi_${numnew}".nc"
+  cp start_icosa_${numnew}.nc $dir
+  cp startfi_${numnew}.nc $dir 
+else 
+  if [[ -r num_run ]] ; then 
+    mv -f num_run num_run.crash 
+  else 
+    echo "No file num_run to build num_run.crash from !!"
+    echo "We set num_run.crash at 0"
+    echo 0 >num_run.crash
+  fi 
+  echo 99999 >num_run
+  exit 
+fi
+
+##let's get ready for next run ! 
+## we write the value of the computed run in file num_run
+echo ${numnew} > num_run
+
+exit
+# count=1
+# limcount=$((count+1))
+# while [ $count -lt $limcount ]
+# do
+#   echo "**************************************"
+#   echo "RUN NUMBER "$count
+#   echo "**************************************"
+#   ##
+#   ln -sf start_icosa_$count.nc start_icosa.nc
+#   ln -sf startfi_$count.nc     startfi.nc
+#   ##
+#   srun --resv-ports --kill-on-bad-exit=1 --mpi=pmi2 --label -c $OMP_NUM_THREADS -n $SLURM_NTASKS --multi-prog srun.conf > icosa_lmdz.out 2>&1
+#   ##
+#   sleep 30
+#   mv Xhistins.nc      Xhistins_$count".nc"
+#   mv icosa_lmdz.out   icosa_lmdz_$count".out"
+#   ##
+#   count=$((count+1))
+#   mv restart_icosa.nc start_icosa_$count".nc"
+#   mv restartfi.nc     startfi_$count".nc"
+# done
+
+
+
