@@ -106,8 +106,8 @@ sleep 30 # we just wait a bit to make sure everything is done
 if [[ ( -r restartfi.nc && restart_icosa.nc ) ]] ; then 
   echo "run seems to have ended without trouble"
   mv Xhistins.nc Xhistins_${numnew}".nc"
-  mv icosa_lmdz.out icosa_lmdz_${numnew}".nc"
-  mv restart.nc start_icosa_${numnew}".nc"
+  mv icosa_lmdz.out icosa_lmdz_${numnew}".out"
+  mv restart_icosa.nc start_icosa_${numnew}".nc"
   mv restartfi.nc startfi_${numnew}".nc"
   cp start_icosa_${numnew}.nc $dir
   cp startfi_${numnew}.nc $dir 
