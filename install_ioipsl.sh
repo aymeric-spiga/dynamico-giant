@@ -3,7 +3,7 @@ echo "Install ioipsl"
 
 echo "1) Before ioipsl installation, you have to install the model."
 echo "If not, please use install.sh before install_ioipsl.sh"
-echo "2) For the first installation, a login and a password are necessary"
+echo "2) For the first installation of ioipsl, a login and a password are necessary"
 echo "Please contact TGCC computing center to get the login/password."
 
 echo "Start..."
