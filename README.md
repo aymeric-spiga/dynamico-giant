@@ -16,6 +16,7 @@ install code
 ```bash 
 cd dynamico-giant
 ./install.sh
+./install_ioipsl.sh
 ```
 
 compile code
