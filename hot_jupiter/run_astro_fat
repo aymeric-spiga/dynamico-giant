@@ -1,0 +1,15 @@
+#!/bin/bash
+nummax=81
+echo "We have nummax= ${nummax}"
+echo "starting the sbatch part"
+echo "sbatch #1"
+sbatch astro_fat_mpi $nummax
+count=41
+while [ $count -le $nummax ]
+do 
+    echo "sbatch #${count}"
+    sbatch -d singleton astro_fat_mpi $nummax
+    count=$((count +1))
+done
+
+echo "we're done here"
