@@ -18,4 +18,4 @@ cd $PBS_O_WORKDIR
 mpirun icosa_lmdz.exe
 
 
-# qsub -l mem=15gb -l vmem=25gb run_ciclad
+# qsub -l mem=15gb -l vmem=25gb job_mpi_ciclad
