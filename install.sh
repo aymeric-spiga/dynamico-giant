@@ -2,10 +2,10 @@
 
 ###############
 ### CONFIG ###
-ver_dyn=90f7138a60ebd3644fbbc42bc9dfa22923386385 # ICOSAGCM
-ver_phys= 2655 #2653 # ARCH ICOSA_LMDZ LMDZ.COMMON LMDZ.GENERIC
-ver_xios= 2319 #2298 # XIOS
-ver_ioipsl= 453 # IOIPSL
+ver_dyn=90f7138a60ebd3644fbbc42bc9dfa22923386385
+ver_phys=2655
+ver_xios=2319
+ver_ioipsl=453
 ###############
 
 echo "Start..."
